@@ -1,31 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Colores base -->
+
+    <!-- Colores básicos -->
     <color name="negro">#FF000000</color>
     <color name="blanco">#FFFFFFFF</color>
 
-    <!-- Paleta principal -->
-    <color name="color_primario">#2E7D32</color>
-    <color name="color_primario_oscuro">#1B5E20</color>
-    <color name="color_primario_claro">#66BB6A</color>
+    <!-- Paleta principal EcoRisk Manager -->
+    <color name="color_primario">#1B5E20</color>
+    <color name="color_primario_medio">#2E7D32</color>
+    <color name="color_primario_claro">#A5D6A7</color>
+
     <color name="color_secundario">#EF6C00</color>
-    <color name="color_secundario_oscuro">#E65100</color>
+    <color name="color_secundario_claro">#FFE0B2</color>
 
-    <!-- Fondos y superficies (modo claro) -->
-    <color name="color_fondo">#F5F5F5</color>
+    <!-- Fondos modo claro -->
+    <color name="color_fondo">#F4F7F4</color>
     <color name="color_superficie">#FFFFFF</color>
-    <color name="texto_primario">#212121</color>
-    <color name="texto_secundario">#757575</color>
+    <color name="color_borde_suave">#DDE5DD</color>
 
-    <!-- Fondos y superficies (modo oscuro) -->
-    <color name="color_fondo_oscuro">#121212</color>
-    <color name="color_superficie_oscura">#1E1E1E</color>
-    <color name="texto_primario_oscuro">#F5F5F5</color>
-    <color name="texto_secundario_oscuro">#B0B0B0</color>
+    <!-- Textos modo claro -->
+    <color name="texto_primario">#1F2A1F</color>
+    <color name="texto_secundario">#5F6F5F</color>
+    <color name="texto_sobre_primario">#FFFFFF</color>
 
-    <!-- Colores de riesgo (semáforo) -->
+    <!-- Estados y riesgos -->
     <color name="riesgo_bajo">#4CAF50</color>
     <color name="riesgo_medio">#FFC107</color>
     <color name="riesgo_alto">#FF9800</color>
     <color name="riesgo_critico">#D32F2F</color>
+
+    <!-- Paleta modo oscuro.
+         Estos colores los pide el tema night del proyecto.
+         Luego podemos ajustarlos mejor cuando hagamos diseño real. -->
+    <color name="color_primario_oscuro">#0B2E13</color>
+    <color name="color_secundario_oscuro">#BF5A00</color>
+    <color name="color_fondo_oscuro">#101510</color>
+    <color name="color_superficie_oscura">#1A241A</color>
+    <color name="texto_primario_oscuro">#E8F5E9</color>
+    <color name="texto_secundario_oscuro">#B7C8B7</color>
+
 </resources>

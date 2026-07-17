@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,16 +8,48 @@
     android:background="@color/color_primario"
     tools:context=".ui.splash.SplashActivity">
 
+    <!-- Logo temporal: después podemos cambiarlo por una imagen real -->
     <TextView
-        android:id="@+id/textoSplash"
+        android:id="@+id/textoLogoTemporal"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:background="@color/color_primario_medio"
+        android:gravity="center"
+        android:text="ER"
+        android:textColor="@color/blanco"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/textoTituloSplash"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/textoTituloSplash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
+        android:layout_marginTop="22dp"
+        android:text="@string/titulo_splash"
         android:textColor="@color/blanco"
-        android:textSize="24sp"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/textoSubtituloSplash"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textoLogoTemporal" />
+
+    <TextView
+        android:id="@+id/textoSubtituloSplash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/subtitulo_splash"
+        android:textColor="@color/color_primario_claro"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/textoTituloSplash" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
