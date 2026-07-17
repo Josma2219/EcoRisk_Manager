@@ -36,7 +36,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textoTituloLogin" />
 
-    <!-- UI básica: después podemos mejorar bordes, iconos y colores aquí -->
     <EditText
         android:id="@+id/campoUsuario"
         android:layout_width="0dp"
@@ -79,9 +78,36 @@
         android:backgroundTint="@color/color_primario"
         android:text="@string/accion_entrar"
         android:textColor="@color/blanco"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/progresoLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/campoContrasena" />
+
+    <ProgressBar
+        android:id="@+id/progresoLogin"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="18dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/textoAyudaLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/botonEntrar" />
+
+    <!-- Texto temporal para que el profe/equipo pueda probar fácil.
+         Cuando la app ya esté más pulida, si quieren lo quitamos. -->
+    <TextView
+        android:id="@+id/textoAyudaLogin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:gravity="center"
+        android:text="Usuario de prueba: admin / admin123"
+        android:textColor="@color/texto_secundario"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progresoLogin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
