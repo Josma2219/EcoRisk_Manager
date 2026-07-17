@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Colores base -->
+    <color name="negro">#FF000000</color>
+    <color name="blanco">#FFFFFFFF</color>
+
+    <!-- Paleta principal -->
+    <color name="color_primario">#2E7D32</color>
+    <color name="color_primario_oscuro">#1B5E20</color>
+    <color name="color_primario_claro">#66BB6A</color>
+    <color name="color_secundario">#EF6C00</color>
+    <color name="color_secundario_oscuro">#E65100</color>
+
+    <!-- Fondos y superficies (modo claro) -->
+    <color name="color_fondo">#F5F5F5</color>
+    <color name="color_superficie">#FFFFFF</color>
+    <color name="texto_primario">#212121</color>
+    <color name="texto_secundario">#757575</color>
+
+    <!-- Fondos y superficies (modo oscuro) -->
+    <color name="color_fondo_oscuro">#121212</color>
+    <color name="color_superficie_oscura">#1E1E1E</color>
+    <color name="texto_primario_oscuro">#F5F5F5</color>
+    <color name="texto_secundario_oscuro">#B0B0B0</color>
+
+    <!-- Colores de riesgo (semáforo) -->
+    <color name="riesgo_bajo">#4CAF50</color>
+    <color name="riesgo_medio">#FFC107</color>
+    <color name="riesgo_alto">#FF9800</color>
+    <color name="riesgo_critico">#D32F2F</color>
 </resources>
