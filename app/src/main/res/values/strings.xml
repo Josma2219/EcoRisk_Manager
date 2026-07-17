@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">EcoRisk_Manager</string>
+
+    <!-- Textos generales reutilizables -->
+    <string name="accion_guardar">Guardar</string>
+    <string name="accion_cancelar">Cancelar</string>
+    <string name="accion_eliminar">Eliminar</string>
+    <string name="accion_editar">Editar</string>
+    <string name="accion_aceptar">Aceptar</string>
+    <string name="accion_buscar">Buscar</string>
+    <string name="titulo_login">Iniciar Sesión</string>
+    <string name="accion_entrar">Entrar</string>
+    <string name="titulo_home">Inicio</string>
 </resources>
