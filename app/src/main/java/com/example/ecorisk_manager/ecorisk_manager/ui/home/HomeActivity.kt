@@ -2,11 +2,16 @@ package com.example.ecorisk_manager.ui.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ecorisk_manager.databinding.ActivityHomeBinding
+import com.example.ecorisk_manager.ui.hojas.HojaListaActivity
+import com.example.ecorisk_manager.ui.incidentes.IncidenteListaActivity
 import com.example.ecorisk_manager.ui.login.LoginActivity
-import com.example.ecorisk_manager.utils.Constantes
+import com.example.ecorisk_manager.ui.materiales.MaterialListaActivity
+import com.example.ecorisk_manager.ui.materialproveedor.MaterialProveedorActivity
+import com.example.ecorisk_manager.ui.proveedores.ProveedorListaActivity
+import com.example.ecorisk_manager.ui.reportes.ReporteMenuActivity
+import com.example.ecorisk_manager.ui.respaldo.RespaldoActivity
 import com.example.ecorisk_manager.utils.SessionManager
 
 class HomeActivity : AppCompatActivity() {
@@ -39,39 +44,39 @@ class HomeActivity : AppCompatActivity() {
 
         binding.textoDatosUsuario.text = "Bienvenido $nombreUsuario - Rol: $rolUsuario"
 
-        // Estos valores están en cero por ahora.
-        // Luego van a salir de la base de datos desde HomeViewModel.
+        // Por ahora son datos temporales.
+        // Más adelante estos números salen de Room desde HomeViewModel.
         binding.tarjetaMateriales.text = "0\nMateriales"
         binding.tarjetaProveedores.text = "0\nProveedores"
     }
 
     private fun configurarEventos() {
         binding.botonMateriales.setOnClickListener {
-            mostrarModuloEnProceso()
+            abrirPantalla(MaterialListaActivity::class.java)
         }
 
         binding.botonHojas.setOnClickListener {
-            mostrarModuloEnProceso()
+            abrirPantalla(HojaListaActivity::class.java)
         }
 
         binding.botonProveedores.setOnClickListener {
-            mostrarModuloEnProceso()
+            abrirPantalla(ProveedorListaActivity::class.java)
         }
 
         binding.botonMaterialProveedor.setOnClickListener {
-            mostrarModuloEnProceso()
+            abrirPantalla(MaterialProveedorActivity::class.java)
         }
 
         binding.botonIncidentes.setOnClickListener {
-            mostrarModuloEnProceso()
+            abrirPantalla(IncidenteListaActivity::class.java)
         }
 
         binding.botonReportes.setOnClickListener {
-            mostrarModuloEnProceso()
+            abrirPantalla(ReporteMenuActivity::class.java)
         }
 
         binding.botonRespaldo.setOnClickListener {
-            mostrarModuloEnProceso()
+            abrirPantalla(RespaldoActivity::class.java)
         }
 
         binding.botonCerrarSesion.setOnClickListener {
@@ -80,12 +85,9 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun mostrarModuloEnProceso() {
-        Toast.makeText(
-            this,
-            Constantes.Mensajes.MODULO_EN_PROCESO,
-            Toast.LENGTH_SHORT
-        ).show()
+    private fun abrirPantalla(pantalla: Class<*>) {
+        val intent = Intent(this, pantalla)
+        startActivity(intent)
     }
 
     private fun abrirLogin() {

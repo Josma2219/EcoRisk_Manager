@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_fondo"
+    tools:context=".ui.respaldo.RespaldoActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/textoTituloRespaldo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Respaldo y recuperación"
+            android:textColor="@color/texto_primario"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textoDescripcionRespaldo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Aquí se manejará el respaldo y restauración de la información del sistema."
+            android:textColor="@color/texto_secundario"
+            android:textSize="15sp" />
+
+        <!-- Luego aquí conectamos BackupUtils para generar el respaldo real. -->
+        <TextView
+            android:id="@+id/textoEstadoRespaldo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:background="@color/color_superficie"
+            android:padding="18dp"
+            android:text="Último respaldo: pendiente"
+            android:textColor="@color/texto_primario"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/botonGenerarRespaldo"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/color_primario"
+            android:text="Generar respaldo"
+            android:textColor="@color/blanco" />
+
+        <Button
+            android:id="@+id/botonRestaurarRespaldo"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/color_secundario"
+            android:text="Restaurar respaldo"
+            android:textColor="@color/blanco" />
+
+        <Button
+            android:id="@+id/botonVolver"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/color_primario_medio"
+            android:text="Volver"
+            android:textColor="@color/blanco" />
+
+    </LinearLayout>
+
+</ScrollView>
