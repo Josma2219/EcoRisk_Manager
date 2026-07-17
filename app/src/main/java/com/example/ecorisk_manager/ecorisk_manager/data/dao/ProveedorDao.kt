@@ -1,0 +1,40 @@
+package com.example.ecorisk_manager.data.dao
+
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
+import androidx.room.Update
+import com.example.ecorisk_manager.data.entity.ProveedorEntity
+import kotlinx.coroutines.flow.Flow
+
+@Dao
+interface ProveedorDao {
+
+    @Insert
+    suspend fun insertarProveedor(proveedor: ProveedorEntity): Long
+
+    @Update
+    suspend fun actualizarProveedor(proveedor: ProveedorEntity)
+
+    @Delete
+    suspend fun eliminarProveedor(proveedor: ProveedorEntity)
+
+    @Query("SELECT * FROM proveedores ORDER BY nombre ASC")
+    fun obtenerProveedores(): Flow<List<ProveedorEntity>>
+
+    @Query("SELECT * FROM proveedores WHERE id_proveedor = :idProveedor LIMIT 1")
+    suspend fun obtenerProveedorPorId(idProveedor: Int): ProveedorEntity?
+
+    @Query("""
+        SELECT * FROM proveedores
+        WHERE nombre LIKE '%' || :texto || '%'
+        OR correo LIKE '%' || :texto || '%'
+        OR contacto_principal LIKE '%' || :texto || '%'
+        ORDER BY nombre ASC
+    """)
+    fun buscarProveedores(texto: String): Flow<List<ProveedorEntity>>
+
+    @Query("SELECT COUNT(*) FROM proveedores")
+    suspend fun contarProveedores(): Int
+}
