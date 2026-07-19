@@ -7,6 +7,7 @@ import androidx.room.Query
 import androidx.room.Update
 import com.example.ecorisk_manager.data.entity.ProveedorEntity
 import kotlinx.coroutines.flow.Flow
+import androidx.room.OnConflictStrategy
 
 @Dao
 interface ProveedorDao {
@@ -50,4 +51,13 @@ interface ProveedorDao {
 
     @Query("SELECT COUNT(*) FROM proveedores")
     suspend fun contarProveedores(): Int
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertarProveedores(proveedores: List<ProveedorEntity>)
+
+    @Query("SELECT * FROM proveedores ORDER BY id_proveedor ASC")
+    suspend fun obtenerProveedoresParaRespaldo(): List<ProveedorEntity>
+
+    @Query("DELETE FROM proveedores")
+    suspend fun eliminarTodosProveedores()
 }

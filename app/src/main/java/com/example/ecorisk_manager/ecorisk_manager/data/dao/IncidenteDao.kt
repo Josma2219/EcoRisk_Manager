@@ -8,6 +8,7 @@ import androidx.room.Update
 import com.example.ecorisk_manager.data.entity.IncidenteEntity
 import com.example.ecorisk_manager.model.IncidenteDetalle
 import kotlinx.coroutines.flow.Flow
+import androidx.room.OnConflictStrategy
 
 @Dao
 interface IncidenteDao {
@@ -134,4 +135,13 @@ interface IncidenteDao {
 
     @Query("DELETE FROM incidentes WHERE id_incidente = :idIncidente")
     suspend fun eliminarIncidentePorId(idIncidente: Int)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertarIncidentes(incidentes: List<IncidenteEntity>)
+
+    @Query("SELECT * FROM incidentes ORDER BY id_incidente ASC")
+    suspend fun obtenerIncidentesParaRespaldo(): List<IncidenteEntity>
+
+    @Query("DELETE FROM incidentes")
+    suspend fun eliminarTodosIncidentes()
 }

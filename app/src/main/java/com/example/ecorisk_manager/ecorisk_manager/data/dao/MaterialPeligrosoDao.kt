@@ -7,6 +7,7 @@ import androidx.room.Query
 import androidx.room.Update
 import com.example.ecorisk_manager.data.entity.MaterialPeligrosoEntity
 import kotlinx.coroutines.flow.Flow
+import androidx.room.OnConflictStrategy
 
 @Dao
 interface MaterialPeligrosoDao {
@@ -59,4 +60,13 @@ interface MaterialPeligrosoDao {
 
     @Query("SELECT COUNT(*) FROM materiales_peligrosos WHERE estado = 'Activo'")
     suspend fun contarMaterialesActivos(): Int
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertarMateriales(materiales: List<MaterialPeligrosoEntity>)
+
+    @Query("SELECT * FROM materiales_peligrosos ORDER BY id_material ASC")
+    suspend fun obtenerMaterialesParaRespaldo(): List<MaterialPeligrosoEntity>
+
+    @Query("DELETE FROM materiales_peligrosos")
+    suspend fun eliminarTodosMateriales()
 }

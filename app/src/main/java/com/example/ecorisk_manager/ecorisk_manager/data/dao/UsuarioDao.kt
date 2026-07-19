@@ -6,6 +6,7 @@ import androidx.room.Query
 import androidx.room.Update
 import com.example.ecorisk_manager.data.entity.UsuarioEntity
 import kotlinx.coroutines.flow.Flow
+import androidx.room.OnConflictStrategy
 
 @Dao
 interface UsuarioDao {
@@ -36,4 +37,13 @@ interface UsuarioDao {
 
     @Query("SELECT COUNT(*) FROM usuarios")
     suspend fun contarUsuarios(): Int
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertarUsuarios(usuarios: List<UsuarioEntity>)
+
+    @Query("SELECT * FROM usuarios ORDER BY id_usuario ASC")
+    suspend fun obtenerUsuariosParaRespaldo(): List<UsuarioEntity>
+
+    @Query("DELETE FROM usuarios")
+    suspend fun eliminarTodosUsuarios()
 }

@@ -8,6 +8,7 @@ import androidx.room.Update
 import com.example.ecorisk_manager.data.entity.HojaSeguridadEntity
 import com.example.ecorisk_manager.model.HojaSeguridadDetalle
 import kotlinx.coroutines.flow.Flow
+import androidx.room.OnConflictStrategy
 
 @Dao
 interface HojaSeguridadDao {
@@ -108,4 +109,13 @@ interface HojaSeguridadDao {
 
     @Query("DELETE FROM hojas_seguridad WHERE id_hoja = :idHoja")
     suspend fun eliminarHojaPorId(idHoja: Int)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertarHojas(hojas: List<HojaSeguridadEntity>)
+
+    @Query("SELECT * FROM hojas_seguridad ORDER BY id_hoja ASC")
+    suspend fun obtenerHojasParaRespaldo(): List<HojaSeguridadEntity>
+
+    @Query("DELETE FROM hojas_seguridad")
+    suspend fun eliminarTodasHojas()
 }

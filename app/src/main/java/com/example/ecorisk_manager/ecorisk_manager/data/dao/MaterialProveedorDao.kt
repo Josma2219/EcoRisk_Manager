@@ -8,6 +8,7 @@ import androidx.room.Update
 import com.example.ecorisk_manager.data.entity.MaterialProveedorEntity
 import com.example.ecorisk_manager.model.MaterialProveedorDetalle
 import kotlinx.coroutines.flow.Flow
+import androidx.room.OnConflictStrategy
 
 @Dao
 interface MaterialProveedorDao {
@@ -113,4 +114,13 @@ interface MaterialProveedorDao {
 
     @Query("DELETE FROM materiales_proveedores WHERE id_material_proveedor = :idRelacion")
     suspend fun eliminarRelacionPorId(idRelacion: Int)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertarRelaciones(relaciones: List<MaterialProveedorEntity>)
+
+    @Query("SELECT * FROM materiales_proveedores ORDER BY id_material_proveedor ASC")
+    suspend fun obtenerRelacionesParaRespaldo(): List<MaterialProveedorEntity>
+
+    @Query("DELETE FROM materiales_proveedores")
+    suspend fun eliminarTodasRelaciones()
 }
