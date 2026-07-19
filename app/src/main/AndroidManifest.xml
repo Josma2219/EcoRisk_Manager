@@ -51,6 +51,14 @@
             android:exported="false" />
 
         <activity
+            android:name=".ui.proveedores.ProveedorFormularioActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.proveedores.ProveedorDetalleActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".ui.materialproveedor.MaterialProveedorActivity"
             android:exported="false" />
 

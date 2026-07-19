@@ -35,6 +35,19 @@ interface ProveedorDao {
     """)
     fun buscarProveedores(texto: String): Flow<List<ProveedorEntity>>
 
+    @Query("SELECT COUNT(*) FROM proveedores WHERE correo = :correo")
+    suspend fun contarProveedorPorCorreo(correo: String): Int
+
+    @Query("""
+        SELECT COUNT(*) FROM proveedores
+        WHERE correo = :correo
+        AND id_proveedor != :idProveedor
+    """)
+    suspend fun contarProveedorPorCorreoEnOtroRegistro(
+        correo: String,
+        idProveedor: Int
+    ): Int
+
     @Query("SELECT COUNT(*) FROM proveedores")
     suspend fun contarProveedores(): Int
 }
