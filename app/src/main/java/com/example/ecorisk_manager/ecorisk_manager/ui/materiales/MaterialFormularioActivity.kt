@@ -16,6 +16,7 @@ import com.example.ecorisk_manager.viewmodel.MaterialViewModelFactory
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import com.example.ecorisk_manager.utils.Constantes
 
 class MaterialFormularioActivity : AppCompatActivity() {
 
@@ -30,7 +31,7 @@ class MaterialFormularioActivity : AppCompatActivity() {
         binding = ActivityMaterialFormularioBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        idMaterialActual = intent.getIntExtra(EXTRA_ID_MATERIAL, 0)
+        idMaterialActual = intent.getIntExtra(Constantes.Extras.EXTRA_ID_MATERIAL, 0)
 
         prepararViewModel()
         configurarSpinners()
@@ -169,9 +170,5 @@ class MaterialFormularioActivity : AppCompatActivity() {
         val fechaActual = formatoFecha.format(Date())
 
         binding.campoFechaRegistro.setText(fechaActual)
-    }
-
-    companion object {
-        const val EXTRA_ID_MATERIAL = "id_material"
     }
 }

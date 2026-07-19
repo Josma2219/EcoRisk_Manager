@@ -7,6 +7,7 @@ import com.example.ecorisk_manager.data.entity.MaterialPeligrosoEntity
 import com.example.ecorisk_manager.databinding.ItemMaterialBinding
 
 class MaterialAdapter(
+    private val alVerDetalleMaterial: (MaterialPeligrosoEntity) -> Unit,
     private val alEditarMaterial: (MaterialPeligrosoEntity) -> Unit
 ) : RecyclerView.Adapter<MaterialAdapter.MaterialViewHolder>() {
 
@@ -46,8 +47,18 @@ class MaterialAdapter(
             binding.textoRiesgoMaterial.text = "Riesgo: ${material.clasificacionRiesgo}"
             binding.textoEstadoMaterial.text = "Estado: ${material.estado}"
 
+            binding.botonVerDetalleMaterial.setOnClickListener {
+                alVerDetalleMaterial(material)
+            }
+
             binding.botonEditarMaterial.setOnClickListener {
                 alEditarMaterial(material)
+            }
+
+            // También dejamos que tocar la tarjeta abra el detalle.
+            // Es un extra pequeño, pero hace la app más cómoda.
+            binding.root.setOnClickListener {
+                alVerDetalleMaterial(material)
             }
         }
     }

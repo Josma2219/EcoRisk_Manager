@@ -9,6 +9,13 @@ object Constantes {
         const val CLAVE_ROL_USUARIO = "rol_usuario"
     }
 
+    object Extras {
+        const val EXTRA_ID_MATERIAL = "extra_id_material"
+        const val EXTRA_ID_PROVEEDOR = "extra_id_proveedor"
+        const val EXTRA_ID_INCIDENTE = "extra_id_incidente"
+        const val EXTRA_ID_HOJA = "extra_id_hoja"
+    }
+
     object UsuarioTemporal {
         const val USUARIO = "admin"
         const val CONTRASENA = "admin123"

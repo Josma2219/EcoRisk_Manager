@@ -13,6 +13,7 @@ import com.example.ecorisk_manager.adapter.MaterialAdapter
 import com.example.ecorisk_manager.data.database.AppDatabase
 import com.example.ecorisk_manager.data.repository.MaterialRepository
 import com.example.ecorisk_manager.databinding.ActivityMaterialListaBinding
+import com.example.ecorisk_manager.utils.Constantes
 import com.example.ecorisk_manager.viewmodel.MaterialViewModel
 import com.example.ecorisk_manager.viewmodel.MaterialViewModelFactory
 
@@ -40,7 +41,7 @@ class MaterialListaActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        // Al volver del formulario, refrescamos la lista por si se guardó algo.
+        // Al volver del formulario o detalle, refrescamos la lista.
         materialViewModel.cargarMateriales()
     }
 
@@ -54,6 +55,9 @@ class MaterialListaActivity : AppCompatActivity() {
 
     private fun configurarRecycler() {
         materialAdapter = MaterialAdapter(
+            alVerDetalleMaterial = { material ->
+                abrirDetalleMaterial(material.idMaterial)
+            },
             alEditarMaterial = { material ->
                 abrirFormularioMaterial(material.idMaterial)
             }
@@ -118,7 +122,13 @@ class MaterialListaActivity : AppCompatActivity() {
 
     private fun abrirFormularioMaterial(idMaterial: Int = 0) {
         val intent = Intent(this, MaterialFormularioActivity::class.java)
-        intent.putExtra(MaterialFormularioActivity.EXTRA_ID_MATERIAL, idMaterial)
+        intent.putExtra(Constantes.Extras.EXTRA_ID_MATERIAL, idMaterial)
+        startActivity(intent)
+    }
+
+    private fun abrirDetalleMaterial(idMaterial: Int) {
+        val intent = Intent(this, MaterialDetalleActivity::class.java)
+        intent.putExtra(Constantes.Extras.EXTRA_ID_MATERIAL, idMaterial)
         startActivity(intent)
     }
 }

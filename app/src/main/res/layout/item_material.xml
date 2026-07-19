@@ -45,15 +45,35 @@
         android:textSize="14sp"
         tools:text="Estado: Activo" />
 
-    <!-- Botón básico por ahora.
-         Luego aquí podemos meter Ver detalle, Hojas, Proveedores e Incidentes. -->
-    <Button
-        android:id="@+id/botonEditarMaterial"
+    <!-- UI básica:
+         Por ahora usamos botones simples.
+         Luego podemos cambiarlos por iconos o tarjetas más bonitas. -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:backgroundTint="@color/color_primario_medio"
-        android:text="Editar"
-        android:textColor="@color/blanco" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/botonVerDetalleMaterial"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/color_primario"
+            android:text="Detalle"
+            android:textColor="@color/blanco" />
+
+        <Button
+            android:id="@+id/botonEditarMaterial"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/color_primario_medio"
+            android:text="Editar"
+            android:textColor="@color/blanco" />
+
+    </LinearLayout>
 
 </LinearLayout>

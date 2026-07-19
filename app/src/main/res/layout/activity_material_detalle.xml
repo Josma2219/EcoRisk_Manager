@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_fondo"
+    tools:context=".ui.materiales.MaterialDetalleActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/textoTituloDetalle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Detalle del material"
+            android:textColor="@color/texto_primario"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textoSubtituloDetalle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Información completa del material peligroso."
+            android:textColor="@color/texto_secundario"
+            android:textSize="15sp" />
+
+        <!-- Tarjeta principal.
+             Luego podemos cambiar este bloque por un diseño más pro con iconos. -->
+        <LinearLayout
+            android:id="@+id/contenedorDetalleMaterial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:background="@color/color_superficie"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/textoNombreComercial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/texto_primario"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                tools:text="Ácido Sulfúrico" />
+
+            <TextView
+                android:id="@+id/textoCodigoMaterial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/texto_secundario"
+                android:textSize="15sp"
+                tools:text="Código: MAT-001" />
+
+            <TextView
+                android:id="@+id/textoClasificacionRiesgo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/texto_secundario"
+                android:textSize="15sp"
+                tools:text="Clasificación: Corrosivo" />
+
+            <TextView
+                android:id="@+id/textoUnidadMedida"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/texto_secundario"
+                android:textSize="15sp"
+                tools:text="Unidad: Litros" />
+
+            <TextView
+                android:id="@+id/textoFechaRegistro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/texto_secundario"
+                android:textSize="15sp"
+                tools:text="Fecha de registro: 2026-07-17" />
+
+            <TextView
+                android:id="@+id/textoEstadoMaterial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/texto_secundario"
+                android:textSize="15sp"
+                tools:text="Estado: Activo" />
+
+            <TextView
+                android:id="@+id/textoDescripcionMaterial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:textColor="@color/texto_primario"
+                android:textSize="15sp"
+                tools:text="Descripción completa del material peligroso." />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textoAccionesRelacionadas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Acciones relacionadas"
+            android:textColor="@color/texto_primario"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/botonEditarMaterial"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/color_primario"
+            android:text="Editar material"
+            android:textColor="@color/blanco" />
+
+        <Button
+            android:id="@+id/botonVerHojas"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/color_primario_medio"
+            android:text="Ver hojas de seguridad"
+            android:textColor="@color/blanco" />
+
+        <Button
+            android:id="@+id/botonVerProveedores"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/color_primario_medio"
+            android:text="Ver proveedores asociados"
+            android:textColor="@color/blanco" />
+
+        <Button
+            android:id="@+id/botonVerIncidentes"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/color_secundario"
+            android:text="Ver incidentes del material"
+            android:textColor="@color/blanco" />
+
+        <Button
+            android:id="@+id/botonVolver"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/riesgo_critico"
+            android:text="Volver"
+            android:textColor="@color/blanco" />
+
+    </LinearLayout>
+
+</ScrollView>
