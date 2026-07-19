@@ -47,6 +47,14 @@
             android:exported="false" />
 
         <activity
+            android:name=".ui.hojas.HojaFormularioActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.hojas.HojaDetalleActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".ui.proveedores.ProveedorListaActivity"
             android:exported="false" />
 

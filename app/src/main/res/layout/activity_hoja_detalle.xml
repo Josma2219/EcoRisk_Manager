@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_fondo"
+    tools:context=".ui.hojas.HojaDetalleActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/textoTituloDetalle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Detalle de hoja"
+            android:textColor="@color/texto_primario"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textoSubtituloDetalle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Información completa de la hoja de seguridad."
+            android:textColor="@color/texto_secundario"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:id="@+id/contenedorDetalleHoja"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:background="@color/color_superficie"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/textoMaterialHoja"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/texto_primario"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                tools:text="Ácido Sulfúrico" />
+
+            <TextView
+                android:id="@+id/textoCodigoMaterial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/texto_secundario"
+                android:textSize="15sp"
+                tools:text="Código: MAT-001" />
+
+            <TextView
+                android:id="@+id/textoClasificacionRiesgo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/texto_secundario"
+                android:textSize="15sp"
+                tools:text="Riesgo: Corrosivo" />
+
+            <TextView
+                android:id="@+id/textoVersionHoja"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:textColor="@color/texto_primario"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="Versión: 1.0" />
+
+            <TextView
+                android:id="@+id/textoFechaEmision"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/texto_secundario"
+                android:textSize="15sp"
+                tools:text="Fecha emisión: 2026-07-17" />
+
+            <TextView
+                android:id="@+id/textoArchivoPdf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/texto_secundario"
+                android:textSize="15sp"
+                tools:text="Archivo PDF: hoja_acido.pdf" />
+
+            <TextView
+                android:id="@+id/textoObservaciones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:textColor="@color/texto_primario"
+                android:textSize="15sp"
+                tools:text="Observaciones de la hoja." />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/botonEditarHoja"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/color_primario"
+            android:text="Editar hoja"
+            android:textColor="@color/blanco" />
+
+        <Button
+            android:id="@+id/botonEliminarHoja"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/riesgo_critico"
+            android:text="Eliminar hoja"
+            android:textColor="@color/blanco" />
+
+        <Button
+            android:id="@+id/botonVolver"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/color_secundario"
+            android:text="Volver"
+            android:textColor="@color/blanco" />
+
+    </LinearLayout>
+
+</ScrollView>

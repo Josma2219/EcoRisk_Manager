@@ -1,57 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_fondo"
+    android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".ui.hojas.HojaListaActivity">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/textoTituloModulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:text="Hojas de seguridad"
+        android:textColor="@color/texto_primario"
+        android:textSize="28sp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textoTituloModulo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/texto_primario"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            tools:text="Hojas de seguridad" />
+    <TextView
+        android:id="@+id/textoDescripcionModulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Registro y consulta de hojas de seguridad asociadas a materiales."
+        android:textColor="@color/texto_secundario"
+        android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/textoDescripcionModulo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/texto_secundario"
-            android:textSize="15sp"
-            tools:text="Descripción del módulo" />
+    <Button
+        android:id="@+id/botonAgregarHoja"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginTop="18dp"
+        android:backgroundTint="@color/color_primario"
+        android:text="Agregar hoja de seguridad"
+        android:textColor="@color/blanco" />
 
-        <!-- Luego aquí va el RecyclerView de hojas y el botón de registrar hoja. -->
-        <TextView
-            android:id="@+id/textoEstadoModulo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:background="@color/color_superficie"
-            android:padding="18dp"
-            android:textColor="@color/texto_primario"
-            android:textSize="16sp"
-            tools:text="Pendiente de desarrollo" />
+    <TextView
+        android:id="@+id/textoListaVacia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:gravity="center"
+        android:text="No hay hojas de seguridad registradas"
+        android:textColor="@color/texto_secundario"
+        android:textSize="15sp"
+        android:visibility="gone" />
 
-        <Button
-            android:id="@+id/botonVolver"
-            android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="@color/color_primario"
-            android:text="Volver"
-            android:textColor="@color/blanco" />
+    <!-- UI básica: luego se puede mejorar con cards más bonitas o íconos PDF. -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerHojas"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="14dp"
+        android:layout_weight="1"
+        tools:listitem="@layout/item_hoja_seguridad" />
 
-    </LinearLayout>
+    <Button
+        android:id="@+id/botonVolver"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@color/color_secundario"
+        android:text="Volver"
+        android:textColor="@color/blanco" />
 
-</ScrollView>
+</LinearLayout>
