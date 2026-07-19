@@ -1,57 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_fondo"
+    android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".ui.materialproveedor.MaterialProveedorActivity">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/textoTituloModulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:text="Material por proveedor"
+        android:textColor="@color/texto_primario"
+        android:textSize="28sp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textoTituloModulo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/texto_primario"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            tools:text="Material por proveedor" />
+    <TextView
+        android:id="@+id/textoDescripcionModulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Asocie proveedores con materiales peligrosos."
+        android:textColor="@color/texto_secundario"
+        android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/textoDescripcionModulo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/texto_secundario"
-            android:textSize="15sp"
-            tools:text="Descripción del módulo" />
+    <!-- Formulario básico.
+         Después podemos esconder esta zona cuando se entra solo a consultar desde detalle. -->
+    <TextView
+        android:id="@+id/textoMaterial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="Material"
+        android:textColor="@color/texto_primario"
+        android:textStyle="bold" />
 
-        <!-- Luego aquí van los Spinners de material/proveedor y el precio. -->
-        <TextView
-            android:id="@+id/textoEstadoModulo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:background="@color/color_superficie"
-            android:padding="18dp"
-            android:textColor="@color/texto_primario"
-            android:textSize="16sp"
-            tools:text="Pendiente de desarrollo" />
+    <Spinner
+        android:id="@+id/spinnerMaterial"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="6dp"
+        android:background="@color/color_superficie" />
 
-        <Button
-            android:id="@+id/botonVolver"
-            android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="@color/color_primario"
-            android:text="Volver"
-            android:textColor="@color/blanco" />
+    <TextView
+        android:id="@+id/textoProveedor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Proveedor"
+        android:textColor="@color/texto_primario"
+        android:textStyle="bold" />
 
-    </LinearLayout>
+    <Spinner
+        android:id="@+id/spinnerProveedor"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="6dp"
+        android:background="@color/color_superficie" />
 
-</ScrollView>
+    <EditText
+        android:id="@+id/campoPrecioReferencia"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/color_superficie"
+        android:hint="Precio de referencia"
+        android:inputType="numberDecimal"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:textColor="@color/texto_primario"
+        android:textColorHint="@color/texto_secundario" />
+
+    <Button
+        android:id="@+id/botonAsociar"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginTop="14dp"
+        android:backgroundTint="@color/color_primario"
+        android:text="Asociar material y proveedor"
+        android:textColor="@color/blanco" />
+
+    <TextView
+        android:id="@+id/textoTituloLista"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:text="Relaciones registradas"
+        android:textColor="@color/texto_primario"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textoListaVacia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:gravity="center"
+        android:text="No hay relaciones registradas"
+        android:textColor="@color/texto_secundario"
+        android:textSize="15sp"
+        android:visibility="gone" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerRelaciones"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_weight="1"
+        tools:listitem="@layout/item_material_proveedor" />
+
+    <Button
+        android:id="@+id/botonVolver"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@color/color_secundario"
+        android:text="Volver"
+        android:textColor="@color/blanco" />
+
+</LinearLayout>
