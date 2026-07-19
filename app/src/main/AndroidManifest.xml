@@ -87,6 +87,13 @@
             android:exported="false" />
 
         <activity
+            android:name=".ui.reportes.ReporteMaterialesRiesgoActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.reportes.ReporteHistorialIncidentesActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.respaldo.RespaldoActivity"
             android:exported="false" />
 
