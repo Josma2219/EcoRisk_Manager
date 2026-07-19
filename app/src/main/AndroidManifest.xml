@@ -35,6 +35,10 @@
             android:exported="false" />
 
         <activity
+            android:name=".ui.materiales.MaterialFormularioActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".ui.hojas.HojaListaActivity"
             android:exported="false" />
 

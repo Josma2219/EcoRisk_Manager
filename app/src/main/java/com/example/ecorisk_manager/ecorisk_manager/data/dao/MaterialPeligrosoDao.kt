@@ -44,6 +44,16 @@ interface MaterialPeligrosoDao {
     @Query("SELECT COUNT(*) FROM materiales_peligrosos WHERE codigo_material = :codigoMaterial")
     suspend fun contarMaterialPorCodigo(codigoMaterial: String): Int
 
+    @Query("""
+        SELECT COUNT(*) FROM materiales_peligrosos
+        WHERE codigo_material = :codigoMaterial
+        AND id_material != :idMaterial
+    """)
+    suspend fun contarMaterialPorCodigoEnOtroRegistro(
+        codigoMaterial: String,
+        idMaterial: Int
+    ): Int
+
     @Query("SELECT COUNT(*) FROM materiales_peligrosos")
     suspend fun contarMateriales(): Int
 

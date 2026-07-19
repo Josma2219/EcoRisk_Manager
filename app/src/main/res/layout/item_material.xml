@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:background="@color/color_superficie"
+    android:orientation="vertical"
+    android:padding="14dp">
+
+    <TextView
+        android:id="@+id/textoNombreMaterial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/texto_primario"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:text="Ácido sulfúrico" />
+
+    <TextView
+        android:id="@+id/textoCodigoMaterial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:textColor="@color/texto_secundario"
+        android:textSize="14sp"
+        tools:text="Código: MAT-001" />
+
+    <TextView
+        android:id="@+id/textoRiesgoMaterial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:textColor="@color/texto_secundario"
+        android:textSize="14sp"
+        tools:text="Riesgo: Corrosivo" />
+
+    <TextView
+        android:id="@+id/textoEstadoMaterial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:textColor="@color/texto_secundario"
+        android:textSize="14sp"
+        tools:text="Estado: Activo" />
+
+    <!-- Botón básico por ahora.
+         Luego aquí podemos meter Ver detalle, Hojas, Proveedores e Incidentes. -->
+    <Button
+        android:id="@+id/botonEditarMaterial"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/color_primario_medio"
+        android:text="Editar"
+        android:textColor="@color/blanco" />
+
+</LinearLayout>
