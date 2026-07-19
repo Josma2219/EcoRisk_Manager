@@ -68,6 +68,24 @@
         android:text="Ver historial completo"
         android:textColor="@color/blanco" />
 
+    <Button
+        android:id="@+id/botonExportarPdf"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/riesgo_critico"
+        android:text="Exportar PDF"
+        android:textColor="@color/blanco" />
+
+    <TextView
+        android:id="@+id/textoEstadoPdf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="PDF: sin generar."
+        android:textColor="@color/texto_secundario"
+        android:textSize="13sp" />
+
     <TextView
         android:id="@+id/textoTotalIncidentes"
         android:layout_width="match_parent"

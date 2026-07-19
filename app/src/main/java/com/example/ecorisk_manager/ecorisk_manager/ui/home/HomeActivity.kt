@@ -2,8 +2,10 @@ package com.example.ecorisk_manager.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.ecorisk_manager.data.database.AppDatabase
 import com.example.ecorisk_manager.data.repository.HomeRepository
 import com.example.ecorisk_manager.databinding.ActivityHomeBinding
@@ -15,9 +17,11 @@ import com.example.ecorisk_manager.ui.materialproveedor.MaterialProveedorActivit
 import com.example.ecorisk_manager.ui.proveedores.ProveedorListaActivity
 import com.example.ecorisk_manager.ui.reportes.ReporteMenuActivity
 import com.example.ecorisk_manager.ui.respaldo.RespaldoActivity
+import com.example.ecorisk_manager.utils.PobladorDatosPrueba
 import com.example.ecorisk_manager.utils.SessionManager
 import com.example.ecorisk_manager.viewmodel.HomeViewModel
 import com.example.ecorisk_manager.viewmodel.HomeViewModelFactory
+import kotlinx.coroutines.launch
 
 class HomeActivity : AppCompatActivity() {
 
@@ -35,6 +39,27 @@ class HomeActivity : AppCompatActivity() {
 
         protegerPantalla()
         prepararViewModel()
+
+        /*
+         USAR SOLO UNA VEZ PARA DEMO.
+
+         Esta línea borra los datos actuales y vuelve a llenar la base de datos
+         con materiales, proveedores, hojas de seguridad, relaciones e incidentes.
+
+         Pasos:
+         1. Dejarla activa.
+         2. Ejecutar la app.
+         3. Entrar al Home.
+         4. Confirmar que sale el mensaje "Base de datos poblada para demo".
+         5. Volver a este archivo y comentar o borrar esta línea.
+
+         Si no la comentas, cada vez que entres al Home se reinicia la base.
+        */
+        poblarDatosDemoUnaSolaVez()
+
+        // Después de ejecutarlo una vez, déjalo así:
+        // poblarDatosDemoUnaSolaVez()
+
         observarDashboard()
         cargarDatosUsuario()
         configurarEventos()
@@ -114,6 +139,22 @@ class HomeActivity : AppCompatActivity() {
         binding.botonCerrarSesion.setOnClickListener {
             sessionManager.cerrarSesion()
             abrirLogin()
+        }
+    }
+
+    private fun poblarDatosDemoUnaSolaVez() {
+        lifecycleScope.launch {
+            val baseDatos = AppDatabase.obtenerBaseDatos(applicationContext)
+
+            PobladorDatosPrueba.reiniciarYPoblarBaseDatos(baseDatos)
+
+            homeViewModel.cargarResumenDashboard()
+
+            Toast.makeText(
+                this@HomeActivity,
+                "Base de datos poblada para demo",
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 

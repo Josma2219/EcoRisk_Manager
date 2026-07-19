@@ -10,8 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ecorisk_manager.R
 import com.example.ecorisk_manager.adapter.ReporteMaterialAdapter
 import com.example.ecorisk_manager.data.database.AppDatabase
+import com.example.ecorisk_manager.data.entity.MaterialPeligrosoEntity
 import com.example.ecorisk_manager.data.repository.ReporteRepository
 import com.example.ecorisk_manager.databinding.ActivityReporteMaterialesRiesgoBinding
+import com.example.ecorisk_manager.utils.GeneradorPdf
 import com.example.ecorisk_manager.viewmodel.ReporteViewModel
 import com.example.ecorisk_manager.viewmodel.ReporteViewModelFactory
 
@@ -20,6 +22,9 @@ class ReporteMaterialesRiesgoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReporteMaterialesRiesgoBinding
     private lateinit var reporteViewModel: ReporteViewModel
     private lateinit var reporteMaterialAdapter: ReporteMaterialAdapter
+
+    private var listaActualMateriales = emptyList<MaterialPeligrosoEntity>()
+    private var filtroActual = "Todos los materiales"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,8 +69,9 @@ class ReporteMaterialesRiesgoActivity : AppCompatActivity() {
 
     private fun observarMateriales() {
         reporteViewModel.materialesReporte.observe(this) { listaMateriales ->
-            reporteMaterialAdapter.actualizarLista(listaMateriales)
+            listaActualMateriales = listaMateriales
 
+            reporteMaterialAdapter.actualizarLista(listaMateriales)
             binding.textoTotalMateriales.text = "Total en reporte: ${listaMateriales.size}"
 
             val listaVacia = listaMateriales.isEmpty()
@@ -83,16 +89,45 @@ class ReporteMaterialesRiesgoActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            filtroActual = "Clasificación de riesgo: $clasificacion"
             reporteViewModel.cargarMaterialesPorRiesgo(clasificacion)
         }
 
         binding.botonVerTodos.setOnClickListener {
             binding.spinnerRiesgo.setSelection(0)
+            filtroActual = "Todos los materiales"
             reporteViewModel.cargarTodosLosMateriales()
+        }
+
+        binding.botonExportarPdf.setOnClickListener {
+            exportarPdf()
         }
 
         binding.botonVolver.setOnClickListener {
             finish()
+        }
+    }
+
+    private fun exportarPdf() {
+        if (listaActualMateriales.isEmpty()) {
+            Toast.makeText(this, "No hay materiales para exportar", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        try {
+            val archivo = GeneradorPdf.generarReporteMaterialesPorRiesgo(
+                contexto = this,
+                filtroAplicado = filtroActual,
+                materiales = listaActualMateriales
+            )
+
+            val mensaje = "PDF generado:\n${archivo.absolutePath}"
+            binding.textoEstadoPdf.text = mensaje
+
+            Toast.makeText(this, "PDF generado correctamente", Toast.LENGTH_LONG).show()
+        } catch (error: Exception) {
+            binding.textoEstadoPdf.text = "No se pudo generar el PDF"
+            Toast.makeText(this, "No se pudo generar el PDF", Toast.LENGTH_SHORT).show()
         }
     }
 }

@@ -12,6 +12,8 @@ import com.example.ecorisk_manager.adapter.ReporteIncidenteAdapter
 import com.example.ecorisk_manager.data.database.AppDatabase
 import com.example.ecorisk_manager.data.repository.ReporteRepository
 import com.example.ecorisk_manager.databinding.ActivityReporteHistorialIncidentesBinding
+import com.example.ecorisk_manager.model.IncidenteDetalle
+import com.example.ecorisk_manager.utils.GeneradorPdf
 import com.example.ecorisk_manager.viewmodel.ReporteViewModel
 import com.example.ecorisk_manager.viewmodel.ReporteViewModelFactory
 
@@ -20,6 +22,9 @@ class ReporteHistorialIncidentesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReporteHistorialIncidentesBinding
     private lateinit var reporteViewModel: ReporteViewModel
     private lateinit var reporteIncidenteAdapter: ReporteIncidenteAdapter
+
+    private var listaActualIncidentes = emptyList<IncidenteDetalle>()
+    private var filtroActual = "Historial completo"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,8 +78,9 @@ class ReporteHistorialIncidentesActivity : AppCompatActivity() {
 
     private fun observarIncidentes() {
         reporteViewModel.incidentesReporte.observe(this) { listaIncidentes ->
-            reporteIncidenteAdapter.actualizarLista(listaIncidentes)
+            listaActualIncidentes = listaIncidentes
 
+            reporteIncidenteAdapter.actualizarLista(listaIncidentes)
             binding.textoTotalIncidentes.text = "Total en reporte: ${listaIncidentes.size}"
 
             val listaVacia = listaIncidentes.isEmpty()
@@ -92,6 +98,7 @@ class ReporteHistorialIncidentesActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            filtroActual = "Estado: $estado"
             reporteViewModel.cargarIncidentesPorEstado(estado)
         }
 
@@ -103,17 +110,46 @@ class ReporteHistorialIncidentesActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            filtroActual = "Severidad: $severidad"
             reporteViewModel.cargarIncidentesPorSeveridad(severidad)
         }
 
         binding.botonVerTodos.setOnClickListener {
             binding.spinnerEstado.setSelection(0)
             binding.spinnerSeveridad.setSelection(0)
+            filtroActual = "Historial completo"
             reporteViewModel.cargarHistorialIncidentes()
+        }
+
+        binding.botonExportarPdf.setOnClickListener {
+            exportarPdf()
         }
 
         binding.botonVolver.setOnClickListener {
             finish()
+        }
+    }
+
+    private fun exportarPdf() {
+        if (listaActualIncidentes.isEmpty()) {
+            Toast.makeText(this, "No hay incidentes para exportar", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        try {
+            val archivo = GeneradorPdf.generarReporteHistorialIncidentes(
+                contexto = this,
+                filtroAplicado = filtroActual,
+                incidentes = listaActualIncidentes
+            )
+
+            val mensaje = "PDF generado:\n${archivo.absolutePath}"
+            binding.textoEstadoPdf.text = mensaje
+
+            Toast.makeText(this, "PDF generado correctamente", Toast.LENGTH_LONG).show()
+        } catch (error: Exception) {
+            binding.textoEstadoPdf.text = "No se pudo generar el PDF"
+            Toast.makeText(this, "No se pudo generar el PDF", Toast.LENGTH_SHORT).show()
         }
     }
 }
