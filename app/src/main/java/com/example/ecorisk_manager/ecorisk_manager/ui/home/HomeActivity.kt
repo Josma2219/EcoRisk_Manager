@@ -71,6 +71,7 @@ class HomeActivity : AppCompatActivity() {
         homeViewModel.resumenDashboard.observe(this) { resumen ->
             binding.tarjetaMateriales.text = "${resumen.totalMateriales}\nMateriales"
             binding.tarjetaProveedores.text = "${resumen.totalProveedores}\nProveedores"
+            binding.tarjetaIncidentes.text = "${resumen.incidentesAbiertos}\nIncidentes abiertos"
         }
     }
 

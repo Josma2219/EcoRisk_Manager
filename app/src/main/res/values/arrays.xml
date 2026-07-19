@@ -29,4 +29,30 @@
         <item>Suspendido</item>
     </string-array>
 
+    <string-array name="tipos_incidente">
+        <item>Seleccione tipo</item>
+        <item>Derrame</item>
+        <item>Fuga</item>
+        <item>Exposición</item>
+        <item>Incendio</item>
+        <item>Reacción química</item>
+        <item>Almacenamiento incorrecto</item>
+        <item>Otro</item>
+    </string-array>
+
+    <string-array name="niveles_severidad">
+        <item>Seleccione severidad</item>
+        <item>Bajo</item>
+        <item>Medio</item>
+        <item>Alto</item>
+        <item>Crítico</item>
+    </string-array>
+
+    <string-array name="estados_incidente">
+        <item>Seleccione estado</item>
+        <item>Abierto</item>
+        <item>En proceso</item>
+        <item>Cerrado</item>
+    </string-array>
+
 </resources>

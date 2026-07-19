@@ -65,6 +65,20 @@
                 android:textColor="@color/texto_primario"
                 android:textSize="15sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tarjetaIncidentes"
+                android:layout_width="0dp"
+                android:layout_height="82dp"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:background="@color/color_superficie"
+                android:gravity="center"
+                android:text="0\nIncidentes abiertos"
+                android:textColor="@color/texto_primario"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
         </LinearLayout>
 
         <TextView

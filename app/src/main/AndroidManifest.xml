@@ -75,6 +75,14 @@
             android:exported="false" />
 
         <activity
+            android:name=".ui.incidentes.IncidenteFormularioActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.incidentes.IncidenteDetalleActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".ui.reportes.ReporteMenuActivity"
             android:exported="false" />
 

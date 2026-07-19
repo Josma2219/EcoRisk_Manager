@@ -1,57 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_fondo"
+    android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".ui.incidentes.IncidenteListaActivity">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/textoTituloModulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:text="Incidentes"
+        android:textColor="@color/texto_primario"
+        android:textSize="28sp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textoTituloModulo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/texto_primario"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            tools:text="Incidentes" />
+    <TextView
+        android:id="@+id/textoDescripcionModulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Registro y seguimiento de incidentes relacionados con materiales peligrosos."
+        android:textColor="@color/texto_secundario"
+        android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/textoDescripcionModulo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/texto_secundario"
-            android:textSize="15sp"
-            tools:text="Descripción del módulo" />
+    <Button
+        android:id="@+id/botonAgregarIncidente"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginTop="18dp"
+        android:backgroundTint="@color/color_primario"
+        android:text="Agregar incidente"
+        android:textColor="@color/blanco" />
 
-        <!-- Luego aquí van filtros, RecyclerView y botón de registrar incidente. -->
-        <TextView
-            android:id="@+id/textoEstadoModulo"
+    <LinearLayout
+        android:id="@+id/contenedorFiltros"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:orientation="vertical">
+
+        <Spinner
+            android:id="@+id/spinnerFiltroEstado"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:background="@color/color_superficie"
-            android:padding="18dp"
-            android:textColor="@color/texto_primario"
-            android:textSize="16sp"
-            tools:text="Pendiente de desarrollo" />
+            android:layout_height="52dp"
+            android:background="@color/color_superficie" />
 
         <Button
-            android:id="@+id/botonVolver"
+            android:id="@+id/botonFiltrarEstado"
             android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:layout_marginTop="24dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/color_primario_medio"
+            android:text="Filtrar por estado"
+            android:textColor="@color/blanco" />
+
+        <Spinner
+            android:id="@+id/spinnerFiltroSeveridad"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/color_superficie" />
+
+        <Button
+            android:id="@+id/botonFiltrarSeveridad"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/color_secundario"
+            android:text="Filtrar por severidad"
+            android:textColor="@color/blanco" />
+
+        <Button
+            android:id="@+id/botonLimpiarFiltros"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
             android:backgroundTint="@color/color_primario"
-            android:text="Volver"
+            android:text="Ver todos"
             android:textColor="@color/blanco" />
 
     </LinearLayout>
 
-</ScrollView>
+    <TextView
+        android:id="@+id/textoListaVacia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:gravity="center"
+        android:text="No hay incidentes registrados"
+        android:textColor="@color/texto_secundario"
+        android:textSize="15sp"
+        android:visibility="gone" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerIncidentes"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="14dp"
+        android:layout_weight="1"
+        tools:listitem="@layout/item_incidente" />
+
+    <Button
+        android:id="@+id/botonVolver"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@color/color_secundario"
+        android:text="Volver"
+        android:textColor="@color/blanco" />
+
+</LinearLayout>

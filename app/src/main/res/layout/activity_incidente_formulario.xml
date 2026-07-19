@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_fondo"
+    tools:context=".ui.incidentes.IncidenteFormularioActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/textoTituloFormulario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registrar incidente"
+            android:textColor="@color/texto_primario"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textoDescripcionFormulario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Complete los datos del incidente."
+            android:textColor="@color/texto_secundario"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Material asociado"
+            android:textColor="@color/texto_primario"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spinnerMaterial"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="6dp"
+            android:background="@color/color_superficie" />
+
+        <EditText
+            android:id="@+id/campoFechaIncidente"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/color_superficie"
+            android:hint="Fecha del incidente"
+            android:inputType="date"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:textColor="@color/texto_primario"
+            android:textColorHint="@color/texto_secundario"
+            tools:text="2026-07-17" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="Tipo de incidente"
+            android:textColor="@color/texto_primario"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spinnerTipoIncidente"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="6dp"
+            android:background="@color/color_superficie" />
+
+        <EditText
+            android:id="@+id/campoDescripcion"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/color_superficie"
+            android:gravity="top"
+            android:hint="Descripción"
+            android:inputType="textMultiLine"
+            android:padding="14dp"
+            android:textColor="@color/texto_primario"
+            android:textColorHint="@color/texto_secundario" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="Nivel de severidad"
+            android:textColor="@color/texto_primario"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spinnerSeveridad"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="6dp"
+            android:background="@color/color_superficie" />
+
+        <EditText
+            android:id="@+id/campoAccionesCorrectivas"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/color_superficie"
+            android:gravity="top"
+            android:hint="Acciones correctivas"
+            android:inputType="textMultiLine"
+            android:padding="14dp"
+            android:textColor="@color/texto_primario"
+            android:textColorHint="@color/texto_secundario" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="Estado"
+            android:textColor="@color/texto_primario"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spinnerEstado"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="6dp"
+            android:background="@color/color_superficie" />
+
+        <Button
+            android:id="@+id/botonGuardarIncidente"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/color_primario"
+            android:text="Guardar"
+            android:textColor="@color/blanco" />
+
+        <Button
+            android:id="@+id/botonCancelar"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/color_secundario"
+            android:text="Cancelar"
+            android:textColor="@color/blanco" />
+
+    </LinearLayout>
+
+</ScrollView>
