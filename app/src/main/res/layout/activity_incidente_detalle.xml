@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_fondo"
+    tools:context=".ui.incidentes.IncidenteDetalleActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/textoTituloDetalle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Detalle del incidente"
+            android:textColor="@color/texto_primario"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textoSubtituloDetalle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Información completa del incidente registrado."
+            android:textColor="@color/texto_secundario"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:id="@+id/contenedorDetalleIncidente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:background="@color/color_superficie"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/textoTipoIncidente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/texto_primario"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                tools:text="Derrame" />
+
+            <TextView
+                android:id="@+id/textoMaterialIncidente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/texto_secundario"
+                android:textSize="15sp"
+                tools:text="Material: Ácido Sulfúrico" />
+
+            <TextView
+                android:id="@+id/textoCodigoMaterial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/texto_secundario"
+                android:textSize="15sp"
+                tools:text="Código: MAT-001" />
+
+            <TextView
+                android:id="@+id/textoFechaIncidente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/texto_secundario"
+                android:textSize="15sp"
+                tools:text="Fecha: 2026-07-17" />
+
+            <TextView
+                android:id="@+id/textoSeveridadIncidente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/texto_secundario"
+                android:textSize="15sp"
+                tools:text="Severidad: Alto" />
+
+            <TextView
+                android:id="@+id/textoEstadoIncidente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/color_secundario"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="Estado: Abierto" />
+
+            <TextView
+                android:id="@+id/textoDescripcionIncidente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:textColor="@color/texto_primario"
+                android:textSize="15sp"
+                tools:text="Descripción del incidente." />
+
+            <TextView
+                android:id="@+id/textoAccionesCorrectivas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:textColor="@color/texto_primario"
+                android:textSize="15sp"
+                tools:text="Acciones correctivas." />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/botonEditarIncidente"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/color_primario"
+            android:text="Editar incidente"
+            android:textColor="@color/blanco" />
+
+        <Button
+            android:id="@+id/botonEliminarIncidente"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/riesgo_critico"
+            android:text="Eliminar incidente"
+            android:textColor="@color/blanco" />
+
+        <Button
+            android:id="@+id/botonVolver"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/color_secundario"
+            android:text="Volver"
+            android:textColor="@color/blanco" />
+
+    </LinearLayout>
+
+</ScrollView>

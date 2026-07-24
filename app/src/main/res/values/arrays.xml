@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="clasificaciones_riesgo">
+        <item>Seleccione clasificación</item>
+        <item>Inflamable</item>
+        <item>Corrosivo</item>
+        <item>Tóxico</item>
+        <item>Reactivo</item>
+        <item>Explosivo</item>
+        <item>Comburente</item>
+        <item>Irritante</item>
+        <item>Peligroso para el ambiente</item>
+    </string-array>
+
+    <string-array name="unidades_medida">
+        <item>Seleccione unidad</item>
+        <item>Litros</item>
+        <item>Mililitros</item>
+        <item>Kilogramos</item>
+        <item>Gramos</item>
+        <item>Galones</item>
+        <item>Unidades</item>
+    </string-array>
+
+    <string-array name="estados_material">
+        <item>Activo</item>
+        <item>Inactivo</item>
+        <item>Suspendido</item>
+    </string-array>
+
+    <string-array name="tipos_incidente">
+        <item>Seleccione tipo</item>
+        <item>Derrame</item>
+        <item>Fuga</item>
+        <item>Exposición</item>
+        <item>Incendio</item>
+        <item>Reacción química</item>
+        <item>Almacenamiento incorrecto</item>
+        <item>Otro</item>
+    </string-array>
+
+    <string-array name="niveles_severidad">
+        <item>Seleccione severidad</item>
+        <item>Bajo</item>
+        <item>Medio</item>
+        <item>Alto</item>
+        <item>Crítico</item>
+    </string-array>
+
+    <string-array name="estados_incidente">
+        <item>Seleccione estado</item>
+        <item>Abierto</item>
+        <item>En proceso</item>
+        <item>Cerrado</item>
+    </string-array>
+
+</resources>

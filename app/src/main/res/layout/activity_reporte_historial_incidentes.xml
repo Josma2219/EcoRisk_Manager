@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_fondo"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".ui.reportes.ReporteHistorialIncidentesActivity">
+
+    <TextView
+        android:id="@+id/textoTituloReporte"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Historial de incidentes"
+        android:textColor="@color/texto_primario"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textoDescripcionReporte"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Consulta los incidentes registrados, con filtros por estado y severidad."
+        android:textColor="@color/texto_secundario"
+        android:textSize="15sp" />
+
+    <Spinner
+        android:id="@+id/spinnerEstado"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="18dp"
+        android:background="@color/color_superficie" />
+
+    <Button
+        android:id="@+id/botonFiltrarEstado"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/color_primario"
+        android:text="Filtrar por estado"
+        android:textColor="@color/blanco" />
+
+    <Spinner
+        android:id="@+id/spinnerSeveridad"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/color_superficie" />
+
+    <Button
+        android:id="@+id/botonFiltrarSeveridad"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/color_primario_medio"
+        android:text="Filtrar por severidad"
+        android:textColor="@color/blanco" />
+
+    <Button
+        android:id="@+id/botonVerTodos"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/color_secundario"
+        android:text="Ver historial completo"
+        android:textColor="@color/blanco" />
+
+    <Button
+        android:id="@+id/botonExportarPdf"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/riesgo_critico"
+        android:text="Exportar PDF"
+        android:textColor="@color/blanco" />
+
+    <TextView
+        android:id="@+id/textoEstadoPdf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="PDF: sin generar."
+        android:textColor="@color/texto_secundario"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/textoTotalIncidentes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="Total en reporte: 0"
+        android:textColor="@color/texto_primario"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textoListaVacia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:gravity="center"
+        android:text="No hay incidentes para este reporte"
+        android:textColor="@color/texto_secundario"
+        android:textSize="15sp"
+        android:visibility="gone" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerIncidentesReporte"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_weight="1"
+        tools:listitem="@layout/item_reporte_incidente" />
+
+    <Button
+        android:id="@+id/botonVolver"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@color/color_secundario"
+        android:text="Volver"
+        android:textColor="@color/blanco" />
+
+</LinearLayout>

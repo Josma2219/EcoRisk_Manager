@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_fondo"
+    tools:context=".ui.proveedores.ProveedorDetalleActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/textoTituloDetalle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Detalle del proveedor"
+            android:textColor="@color/texto_primario"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textoSubtituloDetalle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Información completa del proveedor."
+            android:textColor="@color/texto_secundario"
+            android:textSize="15sp" />
+
+        <!-- Tarjeta básica de detalle.
+             Luego podemos poner iconos o mejor distribución visual. -->
+        <LinearLayout
+            android:id="@+id/contenedorDetalleProveedor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:background="@color/color_superficie"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/textoNombreProveedor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/texto_primario"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                tools:text="Químicos del Norte" />
+
+            <TextView
+                android:id="@+id/textoTelefonoProveedor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/texto_secundario"
+                android:textSize="15sp"
+                tools:text="Teléfono: 2222-1111" />
+
+            <TextView
+                android:id="@+id/textoCorreoProveedor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/texto_secundario"
+                android:textSize="15sp"
+                tools:text="Correo: ventas@quimicosnorte.com" />
+
+            <TextView
+                android:id="@+id/textoContactoPrincipal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/texto_secundario"
+                android:textSize="15sp"
+                tools:text="Contacto principal: Carlos Vargas" />
+
+            <TextView
+                android:id="@+id/textoDireccionProveedor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:textColor="@color/texto_primario"
+                android:textSize="15sp"
+                tools:text="Dirección completa del proveedor." />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textoAccionesRelacionadas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Acciones relacionadas"
+            android:textColor="@color/texto_primario"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/botonEditarProveedor"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/color_primario"
+            android:text="Editar proveedor"
+            android:textColor="@color/blanco" />
+
+        <Button
+            android:id="@+id/botonVerMateriales"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/color_primario_medio"
+            android:text="Ver materiales suministrados"
+            android:textColor="@color/blanco" />
+
+        <Button
+            android:id="@+id/botonVolver"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/riesgo_critico"
+            android:text="Volver"
+            android:textColor="@color/blanco" />
+
+    </LinearLayout>
+
+</ScrollView>

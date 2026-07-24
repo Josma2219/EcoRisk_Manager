@@ -17,6 +17,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -27,6 +28,73 @@
 
         <activity
             android:name=".ui.home.HomeActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.materiales.MaterialListaActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.materiales.MaterialFormularioActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.materiales.MaterialDetalleActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.hojas.HojaListaActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.hojas.HojaFormularioActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.hojas.HojaDetalleActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.proveedores.ProveedorListaActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.proveedores.ProveedorFormularioActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.proveedores.ProveedorDetalleActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.materialproveedor.MaterialProveedorActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.incidentes.IncidenteListaActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.incidentes.IncidenteFormularioActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.incidentes.IncidenteDetalleActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.reportes.ReporteMenuActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.reportes.ReporteMaterialesRiesgoActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.reportes.ReporteHistorialIncidentesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.respaldo.RespaldoActivity"
             android:exported="false" />
 
     </application>
