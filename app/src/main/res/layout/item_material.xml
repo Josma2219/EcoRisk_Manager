@@ -1,79 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
-    android:background="@color/color_superficie"
-    android:orientation="vertical"
-    android:padding="14dp">
+    android:layout_marginBottom="12dp"
+    app:cardBackgroundColor="@color/color_superficie"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp">
 
-    <TextView
-        android:id="@+id/textoNombreMaterial"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/texto_primario"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        tools:text="Ácido sulfúrico" />
-
-    <TextView
-        android:id="@+id/textoCodigoMaterial"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:textColor="@color/texto_secundario"
-        android:textSize="14sp"
-        tools:text="Código: MAT-001" />
-
-    <TextView
-        android:id="@+id/textoRiesgoMaterial"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:textColor="@color/texto_secundario"
-        android:textSize="14sp"
-        tools:text="Riesgo: Corrosivo" />
-
-    <TextView
-        android:id="@+id/textoEstadoMaterial"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:textColor="@color/texto_secundario"
-        android:textSize="14sp"
-        tools:text="Estado: Activo" />
-
-    <!-- UI básica:
-         Por ahora usamos botones simples.
-         Luego podemos cambiarlos por iconos o tarjetas más bonitas. -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <Button
-            android:id="@+id/botonVerDetalleMaterial"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="5dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/color_primario"
-            android:text="Detalle"
-            android:textColor="@color/blanco" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/botonEditarMaterial"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="5dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/color_primario_medio"
-            android:text="Editar"
-            android:textColor="@color/blanco" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textoNombreMaterial"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/texto_primario"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    tools:text="Ácido sulfúrico" />
+
+                <TextView
+                    android:id="@+id/textoCodigoMaterial"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:textColor="@color/texto_secundario"
+                    android:textSize="13sp"
+                    tools:text="Código: MAT-001" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textoRiesgoMaterial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/bg_chip"
+                android:paddingStart="12dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="5dp"
+                android:textColor="@color/blanco"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                tools:text="Corrosivo" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textoEstadoMaterial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/texto_secundario"
+            android:textSize="13sp"
+            tools:text="Estado: Activo" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/botonVerDetalleMaterial"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:text="Detalle"
+                android:textColor="@color/color_primario"
+                app:cornerRadius="10dp"
+                app:strokeColor="@color/color_primario" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/botonEditarMaterial"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/color_primario_medio"
+                android:text="Editar"
+                android:textColor="@color/blanco"
+                app:cornerRadius="10dp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</com.google.android.material.card.MaterialCardView>

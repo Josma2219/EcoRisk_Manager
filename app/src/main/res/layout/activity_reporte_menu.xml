@@ -1,69 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_fondo"
+    android:background="@color/color_primario_claro"
     android:orientation="vertical"
-    android:padding="20dp"
     tools:context=".ui.reportes.ReporteMenuActivity">
 
-    <TextView
-        android:id="@+id/textoTituloReportes"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Reportes"
-        android:textColor="@color/texto_primario"
-        android:textSize="28sp"
-        android:textStyle="bold" />
+        android:background="@drawable/bg_encabezado_login"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingTop="18dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="24dp">
 
-    <TextView
-        android:id="@+id/textoDescripcionReportes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:text="Consultas principales para revisar materiales e incidentes."
-        android:textColor="@color/texto_secundario"
-        android:textSize="15sp" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/botonVolver"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-12dp"
+            android:text="‹ Volver"
+            android:textColor="@color/color_primario_claro" />
 
-    <Button
-        android:id="@+id/botonReporteRiesgo"
-        android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:layout_marginTop="26dp"
-        android:backgroundTint="@color/color_primario"
-        android:text="Materiales por categoría de riesgo"
-        android:textColor="@color/blanco" />
+        <TextView
+            android:id="@+id/textoTituloReportes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Reportes"
+            android:textColor="@color/blanco"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/botonReporteIncidentes"
-        android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:layout_marginTop="12dp"
-        android:backgroundTint="@color/color_primario_medio"
-        android:text="Historial de incidentes"
-        android:textColor="@color/blanco" />
+        <TextView
+            android:id="@+id/textoDescripcionReportes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Consultas principales para revisar materiales e incidentes"
+            android:textColor="@color/color_primario_claro"
+            android:textSize="13sp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
-        android:text="Estos reportes usan los datos registrados en Room. Si no hay materiales o incidentes, las listas aparecerán vacías."
-        android:textColor="@color/texto_secundario"
-        android:textSize="14sp" />
+    </LinearLayout>
 
-    <View
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="20dp">
 
-    <Button
-        android:id="@+id/botonVolver"
-        android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:backgroundTint="@color/color_secundario"
-        android:text="Volver"
-        android:textColor="@color/blanco" />
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/botonReporteRiesgo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardBackgroundColor="@color/color_primario"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="3dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="18dp">
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_circulo_logo"
+                    android:backgroundTint="@color/color_primario_medio"
+                    android:gravity="center"
+                    android:text="MP"
+                    android:textColor="@color/blanco"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Materiales por categoría de riesgo"
+                        android:textColor="@color/blanco"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Filtra y exporta el listado en PDF"
+                        android:textColor="@color/color_primario_claro"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="›"
+                    android:textColor="@color/blanco"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/botonReporteIncidentes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardBackgroundColor="@color/color_secundario"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="3dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="18dp">
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_circulo_logo"
+                    android:backgroundTint="@color/color_secundario_claro"
+                    android:gravity="center"
+                    android:text="IN"
+                    android:textColor="@color/texto_primario"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Historial de incidentes"
+                        android:textColor="@color/blanco"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Consulta por estado y severidad"
+                        android:textColor="@color/color_secundario_claro"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="›"
+                    android:textColor="@color/blanco"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Estos reportes usan los datos registrados en la app. Si no hay materiales o incidentes, las listas aparecerán vacías."
+            android:textColor="@color/texto_primario"
+            android:textSize="13sp" />
+
+    </LinearLayout>
 
 </LinearLayout>
