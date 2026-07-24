@@ -8,16 +8,15 @@
     android:background="@color/color_primario"
     tools:context=".ui.splash.SplashActivity">
 
-    <!-- Logo temporal: después podemos cambiarlo por una imagen real -->
     <TextView
         android:id="@+id/textoLogoTemporal"
-        android:layout_width="88dp"
-        android:layout_height="88dp"
-        android:background="@color/color_primario_medio"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:background="@drawable/bg_circulo_logo"
         android:gravity="center"
         android:text="ER"
         android:textColor="@color/blanco"
-        android:textSize="28sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/textoTituloSplash"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,7 +28,7 @@
         android:id="@+id/textoTituloSplash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="24dp"
         android:text="@string/titulo_splash"
         android:textColor="@color/blanco"
         android:textSize="28sp"

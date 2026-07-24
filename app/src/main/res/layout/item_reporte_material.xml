@@ -1,58 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
-    android:background="@color/color_superficie"
-    android:orientation="vertical"
-    android:padding="14dp">
+    app:cardBackgroundColor="@color/color_superficie"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="1dp">
 
-    <TextView
-        android:id="@+id/textoNombreMaterial"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/texto_primario"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        tools:text="Ácido Sulfúrico" />
+        android:orientation="vertical"
+        android:padding="14dp">
 
-    <TextView
-        android:id="@+id/textoCodigoMaterial"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:textColor="@color/texto_secundario"
-        android:textSize="14sp"
-        tools:text="Código: MAT-001" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/textoRiesgoMaterial"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:textColor="@color/color_secundario"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        tools:text="Riesgo: Corrosivo" />
+            <TextView
+                android:id="@+id/textoNombreMaterial"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/texto_primario"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="Ácido Sulfúrico" />
 
-    <TextView
-        android:id="@+id/textoEstadoMaterial"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:textColor="@color/texto_secundario"
-        android:textSize="14sp"
-        tools:text="Estado: Activo" />
+            <TextView
+                android:id="@+id/textoRiesgoMaterial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/bg_chip"
+                android:paddingStart="10dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="4dp"
+                android:textColor="@color/blanco"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                tools:text="Corrosivo" />
 
-    <TextView
-        android:id="@+id/textoUnidadMaterial"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:textColor="@color/texto_secundario"
-        android:textSize="14sp"
-        tools:text="Unidad: Litros" />
+        </LinearLayout>
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/textoCodigoMaterial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/texto_secundario"
+            android:textSize="13sp"
+            tools:text="Código: MAT-001" />
+
+        <TextView
+            android:id="@+id/textoEstadoMaterial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/texto_secundario"
+            android:textSize="13sp"
+            tools:text="Estado: Activo" />
+
+        <TextView
+            android:id="@+id/textoUnidadMaterial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/texto_secundario"
+            android:textSize="13sp"
+            tools:text="Unidad: Litros" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

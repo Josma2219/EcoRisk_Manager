@@ -1,68 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_fondo"
+    android:background="@color/color_primario_claro"
     android:orientation="vertical"
-    android:padding="20dp"
     tools:context=".ui.hojas.HojaListaActivity">
 
-    <TextView
-        android:id="@+id/textoTituloModulo"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hojas de seguridad"
-        android:textColor="@color/texto_primario"
-        android:textSize="28sp"
-        android:textStyle="bold" />
+        android:background="@drawable/bg_encabezado_login"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingTop="18dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="24dp">
 
-    <TextView
-        android:id="@+id/textoDescripcionModulo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:text="Registro y consulta de hojas de seguridad asociadas a materiales."
-        android:textColor="@color/texto_secundario"
-        android:textSize="15sp" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/botonVolver"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-12dp"
+            android:text="‹ Volver"
+            android:textColor="@color/color_primario_claro" />
 
-    <Button
-        android:id="@+id/botonAgregarHoja"
-        android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:layout_marginTop="18dp"
-        android:backgroundTint="@color/color_primario"
-        android:text="Agregar hoja de seguridad"
-        android:textColor="@color/blanco" />
+        <TextView
+            android:id="@+id/textoTituloModulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Hojas de seguridad"
+            android:textColor="@color/blanco"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textoListaVacia"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:gravity="center"
-        android:text="No hay hojas de seguridad registradas"
-        android:textColor="@color/texto_secundario"
-        android:textSize="15sp"
-        android:visibility="gone" />
+        <TextView
+            android:id="@+id/textoDescripcionModulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Registro y consulta de hojas de seguridad asociadas a materiales"
+            android:textColor="@color/color_primario_claro"
+            android:textSize="13sp" />
 
-    <!-- UI básica: luego se puede mejorar con cards más bonitas o íconos PDF. -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerHojas"
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="14dp"
         android:layout_weight="1"
-        tools:listitem="@layout/item_hoja_seguridad" />
+        android:orientation="vertical"
+        android:padding="20dp">
 
-    <Button
-        android:id="@+id/botonVolver"
-        android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:layout_marginTop="12dp"
-        android:backgroundTint="@color/color_secundario"
-        android:text="Volver"
-        android:textColor="@color/blanco" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/botonAgregarHoja"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:backgroundTint="@color/color_secundario"
+            android:text="+  Agregar hoja de seguridad"
+            android:textColor="@color/blanco"
+            app:cornerRadius="12dp" />
+
+        <TextView
+            android:id="@+id/textoListaVacia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="No hay hojas de seguridad registradas"
+            android:textColor="@color/texto_primario"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerHojas"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            tools:listitem="@layout/item_hoja_seguridad" />
+
+    </LinearLayout>
 
 </LinearLayout>
