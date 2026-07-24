@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_fondo"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".ui.proveedores.ProveedorListaActivity">
+
+    <TextView
+        android:id="@+id/textoTituloModulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Proveedores"
+        android:textColor="@color/texto_primario"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textoDescripcionModulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Registro y consulta de proveedores de materiales peligrosos."
+        android:textColor="@color/texto_secundario"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/botonAgregarProveedor"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginTop="18dp"
+        android:backgroundTint="@color/color_primario"
+        android:text="Agregar proveedor"
+        android:textColor="@color/blanco" />
+
+    <EditText
+        android:id="@+id/campoBuscarProveedor"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="14dp"
+        android:background="@color/color_superficie"
+        android:hint="Buscar por nombre, correo o contacto"
+        android:inputType="text"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:textColor="@color/texto_primario"
+        android:textColorHint="@color/texto_secundario" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/botonBuscarProveedor"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/color_primario_medio"
+            android:text="Buscar"
+            android:textColor="@color/blanco" />
+
+        <Button
+            android:id="@+id/botonLimpiarBusqueda"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/color_secundario"
+            android:text="Todos"
+            android:textColor="@color/blanco" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textoListaVacia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:gravity="center"
+        android:text="No hay proveedores registrados"
+        android:textColor="@color/texto_secundario"
+        android:textSize="15sp"
+        android:visibility="gone" />
+
+    <!-- UI básica: luego podemos poner mejores cards y separadores. -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerProveedores"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="14dp"
+        android:layout_weight="1"
+        tools:listitem="@layout/item_proveedor" />
+
+    <Button
+        android:id="@+id/botonVolver"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@color/color_secundario"
+        android:text="Volver"
+        android:textColor="@color/blanco" />
+
+</LinearLayout>

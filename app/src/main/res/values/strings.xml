@@ -1,3 +1,44 @@
 <resources>
-    <string name="app_name">EcoRisk_Manager</string>
+    <string name="app_name">EcoRisk Manager</string>
+
+    <!-- Textos generales -->
+    <string name="accion_guardar">Guardar</string>
+    <string name="accion_cancelar">Cancelar</string>
+    <string name="accion_eliminar">Eliminar</string>
+    <string name="accion_editar">Editar</string>
+    <string name="accion_aceptar">Aceptar</string>
+    <string name="accion_buscar">Buscar</string>
+    <string name="accion_entrar">Entrar</string>
+    <string name="accion_cerrar_sesion">Cerrar sesión</string>
+
+    <!-- Splash -->
+    <string name="titulo_splash">EcoRisk Manager</string>
+    <string name="subtitulo_splash">Gestión de materiales peligrosos</string>
+
+    <!-- Login -->
+    <string name="titulo_login">Iniciar sesión</string>
+    <string name="subtitulo_login">Acceso al sistema de gestión de riesgos</string>
+    <string name="campo_usuario">Usuario</string>
+    <string name="campo_contrasena">Contraseña</string>
+    <string name="error_campos_login">Digite usuario y contraseña</string>
+    <string name="error_credenciales">Usuario o contraseña incorrectos</string>
+
+    <!-- Home -->
+    <string name="titulo_home">Panel principal</string>
+    <string name="texto_bienvenida">Bienvenido</string>
+    <string name="texto_rol">Rol</string>
+
+    <!-- Módulos -->
+    <string name="modulo_materiales">Materiales peligrosos</string>
+    <string name="modulo_hojas">Hojas de seguridad</string>
+    <string name="modulo_proveedores">Proveedores</string>
+    <string name="modulo_material_proveedor">Material por proveedor</string>
+    <string name="modulo_incidentes">Incidentes</string>
+    <string name="modulo_reportes">Reportes</string>
+    <string name="modulo_respaldo">Respaldo</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_materiales">Materiales</string>
+    <string name="dashboard_proveedores">Proveedores</string>
+    <string name="dashboard_incidentes">Incidentes abiertos</string>
 </resources>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_fondo"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".ui.materiales.MaterialListaActivity">
+
+    <TextView
+        android:id="@+id/textoTituloModulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Materiales peligrosos"
+        android:textColor="@color/texto_primario"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textoDescripcionModulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Registro y consulta de sustancias o productos peligrosos."
+        android:textColor="@color/texto_secundario"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/botonAgregarMaterial"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginTop="18dp"
+        android:backgroundTint="@color/color_primario"
+        android:text="Agregar material"
+        android:textColor="@color/blanco" />
+
+    <EditText
+        android:id="@+id/campoBuscarMaterial"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="14dp"
+        android:background="@color/color_superficie"
+        android:hint="Buscar por nombre o código"
+        android:inputType="text"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:textColor="@color/texto_primario"
+        android:textColorHint="@color/texto_secundario" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/botonBuscarMaterial"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/color_primario_medio"
+            android:text="Buscar"
+            android:textColor="@color/blanco" />
+
+        <Button
+            android:id="@+id/botonLimpiarBusqueda"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/color_secundario"
+            android:text="Todos"
+            android:textColor="@color/blanco" />
+    </LinearLayout>
+
+    <Spinner
+        android:id="@+id/spinnerFiltroRiesgo"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/color_superficie" />
+
+    <Button
+        android:id="@+id/botonFiltrarRiesgo"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/color_primario_medio"
+        android:text="Filtrar por riesgo"
+        android:textColor="@color/blanco" />
+
+    <TextView
+        android:id="@+id/textoListaVacia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:gravity="center"
+        android:text="No hay materiales registrados"
+        android:textColor="@color/texto_secundario"
+        android:textSize="15sp"
+        android:visibility="gone" />
+
+    <!-- UI básica: luego aquí podemos mejorar separación, tarjetas e iconos. -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerMateriales"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="14dp"
+        android:layout_weight="1"
+        tools:listitem="@layout/item_material" />
+
+    <Button
+        android:id="@+id/botonVolver"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@color/color_secundario"
+        android:text="Volver"
+        android:textColor="@color/blanco" />
+
+</LinearLayout>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_fondo"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".ui.reportes.ReporteMenuActivity">
+
+    <TextView
+        android:id="@+id/textoTituloReportes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reportes"
+        android:textColor="@color/texto_primario"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textoDescripcionReportes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Consultas principales para revisar materiales e incidentes."
+        android:textColor="@color/texto_secundario"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/botonReporteRiesgo"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:layout_marginTop="26dp"
+        android:backgroundTint="@color/color_primario"
+        android:text="Materiales por categoría de riesgo"
+        android:textColor="@color/blanco" />
+
+    <Button
+        android:id="@+id/botonReporteIncidentes"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@color/color_primario_medio"
+        android:text="Historial de incidentes"
+        android:textColor="@color/blanco" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:text="Estos reportes usan los datos registrados en Room. Si no hay materiales o incidentes, las listas aparecerán vacías."
+        android:textColor="@color/texto_secundario"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/botonVolver"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:backgroundTint="@color/color_secundario"
+        android:text="Volver"
+        android:textColor="@color/blanco" />
+
+</LinearLayout>

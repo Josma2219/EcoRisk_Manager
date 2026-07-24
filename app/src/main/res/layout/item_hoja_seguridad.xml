@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:background="@color/color_superficie"
+    android:orientation="vertical"
+    android:padding="14dp">
+
+    <TextView
+        android:id="@+id/textoMaterialHoja"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/texto_primario"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:text="Ácido Sulfúrico" />
+
+    <TextView
+        android:id="@+id/textoCodigoMaterial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:textColor="@color/texto_secundario"
+        android:textSize="14sp"
+        tools:text="Código: MAT-001" />
+
+    <TextView
+        android:id="@+id/textoVersionHoja"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:textColor="@color/texto_primario"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        tools:text="Versión: 1.0" />
+
+    <TextView
+        android:id="@+id/textoFechaEmision"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:textColor="@color/texto_secundario"
+        android:textSize="14sp"
+        tools:text="Fecha emisión: 2026-07-17" />
+
+    <TextView
+        android:id="@+id/textoArchivoPdf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:textColor="@color/texto_secundario"
+        android:textSize="14sp"
+        tools:text="Archivo: hoja_acido.pdf" />
+
+    <!-- UI básica:
+         Luego podemos cambiar estos botones por iconos o menú de acciones. -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/botonDetalleHoja"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/color_primario"
+            android:text="Detalle"
+            android:textColor="@color/blanco" />
+
+        <Button
+            android:id="@+id/botonEditarHoja"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/color_primario_medio"
+            android:text="Editar"
+            android:textColor="@color/blanco" />
+
+    </LinearLayout>
+
+</LinearLayout>

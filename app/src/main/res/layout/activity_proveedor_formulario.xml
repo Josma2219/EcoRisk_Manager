@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_fondo"
+    tools:context=".ui.proveedores.ProveedorFormularioActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/textoTituloFormulario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registrar proveedor"
+            android:textColor="@color/texto_primario"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textoDescripcionFormulario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Complete los datos básicos del proveedor."
+            android:textColor="@color/texto_secundario"
+            android:textSize="15sp" />
+
+        <!-- UI básica:
+             Después podemos cambiar estos campos por TextInputLayout de Material Design. -->
+        <EditText
+            android:id="@+id/campoNombreProveedor"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/color_superficie"
+            android:hint="Nombre del proveedor"
+            android:inputType="textCapWords"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:textColor="@color/texto_primario"
+            android:textColorHint="@color/texto_secundario" />
+
+        <EditText
+            android:id="@+id/campoTelefonoProveedor"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/color_superficie"
+            android:hint="Teléfono"
+            android:inputType="phone"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:textColor="@color/texto_primario"
+            android:textColorHint="@color/texto_secundario" />
+
+        <EditText
+            android:id="@+id/campoCorreoProveedor"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/color_superficie"
+            android:hint="Correo"
+            android:inputType="textEmailAddress"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:textColor="@color/texto_primario"
+            android:textColorHint="@color/texto_secundario" />
+
+        <EditText
+            android:id="@+id/campoDireccionProveedor"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/color_superficie"
+            android:gravity="top"
+            android:hint="Dirección"
+            android:inputType="textMultiLine"
+            android:padding="14dp"
+            android:textColor="@color/texto_primario"
+            android:textColorHint="@color/texto_secundario" />
+
+        <EditText
+            android:id="@+id/campoContactoPrincipal"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/color_superficie"
+            android:hint="Contacto principal"
+            android:inputType="textCapWords"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:textColor="@color/texto_primario"
+            android:textColorHint="@color/texto_secundario" />
+
+        <Button
+            android:id="@+id/botonGuardarProveedor"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/color_primario"
+            android:text="Guardar"
+            android:textColor="@color/blanco" />
+
+        <Button
+            android:id="@+id/botonCancelar"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/color_secundario"
+            android:text="Cancelar"
+            android:textColor="@color/blanco" />
+
+    </LinearLayout>
+
+</ScrollView>
