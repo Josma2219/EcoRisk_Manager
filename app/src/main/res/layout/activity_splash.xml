@@ -8,16 +8,12 @@
     android:background="@color/color_primario"
     tools:context=".ui.splash.SplashActivity">
 
-    <TextView
-        android:id="@+id/textoLogoTemporal"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:background="@drawable/bg_circulo_logo"
-        android:gravity="center"
-        android:text="ER"
-        android:textColor="@color/blanco"
-        android:textSize="30sp"
-        android:textStyle="bold"
+    <ImageView
+        android:id="@+id/imagenLogoSplash"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/logo_ecorisk"
         app:layout_constraintBottom_toTopOf="@id/textoTituloSplash"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +32,7 @@
         app:layout_constraintBottom_toTopOf="@id/textoSubtituloSplash"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textoLogoTemporal" />
+        app:layout_constraintTop_toBottomOf="@id/imagenLogoSplash" />
 
     <TextView
         android:id="@+id/textoSubtituloSplash"
