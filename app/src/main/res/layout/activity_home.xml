@@ -162,16 +162,15 @@
                 android:orientation="horizontal"
                 android:padding="18dp">
 
-                <TextView
+                <ImageView
                     android:layout_width="52dp"
                     android:layout_height="52dp"
                     android:background="@drawable/bg_circulo_logo"
                     android:backgroundTint="@color/color_primario_medio"
-                    android:gravity="center"
-                    android:text="MP"
-                    android:textColor="@color/blanco"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:padding="13dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_materiales"
+                    android:contentDescription="@string/modulo_materiales" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -233,16 +232,15 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <TextView
+                    <ImageView
                         android:layout_width="44dp"
                         android:layout_height="44dp"
                         android:background="@drawable/bg_cuadro_accento"
                         android:backgroundTint="@color/color_primario_medio"
-                        android:gravity="center"
-                        android:text="HS"
-                        android:textColor="@color/blanco"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
+                        android:padding="11dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_hojas"
+                        android:contentDescription="@string/modulo_hojas" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -283,16 +281,15 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <TextView
+                    <ImageView
                         android:layout_width="44dp"
                         android:layout_height="44dp"
                         android:background="@drawable/bg_cuadro_accento"
                         android:backgroundTint="@color/color_primario"
-                        android:gravity="center"
-                        android:text="PR"
-                        android:textColor="@color/blanco"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
+                        android:padding="11dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_proveedores"
+                        android:contentDescription="@string/modulo_proveedores" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -348,16 +345,15 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <TextView
+                    <ImageView
                         android:layout_width="44dp"
                         android:layout_height="44dp"
                         android:background="@drawable/bg_cuadro_accento"
                         android:backgroundTint="@color/color_primario_medio"
-                        android:gravity="center"
-                        android:text="MxP"
-                        android:textColor="@color/blanco"
-                        android:textSize="10sp"
-                        android:textStyle="bold" />
+                        android:padding="11dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_material_proveedor"
+                        android:contentDescription="@string/modulo_material_proveedor" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -398,16 +394,15 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <TextView
+                    <ImageView
                         android:layout_width="44dp"
                         android:layout_height="44dp"
                         android:background="@drawable/bg_cuadro_accento"
                         android:backgroundTint="@color/color_secundario"
-                        android:gravity="center"
-                        android:text="IN"
-                        android:textColor="@color/blanco"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
+                        android:padding="11dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_incidentes"
+                        android:contentDescription="@string/modulo_incidentes" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -463,16 +458,15 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <TextView
+                    <ImageView
                         android:layout_width="44dp"
                         android:layout_height="44dp"
                         android:background="@drawable/bg_cuadro_accento"
                         android:backgroundTint="@color/color_secundario"
-                        android:gravity="center"
-                        android:text="RE"
-                        android:textColor="@color/blanco"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
+                        android:padding="11dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_reportes"
+                        android:contentDescription="@string/modulo_reportes" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -513,16 +507,15 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <TextView
+                    <ImageView
                         android:layout_width="44dp"
                         android:layout_height="44dp"
                         android:background="@drawable/bg_cuadro_accento"
                         android:backgroundTint="@color/color_secundario"
-                        android:gravity="center"
-                        android:text="RS"
-                        android:textColor="@color/blanco"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
+                        android:padding="11dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_respaldo"
+                        android:contentDescription="@string/modulo_respaldo" />
 
                     <TextView
                         android:layout_width="match_parent"
