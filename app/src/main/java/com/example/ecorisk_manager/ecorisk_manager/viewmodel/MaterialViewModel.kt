@@ -11,6 +11,10 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel encargado de gestionar el registro, consulta,
+ * búsqueda y actualización de materiales peligrosos.
+ */
 class MaterialViewModel(
     private val materialRepository: MaterialRepository
 ) : ViewModel() {
@@ -24,8 +28,13 @@ class MaterialViewModel(
     private val _resultadoOperacion = MutableLiveData<ResultadoOperacion?>()
     val resultadoOperacion: LiveData<ResultadoOperacion?> = _resultadoOperacion
 
+    // Permite cancelar la consulta anterior cuando se realiza una
+    // nueva búsqueda o filtrado, evitando observadores duplicados.
     private var trabajoLista: Job? = null
 
+    /**
+     * Obtiene el listado completo de materiales registrados.
+     */
     fun cargarMateriales() {
         trabajoLista?.cancel()
 
@@ -36,6 +45,9 @@ class MaterialViewModel(
         }
     }
 
+    /**
+     * Busca materiales utilizando el código o el nombre comercial.
+     */
     fun buscarMateriales(texto: String) {
         if (texto.isBlank()) {
             cargarMateriales()
@@ -51,6 +63,9 @@ class MaterialViewModel(
         }
     }
 
+    /**
+     * Filtra los materiales según su clasificación de riesgo.
+     */
     fun filtrarPorRiesgo(clasificacionRiesgo: String) {
         trabajoLista?.cancel()
 
@@ -61,6 +76,10 @@ class MaterialViewModel(
         }
     }
 
+    /**
+     * Recupera la información de un material para visualizarla
+     * o editarla posteriormente.
+     */
     fun cargarMaterialPorId(idMaterial: Int) {
         viewModelScope.launch {
             val material = materialRepository.obtenerMaterialPorId(idMaterial)
@@ -68,6 +87,10 @@ class MaterialViewModel(
         }
     }
 
+    /**
+     * Valida la información ingresada y registra o actualiza
+     * el material según corresponda.
+     */
     fun guardarMaterial(
         idMaterial: Int,
         codigoMaterial: String,
@@ -97,6 +120,8 @@ class MaterialViewModel(
             try {
                 val codigoLimpio = codigoMaterial.trim()
 
+                // Verificar que el código del material sea único
+                // antes de registrar o actualizar el registro.
                 val codigoRepetido = if (idMaterial == 0) {
                     materialRepository.existeCodigoMaterial(codigoLimpio)
                 } else {
@@ -147,10 +172,18 @@ class MaterialViewModel(
         }
     }
 
+    /**
+     * Restablece el resultado de la última operación para evitar
+     * que vuelva a procesarse después de un cambio de configuración.
+     */
     fun limpiarResultadoOperacion() {
         _resultadoOperacion.value = null
     }
 
+    /**
+     * Comprueba que todos los datos requeridos del material
+     * hayan sido ingresados correctamente antes de guardarlo.
+     */
     private fun validarDatosMaterial(
         codigoMaterial: String,
         nombreComercial: String,

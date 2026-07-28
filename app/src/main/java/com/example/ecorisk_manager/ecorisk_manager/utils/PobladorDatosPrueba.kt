@@ -8,8 +8,20 @@ import com.example.ecorisk_manager.data.entity.MaterialProveedorEntity
 import com.example.ecorisk_manager.data.entity.ProveedorEntity
 import com.example.ecorisk_manager.data.entity.UsuarioEntity
 
+/**
+ * Utilidad encargada de poblar la base de datos con información
+ * de demostración para facilitar las pruebas del sistema.
+ *
+ * El proceso elimina los registros existentes y genera un conjunto
+ * consistente de usuarios, materiales, proveedores, hojas de seguridad,
+ * relaciones e incidentes.
+ */
 object PobladorDatosPrueba {
 
+    /**
+     * Reinicia completamente la base de datos y carga un conjunto
+     * de datos de ejemplo manteniendo las relaciones entre entidades.
+     */
     suspend fun reiniciarYPoblarBaseDatos(baseDatos: AppDatabase) {
         limpiarBaseDatos(baseDatos)
 
@@ -23,18 +35,27 @@ object PobladorDatosPrueba {
         insertarIncidentes(baseDatos, materiales)
     }
 
+    /**
+     * Elimina toda la información existente respetando el orden
+     * requerido por las relaciones de llaves foráneas.
+     */
     private suspend fun limpiarBaseDatos(baseDatos: AppDatabase) {
-        // Primero tablas dependientes para no chocar con llaves foráneas.
+        // Eliminar primero las tablas dependientes para evitar conflictos
+        // de integridad referencial durante la limpieza.
         baseDatos.incidenteDao().eliminarTodosIncidentes()
         baseDatos.hojaSeguridadDao().eliminarTodasHojas()
         baseDatos.materialProveedorDao().eliminarTodasRelaciones()
 
-        // Luego tablas principales.
+        // Una vez eliminadas las dependencias, limpiar las tablas principales.
         baseDatos.materialPeligrosoDao().eliminarTodosMateriales()
         baseDatos.proveedorDao().eliminarTodosProveedores()
         baseDatos.usuarioDao().eliminarTodosUsuarios()
     }
 
+    /**
+     * Inserta los usuarios utilizados durante las demostraciones
+     * del sistema con sus respectivos roles.
+     */
     private suspend fun insertarUsuarios(baseDatos: AppDatabase) {
         val usuarios = listOf(
             UsuarioEntity(
@@ -65,6 +86,10 @@ object PobladorDatosPrueba {
         }
     }
 
+    /**
+     * Inserta el catálogo de materiales peligrosos y devuelve un mapa
+     * que relaciona el código del material con el identificador generado.
+     */
     private suspend fun insertarMateriales(
         baseDatos: AppDatabase
     ): Map<String, Int> {
@@ -143,8 +168,11 @@ object PobladorDatosPrueba {
             )
         )
 
+        // Se almacena la relación código -> id para reutilizarla
+        // al crear las entidades relacionadas.
         val ids = mutableMapOf<String, Int>()
 
+        // Insertar cada material y conservar el identificador generado.
         materiales.forEach { material ->
             val idGenerado = baseDatos.materialPeligrosoDao()
                 .insertarMaterial(material)
@@ -156,6 +184,10 @@ object PobladorDatosPrueba {
         return ids
     }
 
+    /**
+     * Inserta los proveedores de demostración y devuelve un mapa
+     * con los identificadores generados para crear las relaciones.
+     */
     private suspend fun insertarProveedores(
         baseDatos: AppDatabase
     ): Map<String, Int> {
@@ -197,8 +229,10 @@ object PobladorDatosPrueba {
             )
         )
 
+        // Relación nombre del proveedor -> id generado.
         val ids = mutableMapOf<String, Int>()
 
+        // Registrar cada proveedor y guardar su identificador.
         proveedores.forEach { proveedor ->
             val idGenerado = baseDatos.proveedorDao()
                 .insertarProveedor(proveedor)
@@ -210,6 +244,10 @@ object PobladorDatosPrueba {
         return ids
     }
 
+    /**
+     * Registra las hojas de seguridad asociadas a los materiales
+     * previamente creados.
+     */
     private suspend fun insertarHojasSeguridad(
         baseDatos: AppDatabase,
         materiales: Map<String, Int>
@@ -259,11 +297,16 @@ object PobladorDatosPrueba {
             )
         )
 
+        // Insertar todas las hojas de seguridad del conjunto de prueba.
         hojas.forEach { hoja ->
             baseDatos.hojaSeguridadDao().insertarHoja(hoja)
         }
     }
 
+    /**
+     * Crea las relaciones entre materiales y proveedores utilizando
+     * los identificadores generados durante la carga inicial.
+     */
     private suspend fun insertarMaterialesProveedores(
         baseDatos: AppDatabase,
         materiales: Map<String, Int>,
@@ -307,13 +350,20 @@ object PobladorDatosPrueba {
             )
         )
 
+        // Solo se insertan relaciones cuyos materiales y proveedores
+        // existan correctamente.
         relaciones.forEach { relacion ->
+            // Validación adicional para evitar referencias inválidas.
             if (relacion.idMaterial != 0 && relacion.idProveedor != 0) {
                 baseDatos.materialProveedorDao().insertarRelacion(relacion)
             }
         }
     }
 
+    /**
+     * Registra los incidentes utilizados para las pruebas del sistema,
+     * vinculándolos con los materiales correspondientes.
+     */
     private suspend fun insertarIncidentes(
         baseDatos: AppDatabase,
         materiales: Map<String, Int>
@@ -375,7 +425,9 @@ object PobladorDatosPrueba {
             )
         )
 
+        // Insertar únicamente los incidentes asociados a materiales válidos.
         incidentes.forEach { incidente ->
+            // Evitar insertar registros sin un material asociado.
             if (incidente.idMaterial != 0) {
                 baseDatos.incidenteDao().insertarIncidente(incidente)
             }

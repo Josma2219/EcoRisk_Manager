@@ -14,28 +14,48 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+/**
+ * Utilidad encargada de generar los reportes PDF del sistema.
+ *
+ * Centraliza la creación de documentos PDF para los distintos
+ * módulos de reportes, incluyendo el historial de incidentes y
+ * el listado de materiales clasificados por riesgo.
+ */
 object GeneradorPdf {
 
+    // Dimensiones de una página A4 en puntos PDF y margen utilizado
+    // para mantener una presentación uniforme en todos los reportes.
     private const val ANCHO_PAGINA = 595
     private const val ALTO_PAGINA = 842
     private const val MARGEN = 40
 
+    /**
+     * Genera un reporte PDF con los materiales peligrosos que cumplen
+     * el filtro de clasificación de riesgo indicado.
+     *
+     * Cada material se presenta junto con su información principal
+     * para facilitar su consulta o impresión.
+     */
     fun generarReporteMaterialesPorRiesgo(
         contexto: Context,
         filtroAplicado: String,
         materiales: List<MaterialPeligrosoEntity>
+        // Crear el documento PDF y el escritor encargado de administrar
+        // automáticamente las páginas y el contenido.
     ): File {
         val documento = PdfDocument()
         val escritor = EscritorPdf(documento)
 
         val titulo = "Reporte de materiales por riesgo"
 
+        // Escribir el encabezado con la información general del reporte.
         escritor.dibujarEncabezado(
             titulo = titulo,
             filtroAplicado = filtroAplicado,
             total = materiales.size
         )
 
+        // Agregar cada material al documento respetando el formato definido.
         materiales.forEachIndexed { indice, material ->
             escritor.separadorSuave()
 
@@ -56,6 +76,7 @@ object GeneradorPdf {
             )
         }
 
+        // Finalizar el documento y almacenarlo dentro de la carpeta de reportes.
         return guardarDocumento(
             contexto = contexto,
             documento = documento,
@@ -64,6 +85,12 @@ object GeneradorPdf {
         )
     }
 
+    /**
+     * Genera un reporte PDF con el historial de incidentes registrados.
+     *
+     * El reporte puede representar el historial completo o un conjunto
+     * filtrado por estado o nivel de severidad.
+     */
     fun generarReporteHistorialIncidentes(
         contexto: Context,
         filtroAplicado: String,
@@ -80,6 +107,7 @@ object GeneradorPdf {
             total = incidentes.size
         )
 
+        // Recorrer todos los incidentes e incorporarlos al reporte.
         incidentes.forEachIndexed { indice, incidente ->
             escritor.separadorSuave()
 
@@ -100,6 +128,8 @@ object GeneradorPdf {
                 espacioDespues = 4
             )
 
+            // Mostrar un mensaje alternativo cuando el incidente todavía
+            // no posee acciones correctivas registradas.
             val acciones = if (incidente.accionesCorrectivas.isBlank()) {
                 "Acciones correctivas: pendiente de registrar"
             } else {
@@ -113,6 +143,10 @@ object GeneradorPdf {
             )
         }
 
+        /**
+         * Finaliza el documento PDF, lo guarda en almacenamiento interno
+         * de la aplicación y devuelve el archivo generado.
+         */
         return guardarDocumento(
             contexto = contexto,
             documento = documento,
@@ -127,12 +161,14 @@ object GeneradorPdf {
         escritor: EscritorPdf,
         nombreBase: String
     ): File {
+        // Cerrar correctamente la última página antes de escribir el archivo.
         escritor.cerrar()
 
         val carpetaReportes = obtenerCarpetaReportes(contexto)
         val nombreArchivo = "${nombreBase}_${fechaParaArchivo()}.pdf"
         val archivo = File(carpetaReportes, nombreArchivo)
 
+        // Escribir físicamente el contenido del documento en el archivo PDF.
         FileOutputStream(archivo).use { salida ->
             documento.writeTo(salida)
         }
@@ -142,6 +178,11 @@ object GeneradorPdf {
         return archivo
     }
 
+    /**
+     * Obtiene la carpeta donde se almacenarán los reportes PDF.
+     *
+     * Si la carpeta aún no existe, se crea automáticamente.
+     */
     private fun obtenerCarpetaReportes(contexto: Context): File {
         val carpetaBase = contexto.getExternalFilesDir(null) ?: contexto.filesDir
         val carpetaReportes = File(carpetaBase, "reportes")
@@ -167,6 +208,10 @@ object GeneradorPdf {
         ).format(Date())
     }
 
+    /**
+     * Conjunto de estilos gráficos utilizados durante la creación
+     * de los reportes PDF.
+     */
     private object pinturas {
         val marca = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = Color.rgb(0, 36, 80)
@@ -209,6 +254,12 @@ object GeneradorPdf {
         }
     }
 
+    /**
+     * Clase auxiliar encargada de escribir el contenido dentro del PDF.
+     *
+     * Gestiona automáticamente la creación de páginas, el control
+     * del espacio disponible y el formato utilizado en el documento.
+     */
     private class EscritorPdf(
         private val documento: PdfDocument
     ) {
@@ -217,10 +268,15 @@ object GeneradorPdf {
         private var canvasActual: Canvas? = null
         private var yActual = MARGEN
 
+        // Crear la primera página del documento al inicializar el escritor.
         init {
             nuevaPagina()
         }
 
+        /**
+         * Dibuja el encabezado principal del reporte con el título,
+         * fecha de generación, filtro aplicado y cantidad de registros.
+         */
         fun dibujarEncabezado(
             titulo: String,
             filtroAplicado: String,
@@ -234,6 +290,7 @@ object GeneradorPdf {
             separadorFuerte()
         }
 
+        // Escribe una única línea de texto respetando el espacio disponible.
         fun linea(
             texto: String,
             paint: Paint,
@@ -244,6 +301,8 @@ object GeneradorPdf {
             yActual += espacioDespues
         }
 
+        // Divide automáticamente el texto en varias líneas cuando supera
+        // el ancho disponible de la página.
         fun parrafo(
             texto: String,
             paint: Paint,
@@ -289,6 +348,7 @@ object GeneradorPdf {
             cerrarPaginaActual()
         }
 
+        // Finaliza la página actual e inicia una nueva página del documento.
         private fun nuevaPagina() {
             cerrarPaginaActual()
 
@@ -305,6 +365,7 @@ object GeneradorPdf {
             yActual = MARGEN
         }
 
+        // Agrega el número de página y cierra correctamente la página actual.
         private fun cerrarPaginaActual() {
             val pagina = paginaActual ?: return
 
@@ -321,12 +382,18 @@ object GeneradorPdf {
             canvasActual = null
         }
 
+        // Verifica si existe espacio suficiente antes de escribir.
+        // Si no lo hay, crea automáticamente una nueva página.
         private fun asegurarEspacio(espacioNecesario: Int) {
             if (yActual + espacioNecesario > ALTO_PAGINA - MARGEN) {
                 nuevaPagina()
             }
         }
 
+        /**
+         * Divide un texto largo en varias líneas utilizando el ancho
+         * máximo disponible para evitar que el contenido salga de la página.
+         */
         private fun dividirTextoEnLineas(
             texto: String,
             paint: Paint,

@@ -8,6 +8,10 @@ import com.example.ecorisk_manager.data.repository.HomeRepository
 import com.example.ecorisk_manager.model.ResumenDashboard
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel encargado de obtener y exponer la información
+ * resumida mostrada en el dashboard principal de la aplicación.
+ */
 class HomeViewModel(
     private val homeRepository: HomeRepository
 ) : ViewModel() {
@@ -15,6 +19,10 @@ class HomeViewModel(
     private val _resumenDashboard = MutableLiveData(ResumenDashboard())
     val resumenDashboard: LiveData<ResumenDashboard> = _resumenDashboard
 
+    /**
+     * Obtiene los indicadores principales del sistema y actualiza
+     * la información mostrada en el dashboard.
+     */
     fun cargarResumenDashboard() {
         viewModelScope.launch {
             try {

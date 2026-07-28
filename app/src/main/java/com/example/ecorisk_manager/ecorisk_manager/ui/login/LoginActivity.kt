@@ -15,12 +15,19 @@ import com.example.ecorisk_manager.utils.SessionManager
 import com.example.ecorisk_manager.viewmodel.LoginViewModel
 import com.example.ecorisk_manager.viewmodel.LoginViewModelFactory
 
+/**
+ * Pantalla encargada de validar las credenciales
+ * y permitir el acceso a la aplicación.
+ */
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var sessionManager: SessionManager
     private lateinit var loginViewModel: LoginViewModel
 
+    /**
+     * Inicializa la pantalla y configura el proceso de inicio de sesión.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -33,10 +40,14 @@ class LoginActivity : AppCompatActivity() {
         observarLogin()
         configurarEventos()
 
-        // Esto crea el admin inicial solo si la tabla usuarios está vacía.
+        // Crea el usuario administrador inicial únicamente
+        // cuando la tabla de usuarios está vacía.
         loginViewModel.prepararUsuarioAdministrador()
     }
 
+    /**
+     * Inicializa el ViewModel que gestionará el proceso de inicio de sesión.
+     */
     private fun prepararViewModel() {
         val baseDatos = AppDatabase.obtenerBaseDatos(applicationContext)
         val usuarioRepository = UsuarioRepository(baseDatos.usuarioDao())
@@ -45,6 +56,9 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
     }
 
+    /**
+     * Configura los eventos de los controles de la pantalla.
+     */
     private fun configurarEventos() {
         binding.botonEntrar.setOnClickListener {
             val usuario = binding.campoUsuario.text.toString()
@@ -54,6 +68,10 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Observa el estado del inicio de sesión para actualizar
+     * la interfaz y responder según el resultado.
+     */
     private fun observarLogin() {
         loginViewModel.estadoLogin.observe(this) { estado ->
             when (estado) {
@@ -84,6 +102,10 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Habilita o deshabilita los controles de la pantalla
+     * mientras se procesa el inicio de sesión.
+     */
     private fun cambiarEstadoCarga(estaCargando: Boolean) {
         binding.progresoLogin.visibility = if (estaCargando) View.VISIBLE else View.GONE
         binding.botonEntrar.isEnabled = !estaCargando
@@ -91,6 +113,9 @@ class LoginActivity : AppCompatActivity() {
         binding.campoContrasena.isEnabled = !estaCargando
     }
 
+    /**
+     * Abre la pantalla principal de la aplicación.
+     */
     private fun abrirHome() {
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)

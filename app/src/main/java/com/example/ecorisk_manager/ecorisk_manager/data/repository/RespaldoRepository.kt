@@ -11,14 +11,23 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+/**
+ * Repositorio encargado de generar y restaurar
+ * los respaldos de la base de datos de la aplicación.
+ */
 class RespaldoRepository(
     private val baseDatos: AppDatabase
 ) {
 
+    // Instancia utilizada para convertir la información hacia y desde formato JSON.
     private val gson = GsonBuilder()
         .setPrettyPrinting()
         .create()
 
+    /**
+     * Genera un respaldo con toda la información almacenada
+     * y lo guarda como un archivo JSON.
+     */
     suspend fun generarRespaldo(contexto: Context): ResultadoOperacion {
         return try {
             val fechaVisible = SimpleDateFormat(
@@ -31,6 +40,7 @@ class RespaldoRepository(
                 Locale.getDefault()
             ).format(Date())
 
+            // Reúne toda la información que será incluida en el respaldo.
             val datos = RespaldoDatos(
                 fechaGeneracion = fechaVisible,
                 usuarios = baseDatos.usuarioDao().obtenerUsuariosParaRespaldo(),
@@ -59,10 +69,14 @@ class RespaldoRepository(
         }
     }
 
+    /**
+     * Restaura la información utilizando el respaldo más reciente disponible.
+     */
     suspend fun restaurarUltimoRespaldo(contexto: Context): ResultadoOperacion {
         return try {
             val carpetaRespaldos = obtenerCarpetaRespaldos(contexto)
 
+            // Busca el archivo de respaldo más reciente.
             val ultimoRespaldo = carpetaRespaldos
                 .listFiles { archivo ->
                     archivo.isFile && archivo.name.endsWith(".json")
@@ -81,23 +95,25 @@ class RespaldoRepository(
             val json = ultimoRespaldo.readText()
             val datos = gson.fromJson(json, RespaldoDatos::class.java)
 
+            // La restauración se realiza dentro de una transacción para mantener la integridad de los datos.
             baseDatos.withTransaction {
-                // Primero borramos tablas dependientes para evitar errores de llaves foráneas.
+
+                // Primero se eliminan las tablas dependientes para evitar conflictos de llaves foráneas.
                 baseDatos.incidenteDao().eliminarTodosIncidentes()
                 baseDatos.hojaSeguridadDao().eliminarTodasHojas()
                 baseDatos.materialProveedorDao().eliminarTodasRelaciones()
 
-                // Luego las tablas principales.
+                // Luego se eliminan las tablas principales.
                 baseDatos.materialPeligrosoDao().eliminarTodosMateriales()
                 baseDatos.proveedorDao().eliminarTodosProveedores()
                 baseDatos.usuarioDao().eliminarTodosUsuarios()
 
-                // Restauramos primero principales.
+                // Se restauran primero las tablas principales.
                 baseDatos.usuarioDao().insertarUsuarios(datos.usuarios)
                 baseDatos.materialPeligrosoDao().insertarMateriales(datos.materiales)
                 baseDatos.proveedorDao().insertarProveedores(datos.proveedores)
 
-                // Luego dependientes.
+                // Finalmente, se restauran las tablas que dependen de las anteriores.
                 baseDatos.hojaSeguridadDao().insertarHojas(datos.hojasSeguridad)
                 baseDatos.materialProveedorDao().insertarRelaciones(datos.materialesProveedores)
                 baseDatos.incidenteDao().insertarIncidentes(datos.incidentes)
@@ -115,6 +131,10 @@ class RespaldoRepository(
         }
     }
 
+    /**
+     * Obtiene la carpeta donde se almacenan los archivos de respaldo.
+     * Si no existe, la crea automáticamente.
+     */
     private fun obtenerCarpetaRespaldos(contexto: Context): File {
         val carpeta = File(contexto.getExternalFilesDir(null), "respaldos")
 

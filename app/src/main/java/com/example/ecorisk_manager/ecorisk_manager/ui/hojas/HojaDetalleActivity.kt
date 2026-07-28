@@ -14,6 +14,10 @@ import com.example.ecorisk_manager.utils.Constantes
 import com.example.ecorisk_manager.viewmodel.HojaSeguridadViewModel
 import com.example.ecorisk_manager.viewmodel.HojaSeguridadViewModelFactory
 
+/**
+ * Pantalla encargada de mostrar la información detallada
+ * de una hoja de seguridad.
+ */
 class HojaDetalleActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHojaDetalleBinding
@@ -22,6 +26,9 @@ class HojaDetalleActivity : AppCompatActivity() {
     private var idHojaActual: Int = 0
     private var hojaActual: HojaSeguridadDetalle? = null
 
+    /**
+     * Inicializa la pantalla y carga la información de la hoja seleccionada.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -36,6 +43,9 @@ class HojaDetalleActivity : AppCompatActivity() {
         validarYCargarHoja()
     }
 
+    /**
+     * Actualiza la información al regresar desde la pantalla de edición.
+     */
     override fun onResume() {
         super.onResume()
 
@@ -44,6 +54,9 @@ class HojaDetalleActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Inicializa el ViewModel que gestionará la información de la pantalla.
+     */
     private fun prepararViewModel() {
         val baseDatos = AppDatabase.obtenerBaseDatos(applicationContext)
         val repository = HojaSeguridadRepository(baseDatos.hojaSeguridadDao())
@@ -52,6 +65,10 @@ class HojaDetalleActivity : AppCompatActivity() {
         hojaViewModel = ViewModelProvider(this, factory)[HojaSeguridadViewModel::class.java]
     }
 
+    /**
+     * Observa los cambios del ViewModel para actualizar la interfaz
+     * y mostrar el resultado de las operaciones.
+     */
     private fun observarDatos() {
         hojaViewModel.hojaDetalleSeleccionada.observe(this) { hoja ->
             if (hoja == null) {
@@ -75,6 +92,10 @@ class HojaDetalleActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Verifica que se haya recibido una hoja válida
+     * antes de solicitar su información.
+     */
     private fun validarYCargarHoja() {
         if (idHojaActual == 0) {
             Toast.makeText(this, "No se recibió la hoja seleccionada", Toast.LENGTH_SHORT).show()
@@ -85,6 +106,9 @@ class HojaDetalleActivity : AppCompatActivity() {
         hojaViewModel.cargarHojaDetallePorId(idHojaActual)
     }
 
+    /**
+     * Muestra la información de la hoja de seguridad en la pantalla.
+     */
     private fun mostrarDatosHoja(hoja: HojaSeguridadDetalle) {
         binding.textoMaterialHoja.text = hoja.nombreMaterial
         binding.textoCodigoMaterial.text = "Código: ${hoja.codigoMaterial}"
@@ -100,6 +124,9 @@ class HojaDetalleActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Configura los eventos de los botones de la pantalla.
+     */
     private fun configurarEventos() {
         binding.botonEditarHoja.setOnClickListener {
             abrirFormularioEdicion()
@@ -114,6 +141,9 @@ class HojaDetalleActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Abre el formulario para editar la hoja de seguridad actual.
+     */
     private fun abrirFormularioEdicion() {
         val intent = Intent(this, HojaFormularioActivity::class.java)
         intent.putExtra(Constantes.Extras.EXTRA_ID_HOJA, idHojaActual)
@@ -125,6 +155,9 @@ class HojaDetalleActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    /**
+     * Muestra un cuadro de confirmación antes de eliminar la hoja.
+     */
     private fun confirmarEliminacion() {
         AlertDialog.Builder(this)
             .setTitle("Eliminar hoja")

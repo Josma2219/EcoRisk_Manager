@@ -14,6 +14,10 @@ import com.example.ecorisk_manager.utils.Constantes
 import com.example.ecorisk_manager.viewmodel.HojaSeguridadViewModel
 import com.example.ecorisk_manager.viewmodel.HojaSeguridadViewModelFactory
 
+/**
+ * Pantalla encargada de mostrar el listado de hojas de seguridad.
+ * Permite consultar, registrar, editar y acceder al detalle de cada hoja.
+ */
 class HojaListaActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHojaListaBinding
@@ -22,6 +26,9 @@ class HojaListaActivity : AppCompatActivity() {
 
     private var idMaterialFiltrado: Int = 0
 
+    /**
+     * Inicializa la pantalla y configura sus componentes.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -38,6 +45,9 @@ class HojaListaActivity : AppCompatActivity() {
         cargarHojasSegunOrigen()
     }
 
+    /**
+     * Actualiza la lista al regresar desde otra pantalla.
+     */
     override fun onResume() {
         super.onResume()
 
@@ -45,6 +55,9 @@ class HojaListaActivity : AppCompatActivity() {
         cargarHojasSegunOrigen()
     }
 
+    /**
+     * Inicializa el ViewModel que gestionará la información de la pantalla.
+     */
     private fun prepararViewModel() {
         val baseDatos = AppDatabase.obtenerBaseDatos(applicationContext)
         val repository = HojaSeguridadRepository(baseDatos.hojaSeguridadDao())
@@ -53,6 +66,10 @@ class HojaListaActivity : AppCompatActivity() {
         hojaViewModel = ViewModelProvider(this, factory)[HojaSeguridadViewModel::class.java]
     }
 
+    /**
+     * Configura el título y la descripción según el origen desde donde
+     * fue abierta la pantalla.
+     */
     private fun configurarPantalla() {
         if (idMaterialFiltrado != 0) {
             binding.textoTituloModulo.text = "Hojas del material"
@@ -65,6 +82,9 @@ class HojaListaActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Configura el RecyclerView y su adaptador.
+     */
     private fun configurarRecycler() {
         hojaAdapter = HojaSeguridadAdapter(
             alVerDetalleHoja = { hoja ->
@@ -79,6 +99,9 @@ class HojaListaActivity : AppCompatActivity() {
         binding.recyclerHojas.adapter = hojaAdapter
     }
 
+    /**
+     * Observa los cambios en la lista de hojas para actualizar la interfaz.
+     */
     private fun observarHojas() {
         hojaViewModel.hojas.observe(this) { listaHojas ->
             hojaAdapter.actualizarLista(listaHojas)
@@ -89,6 +112,9 @@ class HojaListaActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Configura los eventos de los botones de la pantalla.
+     */
     private fun configurarEventos() {
         binding.botonAgregarHoja.setOnClickListener {
             abrirFormularioHoja(idMaterial = idMaterialFiltrado)
@@ -99,6 +125,10 @@ class HojaListaActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Carga las hojas de seguridad según el contexto de la pantalla.
+     * Si existe un material seleccionado, solo muestra sus hojas.
+     */
     private fun cargarHojasSegunOrigen() {
         if (idMaterialFiltrado != 0) {
             hojaViewModel.cargarHojasPorMaterial(idMaterialFiltrado)
@@ -107,6 +137,9 @@ class HojaListaActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Abre el formulario para registrar o editar una hoja de seguridad.
+     */
     private fun abrirFormularioHoja(
         idHoja: Int = 0,
         idMaterial: Int = 0
@@ -117,6 +150,9 @@ class HojaListaActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    /**
+     * Abre la pantalla con el detalle de una hoja de seguridad.
+     */
     private fun abrirDetalleHoja(idHoja: Int) {
         val intent = Intent(this, HojaDetalleActivity::class.java)
         intent.putExtra(Constantes.Extras.EXTRA_ID_HOJA, idHoja)

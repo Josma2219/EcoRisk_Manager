@@ -17,15 +17,25 @@ import com.example.ecorisk_manager.utils.GeneradorPdf
 import com.example.ecorisk_manager.viewmodel.ReporteViewModel
 import com.example.ecorisk_manager.viewmodel.ReporteViewModelFactory
 
+/**
+ * Pantalla encargada de mostrar reportes de materiales
+ * según su clasificación de riesgo y exportarlos en PDF.
+ */
 class ReporteMaterialesRiesgoActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityReporteMaterialesRiesgoBinding
     private lateinit var reporteViewModel: ReporteViewModel
     private lateinit var reporteMaterialAdapter: ReporteMaterialAdapter
 
+    // Guarda la lista actualmente mostrada para exportarla en PDF.
     private var listaActualMateriales = emptyList<MaterialPeligrosoEntity>()
+
+    // Indica el filtro aplicado al reporte.
     private var filtroActual = "Todos los materiales"
 
+    /**
+     * Inicializa la pantalla y carga la información del reporte.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -41,6 +51,9 @@ class ReporteMaterialesRiesgoActivity : AppCompatActivity() {
         reporteViewModel.cargarTodosLosMateriales()
     }
 
+    /**
+     * Inicializa el ViewModel utilizado por la pantalla.
+     */
     private fun prepararViewModel() {
         val baseDatos = AppDatabase.obtenerBaseDatos(applicationContext)
         val repository = ReporteRepository(baseDatos.reporteDao())
@@ -49,6 +62,9 @@ class ReporteMaterialesRiesgoActivity : AppCompatActivity() {
         reporteViewModel = ViewModelProvider(this, factory)[ReporteViewModel::class.java]
     }
 
+    /**
+     * Configura el RecyclerView donde se muestran los materiales.
+     */
     private fun configurarRecycler() {
         reporteMaterialAdapter = ReporteMaterialAdapter()
 
@@ -56,6 +72,10 @@ class ReporteMaterialesRiesgoActivity : AppCompatActivity() {
         binding.recyclerMaterialesReporte.adapter = reporteMaterialAdapter
     }
 
+    /**
+     * Configura el Spinner utilizado para seleccionar
+     * la clasificación de riesgo.
+     */
     private fun configurarSpinner() {
         val adaptador = ArrayAdapter.createFromResource(
             this,
@@ -67,6 +87,9 @@ class ReporteMaterialesRiesgoActivity : AppCompatActivity() {
         binding.spinnerRiesgo.adapter = adaptador
     }
 
+    /**
+     * Observa los cambios en el reporte para actualizar la interfaz.
+     */
     private fun observarMateriales() {
         reporteViewModel.materialesReporte.observe(this) { listaMateriales ->
             listaActualMateriales = listaMateriales
@@ -80,6 +103,9 @@ class ReporteMaterialesRiesgoActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Configura los eventos de los controles de la pantalla.
+     */
     private fun configurarEventos() {
         binding.botonGenerarReporte.setOnClickListener {
             val clasificacion = binding.spinnerRiesgo.selectedItem.toString()
@@ -108,6 +134,10 @@ class ReporteMaterialesRiesgoActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Genera un archivo PDF con la información
+     * actualmente mostrada en el reporte.
+     */
     private fun exportarPdf() {
         if (listaActualMateriales.isEmpty()) {
             Toast.makeText(this, "No hay materiales para exportar", Toast.LENGTH_SHORT).show()

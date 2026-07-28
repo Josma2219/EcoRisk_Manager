@@ -18,6 +18,9 @@ import java.util.Date
 import java.util.Locale
 import com.example.ecorisk_manager.utils.Constantes
 
+/**
+ * Pantalla utilizada para registrar y editar materiales peligrosos.
+ */
 class MaterialFormularioActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMaterialFormularioBinding
@@ -25,6 +28,9 @@ class MaterialFormularioActivity : AppCompatActivity() {
 
     private var idMaterialActual: Int = 0
 
+    /**
+     * Inicializa la pantalla y configura los datos necesarios.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -46,6 +52,9 @@ class MaterialFormularioActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Inicializa el ViewModel que gestionará la información de la pantalla.
+     */
     private fun prepararViewModel() {
         val baseDatos = AppDatabase.obtenerBaseDatos(applicationContext)
         val materialRepository = MaterialRepository(baseDatos.materialPeligrosoDao())
@@ -54,6 +63,9 @@ class MaterialFormularioActivity : AppCompatActivity() {
         materialViewModel = ViewModelProvider(this, factory)[MaterialViewModel::class.java]
     }
 
+    /**
+     * Configura los Spinner con las opciones disponibles.
+     */
     private fun configurarSpinners() {
         configurarSpinnerConArray(
             spinner = binding.spinnerClasificacionRiesgo,
@@ -71,6 +83,9 @@ class MaterialFormularioActivity : AppCompatActivity() {
         )
     }
 
+    /**
+     * Asocia un arreglo de recursos a un Spinner.
+     */
     private fun configurarSpinnerConArray(spinner: Spinner, arrayId: Int) {
         val adaptador = ArrayAdapter.createFromResource(
             this,
@@ -82,6 +97,10 @@ class MaterialFormularioActivity : AppCompatActivity() {
         spinner.adapter = adaptador
     }
 
+    /**
+     * Configura el título y el botón según si se registrará
+     * un nuevo material o se editará uno existente.
+     */
     private fun configurarPantalla() {
         if (idMaterialActual == 0) {
             binding.textoTituloFormulario.text = "Registrar material"
@@ -92,6 +111,10 @@ class MaterialFormularioActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Observa los cambios del ViewModel para actualizar la interfaz
+     * y mostrar el resultado de las operaciones.
+     */
     private fun observarDatos() {
         materialViewModel.materialSeleccionado.observe(this) { material ->
             if (material != null) {
@@ -112,6 +135,9 @@ class MaterialFormularioActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Configura los eventos de los botones de la pantalla.
+     */
     private fun configurarEventos() {
         binding.botonGuardarMaterial.setOnClickListener {
             guardarMaterial()
@@ -122,6 +148,10 @@ class MaterialFormularioActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Obtiene la información ingresada por el usuario
+     * y la envía al ViewModel para guardarla.
+     */
     private fun guardarMaterial() {
         val codigoMaterial = binding.campoCodigoMaterial.text.toString()
         val nombreComercial = binding.campoNombreComercial.text.toString()
@@ -143,6 +173,9 @@ class MaterialFormularioActivity : AppCompatActivity() {
         )
     }
 
+    /**
+     * Completa el formulario con la información de un material existente.
+     */
     private fun llenarFormulario(material: MaterialPeligrosoEntity) {
         binding.campoCodigoMaterial.setText(material.codigoMaterial)
         binding.campoNombreComercial.setText(material.nombreComercial)
@@ -154,6 +187,9 @@ class MaterialFormularioActivity : AppCompatActivity() {
         seleccionarValorSpinner(binding.spinnerEstado, material.estado)
     }
 
+    /**
+     * Selecciona un valor específico dentro de un Spinner.
+     */
     private fun seleccionarValorSpinner(spinner: Spinner, valor: String) {
         for (posicion in 0 until spinner.adapter.count) {
             val item = spinner.adapter.getItem(posicion).toString()
@@ -165,6 +201,9 @@ class MaterialFormularioActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Coloca la fecha actual como valor inicial del formulario.
+     */
     private fun colocarFechaActual() {
         val formatoFecha = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val fechaActual = formatoFecha.format(Date())

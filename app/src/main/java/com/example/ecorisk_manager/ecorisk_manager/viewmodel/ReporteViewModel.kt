@@ -11,6 +11,10 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel encargado de gestionar la información utilizada
+ * para la generación de reportes del sistema.
+ */
 class ReporteViewModel(
     private val reporteRepository: ReporteRepository
 ) : ViewModel() {
@@ -21,9 +25,14 @@ class ReporteViewModel(
     private val _incidentesReporte = MutableLiveData<List<IncidenteDetalle>>(emptyList())
     val incidentesReporte: LiveData<List<IncidenteDetalle>> = _incidentesReporte
 
+    // Se utilizan trabajos independientes para permitir cancelar
+    // consultas anteriores cuando se aplican nuevos filtros.
     private var trabajoMateriales: Job? = null
     private var trabajoIncidentes: Job? = null
 
+    /**
+     * Obtiene todos los materiales registrados para el reporte.
+     */
     fun cargarTodosLosMateriales() {
         trabajoMateriales?.cancel()
 
@@ -34,6 +43,10 @@ class ReporteViewModel(
         }
     }
 
+    /**
+     * Obtiene los materiales que pertenecen a una
+     * clasificación de riesgo específica.
+     */
     fun cargarMaterialesPorRiesgo(clasificacionRiesgo: String) {
         trabajoMateriales?.cancel()
 
@@ -44,6 +57,9 @@ class ReporteViewModel(
         }
     }
 
+    /**
+     * Obtiene el historial completo de incidentes.
+     */
     fun cargarHistorialIncidentes() {
         trabajoIncidentes?.cancel()
 
@@ -54,6 +70,9 @@ class ReporteViewModel(
         }
     }
 
+    /**
+     * Filtra los incidentes según su estado.
+     */
     fun cargarIncidentesPorEstado(estado: String) {
         trabajoIncidentes?.cancel()
 
@@ -64,6 +83,9 @@ class ReporteViewModel(
         }
     }
 
+    /**
+     * Filtra los incidentes según su nivel de severidad.
+     */
     fun cargarIncidentesPorSeveridad(nivelSeveridad: String) {
         trabajoIncidentes?.cancel()
 

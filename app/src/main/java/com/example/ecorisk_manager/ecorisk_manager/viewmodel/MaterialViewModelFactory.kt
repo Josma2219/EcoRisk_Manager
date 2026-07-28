@@ -4,6 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.ecorisk_manager.data.repository.MaterialRepository
 
+/**
+ * Factory encargada de crear la instancia de MaterialViewModel
+ * proporcionando el repositorio necesario para su funcionamiento.
+ */
 class MaterialViewModelFactory(
     private val materialRepository: MaterialRepository
 ) : ViewModelProvider.Factory {

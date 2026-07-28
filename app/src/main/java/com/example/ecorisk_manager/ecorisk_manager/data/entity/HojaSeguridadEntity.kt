@@ -6,6 +6,10 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
+/**
+ * Representa una hoja de seguridad asociada a un material peligroso.
+ * Cada registro almacena la información básica de una versión específica.
+ */
 @Entity(
     tableName = "hojas_seguridad",
     foreignKeys = [
@@ -17,11 +21,13 @@ import androidx.room.PrimaryKey
         )
     ],
     indices = [
+        // Facilita las consultas por material y evita versiones duplicadas para un mismo material.
         Index(value = ["id_material"]),
         Index(value = ["id_material", "version"], unique = true)
     ]
 )
 data class HojaSeguridadEntity(
+
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_hoja")
     val idHoja: Int = 0,

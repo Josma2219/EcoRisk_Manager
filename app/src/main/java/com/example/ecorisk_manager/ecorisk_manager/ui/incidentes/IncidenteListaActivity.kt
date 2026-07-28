@@ -17,6 +17,10 @@ import com.example.ecorisk_manager.utils.Constantes
 import com.example.ecorisk_manager.viewmodel.IncidenteViewModel
 import com.example.ecorisk_manager.viewmodel.IncidenteViewModelFactory
 
+/**
+ * Pantalla encargada de mostrar el listado de incidentes.
+ * Permite consultar, filtrar, registrar, editar y acceder al detalle de cada incidente.
+ */
 class IncidenteListaActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityIncidenteListaBinding
@@ -25,6 +29,9 @@ class IncidenteListaActivity : AppCompatActivity() {
 
     private var idMaterialFiltrado: Int = 0
 
+    /**
+     * Inicializa la pantalla y configura sus componentes.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -42,11 +49,17 @@ class IncidenteListaActivity : AppCompatActivity() {
         cargarIncidentesSegunOrigen()
     }
 
+    /**
+     * Actualiza la lista al regresar desde otra pantalla.
+     */
     override fun onResume() {
         super.onResume()
         cargarIncidentesSegunOrigen()
     }
 
+    /**
+     * Inicializa el ViewModel que gestionará la información de la pantalla.
+     */
     private fun prepararViewModel() {
         val baseDatos = AppDatabase.obtenerBaseDatos(applicationContext)
         val repository = IncidenteRepository(baseDatos.incidenteDao())
@@ -55,13 +68,17 @@ class IncidenteListaActivity : AppCompatActivity() {
         incidenteViewModel = ViewModelProvider(this, factory)[IncidenteViewModel::class.java]
     }
 
+    /**
+     * Configura el título y la descripción según el origen desde donde
+     * fue abierta la pantalla.
+     */
     private fun configurarPantalla() {
         if (idMaterialFiltrado != 0) {
             binding.textoTituloModulo.text = "Incidentes del material"
             binding.textoDescripcionModulo.text =
                 "Incidentes registrados para el material seleccionado."
 
-            // Cuando venimos desde un material, mostramos solo los incidentes de ese material.
+            // Si la pantalla se abrió desde un material, los filtros no son necesarios.
             binding.contenedorFiltros.visibility = View.GONE
         } else {
             binding.textoTituloModulo.text = "Incidentes"
@@ -71,6 +88,9 @@ class IncidenteListaActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Configura el RecyclerView y su adaptador.
+     */
     private fun configurarRecycler() {
         incidenteAdapter = IncidenteAdapter(
             alVerDetalleIncidente = { incidente ->
@@ -88,6 +108,9 @@ class IncidenteListaActivity : AppCompatActivity() {
         binding.recyclerIncidentes.adapter = incidenteAdapter
     }
 
+    /**
+     * Configura los filtros disponibles para la búsqueda de incidentes.
+     */
     private fun configurarFiltros() {
         val adaptadorEstado = ArrayAdapter.createFromResource(
             this,
@@ -108,6 +131,9 @@ class IncidenteListaActivity : AppCompatActivity() {
         binding.spinnerFiltroSeveridad.adapter = adaptadorSeveridad
     }
 
+    /**
+     * Observa los cambios en la lista de incidentes para actualizar la interfaz.
+     */
     private fun observarIncidentes() {
         incidenteViewModel.incidentes.observe(this) { listaIncidentes ->
             incidenteAdapter.actualizarLista(listaIncidentes)
@@ -118,6 +144,9 @@ class IncidenteListaActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Configura los eventos de los botones de la pantalla.
+     */
     private fun configurarEventos() {
         binding.botonAgregarIncidente.setOnClickListener {
             abrirFormularioIncidente(idMaterial = idMaterialFiltrado)
@@ -156,6 +185,10 @@ class IncidenteListaActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Carga los incidentes según el contexto de la pantalla.
+     * Si existe un material seleccionado, solo muestra sus incidentes.
+     */
     private fun cargarIncidentesSegunOrigen() {
         if (idMaterialFiltrado != 0) {
             incidenteViewModel.cargarIncidentesPorMaterial(idMaterialFiltrado)
@@ -164,6 +197,9 @@ class IncidenteListaActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Abre el formulario para registrar o editar un incidente.
+     */
     private fun abrirFormularioIncidente(
         idIncidente: Int = 0,
         idMaterial: Int = 0
@@ -174,6 +210,9 @@ class IncidenteListaActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    /**
+     * Abre la pantalla con el detalle de un incidente.
+     */
     private fun abrirDetalleIncidente(idIncidente: Int) {
         val intent = Intent(this, IncidenteDetalleActivity::class.java)
         intent.putExtra(Constantes.Extras.EXTRA_ID_INCIDENTE, idIncidente)

@@ -14,6 +14,10 @@ import com.example.ecorisk_manager.utils.Constantes
 import com.example.ecorisk_manager.viewmodel.IncidenteViewModel
 import com.example.ecorisk_manager.viewmodel.IncidenteViewModelFactory
 
+/**
+ * Pantalla encargada de mostrar la información detallada
+ * de un incidente.
+ */
 class IncidenteDetalleActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityIncidenteDetalleBinding
@@ -22,6 +26,9 @@ class IncidenteDetalleActivity : AppCompatActivity() {
     private var idIncidenteActual: Int = 0
     private var incidenteActual: IncidenteDetalle? = null
 
+    /**
+     * Inicializa la pantalla y carga la información del incidente seleccionado.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -36,6 +43,9 @@ class IncidenteDetalleActivity : AppCompatActivity() {
         validarYCargarIncidente()
     }
 
+    /**
+     * Actualiza la información al regresar desde la pantalla de edición.
+     */
     override fun onResume() {
         super.onResume()
 
@@ -44,6 +54,9 @@ class IncidenteDetalleActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Inicializa el ViewModel que gestionará la información de la pantalla.
+     */
     private fun prepararViewModel() {
         val baseDatos = AppDatabase.obtenerBaseDatos(applicationContext)
         val repository = IncidenteRepository(baseDatos.incidenteDao())
@@ -52,6 +65,10 @@ class IncidenteDetalleActivity : AppCompatActivity() {
         incidenteViewModel = ViewModelProvider(this, factory)[IncidenteViewModel::class.java]
     }
 
+    /**
+     * Observa los cambios del ViewModel para actualizar la interfaz
+     * y mostrar el resultado de las operaciones.
+     */
     private fun observarDatos() {
         incidenteViewModel.incidenteDetalleSeleccionado.observe(this) { incidente ->
             if (incidente == null) {
@@ -75,6 +92,10 @@ class IncidenteDetalleActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Verifica que se haya recibido un incidente válido
+     * antes de solicitar su información.
+     */
     private fun validarYCargarIncidente() {
         if (idIncidenteActual == 0) {
             Toast.makeText(this, "No se recibió el incidente seleccionado", Toast.LENGTH_SHORT).show()
@@ -85,6 +106,9 @@ class IncidenteDetalleActivity : AppCompatActivity() {
         incidenteViewModel.cargarIncidenteDetallePorId(idIncidenteActual)
     }
 
+    /**
+     * Muestra la información del incidente en la pantalla.
+     */
     private fun mostrarDatosIncidente(incidente: IncidenteDetalle) {
         binding.textoTipoIncidente.text = incidente.tipoIncidente
         binding.textoMaterialIncidente.text = "Material: ${incidente.nombreMaterial}"
@@ -101,6 +125,9 @@ class IncidenteDetalleActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Configura los eventos de los botones de la pantalla.
+     */
     private fun configurarEventos() {
         binding.botonEditarIncidente.setOnClickListener {
             abrirFormularioEdicion()
@@ -115,6 +142,9 @@ class IncidenteDetalleActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Abre el formulario para editar el incidente actual.
+     */
     private fun abrirFormularioEdicion() {
         val intent = Intent(this, IncidenteFormularioActivity::class.java)
         intent.putExtra(Constantes.Extras.EXTRA_ID_INCIDENTE, idIncidenteActual)
@@ -126,6 +156,9 @@ class IncidenteDetalleActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    /**
+     * Muestra un cuadro de confirmación antes de eliminar el incidente.
+     */
     private fun confirmarEliminacion() {
         AlertDialog.Builder(this)
             .setTitle("Eliminar incidente")

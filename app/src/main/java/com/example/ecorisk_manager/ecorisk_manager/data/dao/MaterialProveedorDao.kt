@@ -10,21 +10,40 @@ import com.example.ecorisk_manager.model.MaterialProveedorDetalle
 import kotlinx.coroutines.flow.Flow
 import androidx.room.OnConflictStrategy
 
+/**
+ * DAO encargado de gestionar las relaciones entre
+ * materiales peligrosos y proveedores en la base de datos.
+ */
 @Dao
 interface MaterialProveedorDao {
 
+    /**
+     * Registra una nueva relación entre un material y un proveedor.
+     */
     @Insert
     suspend fun insertarRelacion(relacion: MaterialProveedorEntity): Long
 
+    /**
+     * Actualiza la información de una relación existente.
+     */
     @Update
     suspend fun actualizarRelacion(relacion: MaterialProveedorEntity)
 
+    /**
+     * Elimina una relación entre un material y un proveedor.
+     */
     @Delete
     suspend fun eliminarRelacion(relacion: MaterialProveedorEntity)
 
+    /**
+     * Obtiene todas las relaciones registradas.
+     */
     @Query("SELECT * FROM materiales_proveedores ORDER BY id_material_proveedor DESC")
     fun obtenerRelaciones(): Flow<List<MaterialProveedorEntity>>
 
+    /**
+     * Busca una relación utilizando su identificador.
+     */
     @Query("""
         SELECT * FROM materiales_proveedores
         WHERE id_material_proveedor = :idRelacion
@@ -32,6 +51,9 @@ interface MaterialProveedorDao {
     """)
     suspend fun obtenerRelacionPorId(idRelacion: Int): MaterialProveedorEntity?
 
+    /**
+     * Obtiene el detalle completo de las relaciones entre materiales y proveedores.
+     */
     @Query("""
         SELECT 
             mp.id_material_proveedor AS id_material_proveedor,
@@ -50,6 +72,9 @@ interface MaterialProveedorDao {
     """)
     fun obtenerRelacionesDetalle(): Flow<List<MaterialProveedorDetalle>>
 
+    /**
+     * Obtiene las relaciones de un material específico.
+     */
     @Query("""
         SELECT 
             mp.id_material_proveedor AS id_material_proveedor,
@@ -69,6 +94,9 @@ interface MaterialProveedorDao {
     """)
     fun obtenerRelacionesDetallePorMaterial(idMaterial: Int): Flow<List<MaterialProveedorDetalle>>
 
+    /**
+     * Obtiene las relaciones asociadas a un proveedor específico.
+     */
     @Query("""
         SELECT 
             mp.id_material_proveedor AS id_material_proveedor,
@@ -88,6 +116,9 @@ interface MaterialProveedorDao {
     """)
     fun obtenerRelacionesDetallePorProveedor(idProveedor: Int): Flow<List<MaterialProveedorDetalle>>
 
+    /**
+     * Obtiene las relaciones registradas para un material.
+     */
     @Query("""
         SELECT * FROM materiales_proveedores
         WHERE id_material = :idMaterial
@@ -95,6 +126,9 @@ interface MaterialProveedorDao {
     """)
     fun obtenerRelacionesPorMaterial(idMaterial: Int): Flow<List<MaterialProveedorEntity>>
 
+    /**
+     * Obtiene las relaciones registradas para un proveedor.
+     */
     @Query("""
         SELECT * FROM materiales_proveedores
         WHERE id_proveedor = :idProveedor
@@ -102,6 +136,9 @@ interface MaterialProveedorDao {
     """)
     fun obtenerRelacionesPorProveedor(idProveedor: Int): Flow<List<MaterialProveedorEntity>>
 
+    /**
+     * Verifica si ya existe una relación entre un material y un proveedor.
+     */
     @Query("""
         SELECT COUNT(*) FROM materiales_proveedores
         WHERE id_material = :idMaterial
@@ -109,18 +146,33 @@ interface MaterialProveedorDao {
     """)
     suspend fun contarRelacionExistente(idMaterial: Int, idProveedor: Int): Int
 
+    /**
+     * Cuenta la cantidad total de relaciones registradas.
+     */
     @Query("SELECT COUNT(*) FROM materiales_proveedores")
     suspend fun contarRelaciones(): Int
 
+    /**
+     * Elimina una relación utilizando su identificador.
+     */
     @Query("DELETE FROM materiales_proveedores WHERE id_material_proveedor = :idRelacion")
     suspend fun eliminarRelacionPorId(idRelacion: Int)
 
+    /**
+     * Inserta una lista de relaciones, reemplazando las existentes si es necesario.
+     */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertarRelaciones(relaciones: List<MaterialProveedorEntity>)
 
+    /**
+     * Obtiene todas las relaciones para generar un respaldo.
+     */
     @Query("SELECT * FROM materiales_proveedores ORDER BY id_material_proveedor ASC")
     suspend fun obtenerRelacionesParaRespaldo(): List<MaterialProveedorEntity>
 
+    /**
+     * Elimina todas las relaciones registradas.
+     */
     @Query("DELETE FROM materiales_proveedores")
     suspend fun eliminarTodasRelaciones()
 }

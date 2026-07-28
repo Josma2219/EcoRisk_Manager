@@ -12,13 +12,20 @@ import com.example.ecorisk_manager.utils.Constantes
 import com.example.ecorisk_manager.viewmodel.ProveedorViewModel
 import com.example.ecorisk_manager.viewmodel.ProveedorViewModelFactory
 
+/**
+ * Pantalla utilizada para registrar y editar proveedores.
+ */
 class ProveedorFormularioActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProveedorFormularioBinding
     private lateinit var proveedorViewModel: ProveedorViewModel
 
+    // Guarda el identificador del proveedor cuando se edita un registro existente.
     private var idProveedorActual: Int = 0
 
+    /**
+     * Inicializa la pantalla y prepara sus componentes.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -37,6 +44,9 @@ class ProveedorFormularioActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Inicializa el ViewModel que administrará la información del formulario.
+     */
     private fun prepararViewModel() {
         val baseDatos = AppDatabase.obtenerBaseDatos(applicationContext)
         val proveedorRepository = ProveedorRepository(baseDatos.proveedorDao())
@@ -45,6 +55,9 @@ class ProveedorFormularioActivity : AppCompatActivity() {
         proveedorViewModel = ViewModelProvider(this, factory)[ProveedorViewModel::class.java]
     }
 
+    /**
+     * Ajusta el título y el texto del botón según la operación realizada.
+     */
     private fun configurarPantalla() {
         if (idProveedorActual == 0) {
             binding.textoTituloFormulario.text = "Registrar proveedor"
@@ -55,6 +68,9 @@ class ProveedorFormularioActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Observa los datos del proveedor y el resultado de las operaciones.
+     */
     private fun observarDatos() {
         proveedorViewModel.proveedorSeleccionado.observe(this) { proveedor ->
             if (proveedor != null) {
@@ -75,6 +91,9 @@ class ProveedorFormularioActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Configura los eventos de los botones del formulario.
+     */
     private fun configurarEventos() {
         binding.botonGuardarProveedor.setOnClickListener {
             guardarProveedor()
@@ -85,6 +104,10 @@ class ProveedorFormularioActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Obtiene la información ingresada por el usuario
+     * y la envía al ViewModel para guardarla.
+     */
     private fun guardarProveedor() {
         val nombre = binding.campoNombreProveedor.text.toString()
         val telefono = binding.campoTelefonoProveedor.text.toString()
@@ -102,6 +125,9 @@ class ProveedorFormularioActivity : AppCompatActivity() {
         )
     }
 
+    /**
+     * Completa el formulario con la información del proveedor seleccionado.
+     */
     private fun llenarFormulario(proveedor: ProveedorEntity) {
         binding.campoNombreProveedor.setText(proveedor.nombre)
         binding.campoTelefonoProveedor.setText(proveedor.telefono)

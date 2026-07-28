@@ -11,11 +11,18 @@ import com.example.ecorisk_manager.databinding.ActivityRespaldoBinding
 import com.example.ecorisk_manager.viewmodel.RespaldoViewModel
 import com.example.ecorisk_manager.viewmodel.RespaldoViewModelFactory
 
+/**
+ * Pantalla encargada de generar y restaurar respaldos
+ * de la información almacenada en la aplicación.
+ */
 class RespaldoActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRespaldoBinding
     private lateinit var respaldoViewModel: RespaldoViewModel
 
+    /**
+     * Inicializa la pantalla y prepara sus componentes.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -27,6 +34,10 @@ class RespaldoActivity : AppCompatActivity() {
         configurarEventos()
     }
 
+    /**
+     * Inicializa el ViewModel utilizado para gestionar
+     * las operaciones de respaldo y restauración.
+     */
     private fun prepararViewModel() {
         val baseDatos = AppDatabase.obtenerBaseDatos(applicationContext)
         val repository = RespaldoRepository(baseDatos)
@@ -35,6 +46,10 @@ class RespaldoActivity : AppCompatActivity() {
         respaldoViewModel = ViewModelProvider(this, factory)[RespaldoViewModel::class.java]
     }
 
+    /**
+     * Observa el resultado de las operaciones realizadas
+     * para actualizar la interfaz y mostrar mensajes al usuario.
+     */
     private fun observarResultado() {
         respaldoViewModel.resultadoOperacion.observe(this) { resultado ->
             if (resultado == null) return@observe
@@ -46,6 +61,9 @@ class RespaldoActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Configura los eventos de los botones de la pantalla.
+     */
     private fun configurarEventos() {
         binding.botonGenerarRespaldo.setOnClickListener {
             binding.textoEstadoRespaldo.text = "Generando respaldo..."
@@ -61,6 +79,9 @@ class RespaldoActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Solicita confirmación antes de restaurar el último respaldo disponible.
+     */
     private fun confirmarRestauracion() {
         AlertDialog.Builder(this)
             .setTitle("Restaurar respaldo")

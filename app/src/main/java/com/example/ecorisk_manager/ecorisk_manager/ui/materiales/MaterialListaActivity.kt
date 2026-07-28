@@ -17,12 +17,19 @@ import com.example.ecorisk_manager.utils.Constantes
 import com.example.ecorisk_manager.viewmodel.MaterialViewModel
 import com.example.ecorisk_manager.viewmodel.MaterialViewModelFactory
 
+/**
+ * Pantalla encargada de mostrar el listado de materiales peligrosos.
+ * Permite consultar, buscar, filtrar, registrar, editar y acceder al detalle de cada material.
+ */
 class MaterialListaActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMaterialListaBinding
     private lateinit var materialViewModel: MaterialViewModel
     private lateinit var materialAdapter: MaterialAdapter
 
+    /**
+     * Inicializa la pantalla y configura sus componentes.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -38,13 +45,19 @@ class MaterialListaActivity : AppCompatActivity() {
         materialViewModel.cargarMateriales()
     }
 
+    /**
+     * Actualiza la lista al regresar desde otra pantalla.
+     */
     override fun onResume() {
         super.onResume()
 
-        // Al volver del formulario o detalle, refrescamos la lista.
+        // Refresca la información por si hubo registros o cambios.
         materialViewModel.cargarMateriales()
     }
 
+    /**
+     * Inicializa el ViewModel que gestionará la información de la pantalla.
+     */
     private fun prepararViewModel() {
         val baseDatos = AppDatabase.obtenerBaseDatos(applicationContext)
         val materialRepository = MaterialRepository(baseDatos.materialPeligrosoDao())
@@ -53,6 +66,9 @@ class MaterialListaActivity : AppCompatActivity() {
         materialViewModel = ViewModelProvider(this, factory)[MaterialViewModel::class.java]
     }
 
+    /**
+     * Configura el RecyclerView y su adaptador.
+     */
     private fun configurarRecycler() {
         materialAdapter = MaterialAdapter(
             alVerDetalleMaterial = { material ->
@@ -67,6 +83,9 @@ class MaterialListaActivity : AppCompatActivity() {
         binding.recyclerMateriales.adapter = materialAdapter
     }
 
+    /**
+     * Configura el filtro por clasificación de riesgo.
+     */
     private fun configurarFiltroRiesgo() {
         val adaptador = ArrayAdapter.createFromResource(
             this,
@@ -78,6 +97,9 @@ class MaterialListaActivity : AppCompatActivity() {
         binding.spinnerFiltroRiesgo.adapter = adaptador
     }
 
+    /**
+     * Observa los cambios en la lista de materiales para actualizar la interfaz.
+     */
     private fun observarMateriales() {
         materialViewModel.materiales.observe(this) { listaMateriales ->
             materialAdapter.actualizarLista(listaMateriales)
@@ -88,6 +110,9 @@ class MaterialListaActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Configura los eventos de los botones de la pantalla.
+     */
     private fun configurarEventos() {
         binding.botonAgregarMaterial.setOnClickListener {
             abrirFormularioMaterial()
@@ -120,12 +145,18 @@ class MaterialListaActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Abre el formulario para registrar o editar un material.
+     */
     private fun abrirFormularioMaterial(idMaterial: Int = 0) {
         val intent = Intent(this, MaterialFormularioActivity::class.java)
         intent.putExtra(Constantes.Extras.EXTRA_ID_MATERIAL, idMaterial)
         startActivity(intent)
     }
 
+    /**
+     * Abre la pantalla con el detalle de un material.
+     */
     private fun abrirDetalleMaterial(idMaterial: Int) {
         val intent = Intent(this, MaterialDetalleActivity::class.java)
         intent.putExtra(Constantes.Extras.EXTRA_ID_MATERIAL, idMaterial)

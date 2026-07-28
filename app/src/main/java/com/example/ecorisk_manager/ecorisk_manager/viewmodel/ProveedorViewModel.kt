@@ -11,6 +11,10 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel encargado de gestionar el registro, consulta,
+ * búsqueda y actualización de proveedores.
+ */
 class ProveedorViewModel(
     private val proveedorRepository: ProveedorRepository
 ) : ViewModel() {
@@ -24,8 +28,13 @@ class ProveedorViewModel(
     private val _resultadoOperacion = MutableLiveData<ResultadoOperacion?>()
     val resultadoOperacion: LiveData<ResultadoOperacion?> = _resultadoOperacion
 
+    // Permite cancelar la consulta anterior cuando se realiza una
+    // nueva búsqueda, evitando observadores duplicados.
     private var trabajoLista: Job? = null
 
+    /**
+     * Obtiene el listado completo de proveedores registrados.
+     */
     fun cargarProveedores() {
         trabajoLista?.cancel()
 
@@ -36,6 +45,10 @@ class ProveedorViewModel(
         }
     }
 
+    /**
+     * Busca proveedores utilizando su nombre, correo
+     * o contacto principal.
+     */
     fun buscarProveedores(texto: String) {
         if (texto.isBlank()) {
             cargarProveedores()
@@ -51,6 +64,10 @@ class ProveedorViewModel(
         }
     }
 
+    /**
+     * Recupera la información de un proveedor para visualizarla
+     * o editarla posteriormente.
+     */
     fun cargarProveedorPorId(idProveedor: Int) {
         viewModelScope.launch {
             val proveedor = proveedorRepository.obtenerProveedorPorId(idProveedor)
@@ -58,6 +75,10 @@ class ProveedorViewModel(
         }
     }
 
+    /**
+     * Valida la información ingresada y registra o actualiza
+     * el proveedor según corresponda.
+     */
     fun guardarProveedor(
         idProveedor: Int,
         nombre: String,
@@ -83,6 +104,8 @@ class ProveedorViewModel(
             try {
                 val correoLimpio = correo.trim().lowercase()
 
+                // Verificar que el correo sea único antes de registrar
+                // o actualizar el proveedor.
                 val correoRepetido = if (idProveedor == 0) {
                     proveedorRepository.existeCorreoProveedor(correoLimpio)
                 } else {
@@ -131,10 +154,18 @@ class ProveedorViewModel(
         }
     }
 
+    /**
+     * Restablece el resultado de la última operación para evitar
+     * que vuelva a procesarse después de un cambio de configuración.
+     */
     fun limpiarResultadoOperacion() {
         _resultadoOperacion.value = null
     }
 
+    /**
+     * Comprueba que todos los datos requeridos del proveedor
+     * hayan sido ingresados correctamente antes de guardarlo.
+     */
     private fun validarDatosProveedor(
         nombre: String,
         telefono: String,

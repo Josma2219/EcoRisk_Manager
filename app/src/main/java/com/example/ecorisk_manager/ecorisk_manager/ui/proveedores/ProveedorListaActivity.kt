@@ -14,12 +14,19 @@ import com.example.ecorisk_manager.utils.Constantes
 import com.example.ecorisk_manager.viewmodel.ProveedorViewModel
 import com.example.ecorisk_manager.viewmodel.ProveedorViewModelFactory
 
+/**
+ * Pantalla que muestra el listado de proveedores registrados.
+ * Desde aquí es posible buscar, registrar, editar y consultar proveedores.
+ */
 class ProveedorListaActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProveedorListaBinding
     private lateinit var proveedorViewModel: ProveedorViewModel
     private lateinit var proveedorAdapter: ProveedorAdapter
 
+    /**
+     * Inicializa la pantalla y prepara sus componentes principales.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,6 +41,9 @@ class ProveedorListaActivity : AppCompatActivity() {
         proveedorViewModel.cargarProveedores()
     }
 
+    /**
+     * Actualiza la lista cada vez que la pantalla vuelve a mostrarse.
+     */
     override fun onResume() {
         super.onResume()
 
@@ -41,6 +51,9 @@ class ProveedorListaActivity : AppCompatActivity() {
         proveedorViewModel.cargarProveedores()
     }
 
+    /**
+     * Inicializa el ViewModel utilizado por la pantalla.
+     */
     private fun prepararViewModel() {
         val baseDatos = AppDatabase.obtenerBaseDatos(applicationContext)
         val proveedorRepository = ProveedorRepository(baseDatos.proveedorDao())
@@ -49,6 +62,9 @@ class ProveedorListaActivity : AppCompatActivity() {
         proveedorViewModel = ViewModelProvider(this, factory)[ProveedorViewModel::class.java]
     }
 
+    /**
+     * Configura el RecyclerView y su adaptador.
+     */
     private fun configurarRecycler() {
         proveedorAdapter = ProveedorAdapter(
             alVerDetalleProveedor = { proveedor ->
@@ -63,6 +79,9 @@ class ProveedorListaActivity : AppCompatActivity() {
         binding.recyclerProveedores.adapter = proveedorAdapter
     }
 
+    /**
+     * Observa los cambios en la lista de proveedores para mantener la interfaz actualizada.
+     */
     private fun observarProveedores() {
         proveedorViewModel.proveedores.observe(this) { listaProveedores ->
             proveedorAdapter.actualizarLista(listaProveedores)
@@ -73,6 +92,9 @@ class ProveedorListaActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Configura los eventos de los controles de la pantalla.
+     */
     private fun configurarEventos() {
         binding.botonAgregarProveedor.setOnClickListener {
             abrirFormularioProveedor()
@@ -93,12 +115,19 @@ class ProveedorListaActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Abre el formulario para registrar un proveedor nuevo
+     * o editar uno existente.
+     */
     private fun abrirFormularioProveedor(idProveedor: Int = 0) {
         val intent = Intent(this, ProveedorFormularioActivity::class.java)
         intent.putExtra(Constantes.Extras.EXTRA_ID_PROVEEDOR, idProveedor)
         startActivity(intent)
     }
 
+    /**
+     * Abre la pantalla con el detalle del proveedor seleccionado.
+     */
     private fun abrirDetalleProveedor(idProveedor: Int) {
         val intent = Intent(this, ProveedorDetalleActivity::class.java)
         intent.putExtra(Constantes.Extras.EXTRA_ID_PROVEEDOR, idProveedor)

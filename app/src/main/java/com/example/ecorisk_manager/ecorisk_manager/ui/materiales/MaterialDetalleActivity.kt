@@ -16,6 +16,10 @@ import com.example.ecorisk_manager.utils.Constantes
 import com.example.ecorisk_manager.viewmodel.MaterialViewModel
 import com.example.ecorisk_manager.viewmodel.MaterialViewModelFactory
 
+/**
+ * Pantalla encargada de mostrar la información detallada
+ * de un material peligroso.
+ */
 class MaterialDetalleActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMaterialDetalleBinding
@@ -24,6 +28,9 @@ class MaterialDetalleActivity : AppCompatActivity() {
     private var idMaterialActual: Int = 0
     private var materialActual: MaterialPeligrosoEntity? = null
 
+    /**
+     * Inicializa la pantalla y carga la información del material seleccionado.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -39,15 +46,21 @@ class MaterialDetalleActivity : AppCompatActivity() {
         validarYCargarMaterial()
     }
 
+    /**
+     * Actualiza la información al regresar desde la pantalla de edición.
+     */
     override fun onResume() {
         super.onResume()
 
-        // Si volvemos de editar, recargamos para enseñar los datos actualizados.
+        // Recarga la información para mostrar los cambios realizados.
         if (idMaterialActual != 0) {
             materialViewModel.cargarMaterialPorId(idMaterialActual)
         }
     }
 
+    /**
+     * Inicializa el ViewModel que gestionará la información de la pantalla.
+     */
     private fun prepararViewModel() {
         val baseDatos = AppDatabase.obtenerBaseDatos(applicationContext)
         val materialRepository = MaterialRepository(baseDatos.materialPeligrosoDao())
@@ -56,6 +69,10 @@ class MaterialDetalleActivity : AppCompatActivity() {
         materialViewModel = ViewModelProvider(this, factory)[MaterialViewModel::class.java]
     }
 
+    /**
+     * Verifica que se haya recibido un material válido
+     * antes de solicitar su información.
+     */
     private fun validarYCargarMaterial() {
         if (idMaterialActual == 0) {
             Toast.makeText(this, "No se recibió el material seleccionado", Toast.LENGTH_SHORT).show()
@@ -66,6 +83,9 @@ class MaterialDetalleActivity : AppCompatActivity() {
         materialViewModel.cargarMaterialPorId(idMaterialActual)
     }
 
+    /**
+     * Observa los cambios del ViewModel para actualizar la información mostrada.
+     */
     private fun observarMaterial() {
         materialViewModel.materialSeleccionado.observe(this) { material ->
             if (material == null) {
@@ -77,6 +97,9 @@ class MaterialDetalleActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Muestra la información del material en la pantalla.
+     */
     private fun mostrarDatosMaterial(material: MaterialPeligrosoEntity) {
         binding.textoNombreComercial.text = material.nombreComercial
         binding.textoCodigoMaterial.text = "Código: ${material.codigoMaterial}"
@@ -87,6 +110,9 @@ class MaterialDetalleActivity : AppCompatActivity() {
         binding.textoDescripcionMaterial.text = material.descripcion
     }
 
+    /**
+     * Configura los eventos de los botones de la pantalla.
+     */
     private fun configurarEventos() {
         binding.botonEditarMaterial.setOnClickListener {
             abrirFormularioEdicion()
@@ -109,16 +135,23 @@ class MaterialDetalleActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Abre el formulario para editar el material actual.
+     */
     private fun abrirFormularioEdicion() {
         val intent = Intent(this, MaterialFormularioActivity::class.java)
         intent.putExtra(Constantes.Extras.EXTRA_ID_MATERIAL, idMaterialActual)
         startActivity(intent)
     }
 
+    /**
+     * Abre una pantalla relacionada con el material seleccionado.
+     */
     private fun abrirPantallaRelacionada(pantalla: Class<*>) {
         val intent = Intent(this, pantalla)
 
-        // Guardamos el id para que las próximas etapas puedan filtrar por material.
+        // Envía el identificador del material para mostrar únicamente
+        // la información relacionada con él.
         intent.putExtra(Constantes.Extras.EXTRA_ID_MATERIAL, idMaterialActual)
 
         startActivity(intent)

@@ -23,12 +23,19 @@ import com.example.ecorisk_manager.viewmodel.HomeViewModel
 import com.example.ecorisk_manager.viewmodel.HomeViewModelFactory
 import kotlinx.coroutines.launch
 
+/**
+ * Pantalla principal de la aplicación.
+ * Desde aquí el usuario puede acceder a los distintos módulos del sistema.
+ */
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
     private lateinit var sessionManager: SessionManager
     private lateinit var homeViewModel: HomeViewModel
 
+    /**
+     * Inicializa la pantalla y configura los componentes principales.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -64,21 +71,28 @@ class HomeActivity : AppCompatActivity() {
         cargarDatosUsuario()
         configurarEventos()
     }
-
+    /**
+     * Actualiza la información del panel al regresar desde otros módulos.
+     */
     override fun onResume() {
         super.onResume()
 
-        // Cada vez que volvamos al Home, refrescamos los números.
-        // Cuando registremos materiales/proveedores/incidentes, esto se va a notar.
+        // Refresca los indicadores para mostrar los datos más recientes.
         homeViewModel.cargarResumenDashboard()
     }
 
+    /**
+     * Verifica que exista una sesión activa antes de mostrar el contenido.
+     */
     private fun protegerPantalla() {
         if (!sessionManager.haySesionActiva()) {
             abrirLogin()
         }
     }
 
+    /**
+     * Inicializa el ViewModel encargado del panel principal.
+     */
     private fun prepararViewModel() {
         val baseDatos = AppDatabase.obtenerBaseDatos(applicationContext)
 
@@ -92,6 +106,9 @@ class HomeActivity : AppCompatActivity() {
         homeViewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
     }
 
+    /**
+     * Observa la información del dashboard para actualizar los indicadores.
+     */
     private fun observarDashboard() {
         homeViewModel.resumenDashboard.observe(this) { resumen ->
             binding.tarjetaMateriales.text = "${resumen.totalMateriales}\nMateriales"
@@ -100,6 +117,9 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Muestra el nombre y el rol del usuario que inició sesión.
+     */
     private fun cargarDatosUsuario() {
         val nombreUsuario = sessionManager.obtenerNombreUsuario()
         val rolUsuario = sessionManager.obtenerRolUsuario()
@@ -107,6 +127,9 @@ class HomeActivity : AppCompatActivity() {
         binding.textoDatosUsuario.text = "Bienvenido $nombreUsuario - Rol: $rolUsuario"
     }
 
+    /**
+     * Configura los eventos de navegación de la pantalla.
+     */
     private fun configurarEventos() {
         binding.botonMateriales.setOnClickListener {
             abrirPantalla(MaterialListaActivity::class.java)
@@ -141,7 +164,10 @@ class HomeActivity : AppCompatActivity() {
             abrirLogin()
         }
     }
-
+    /**
+     * Reinicia y carga datos de prueba en la base de datos.
+     * Este método está pensado únicamente para demostraciones.
+     */
     private fun poblarDatosDemoUnaSolaVez() {
         lifecycleScope.launch {
             val baseDatos = AppDatabase.obtenerBaseDatos(applicationContext)
@@ -158,11 +184,17 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Abre la pantalla indicada.
+     */
     private fun abrirPantalla(pantalla: Class<*>) {
         val intent = Intent(this, pantalla)
         startActivity(intent)
     }
 
+    /**
+     * Regresa a la pantalla de inicio de sesión y finaliza la sesión actual.
+     */
     private fun abrirLogin() {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)

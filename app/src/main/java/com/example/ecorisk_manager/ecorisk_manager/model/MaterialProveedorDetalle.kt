@@ -2,7 +2,14 @@ package com.example.ecorisk_manager.model
 
 import androidx.room.ColumnInfo
 
+/**
+ * Representa la información detallada de la relación entre
+ * un material peligroso y un proveedor.
+ * Se utiliza para mostrar los datos obtenidos al combinar
+ * ambas entidades en una misma consulta.
+ */
 data class MaterialProveedorDetalle(
+
     @ColumnInfo(name = "id_material_proveedor")
     val idMaterialProveedor: Int,
 

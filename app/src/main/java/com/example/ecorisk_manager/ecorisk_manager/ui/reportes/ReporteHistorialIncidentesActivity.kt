@@ -17,15 +17,25 @@ import com.example.ecorisk_manager.utils.GeneradorPdf
 import com.example.ecorisk_manager.viewmodel.ReporteViewModel
 import com.example.ecorisk_manager.viewmodel.ReporteViewModelFactory
 
+/**
+ * Pantalla encargada de mostrar el historial de incidentes.
+ * Permite filtrar la información y exportarla en formato PDF.
+ */
 class ReporteHistorialIncidentesActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityReporteHistorialIncidentesBinding
     private lateinit var reporteViewModel: ReporteViewModel
     private lateinit var reporteIncidenteAdapter: ReporteIncidenteAdapter
 
+    // Guarda la lista mostrada actualmente para exportarla al PDF.
     private var listaActualIncidentes = emptyList<IncidenteDetalle>()
+
+    // Indica el filtro aplicado al reporte.
     private var filtroActual = "Historial completo"
 
+    /**
+     * Inicializa la pantalla y carga la información del reporte.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -41,6 +51,9 @@ class ReporteHistorialIncidentesActivity : AppCompatActivity() {
         reporteViewModel.cargarHistorialIncidentes()
     }
 
+    /**
+     * Inicializa el ViewModel utilizado por la pantalla.
+     */
     private fun prepararViewModel() {
         val baseDatos = AppDatabase.obtenerBaseDatos(applicationContext)
         val repository = ReporteRepository(baseDatos.reporteDao())
@@ -49,6 +62,9 @@ class ReporteHistorialIncidentesActivity : AppCompatActivity() {
         reporteViewModel = ViewModelProvider(this, factory)[ReporteViewModel::class.java]
     }
 
+    /**
+     * Configura el RecyclerView donde se muestran los incidentes.
+     */
     private fun configurarRecycler() {
         reporteIncidenteAdapter = ReporteIncidenteAdapter()
 
@@ -56,6 +72,9 @@ class ReporteHistorialIncidentesActivity : AppCompatActivity() {
         binding.recyclerIncidentesReporte.adapter = reporteIncidenteAdapter
     }
 
+    /**
+     * Configura los Spinner utilizados para filtrar la información.
+     */
     private fun configurarSpinners() {
         val adaptadorEstado = ArrayAdapter.createFromResource(
             this,
@@ -76,6 +95,9 @@ class ReporteHistorialIncidentesActivity : AppCompatActivity() {
         binding.spinnerSeveridad.adapter = adaptadorSeveridad
     }
 
+    /**
+     * Observa los cambios en la información del reporte para actualizar la interfaz.
+     */
     private fun observarIncidentes() {
         reporteViewModel.incidentesReporte.observe(this) { listaIncidentes ->
             listaActualIncidentes = listaIncidentes
@@ -89,6 +111,9 @@ class ReporteHistorialIncidentesActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Configura los eventos de los controles de la pantalla.
+     */
     private fun configurarEventos() {
         binding.botonFiltrarEstado.setOnClickListener {
             val estado = binding.spinnerEstado.selectedItem.toString()
@@ -130,6 +155,9 @@ class ReporteHistorialIncidentesActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Genera un archivo PDF con la información mostrada en el reporte.
+     */
     private fun exportarPdf() {
         if (listaActualIncidentes.isEmpty()) {
             Toast.makeText(this, "No hay incidentes para exportar", Toast.LENGTH_SHORT).show()

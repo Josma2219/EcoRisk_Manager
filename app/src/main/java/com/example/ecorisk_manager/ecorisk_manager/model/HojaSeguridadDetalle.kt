@@ -2,7 +2,13 @@ package com.example.ecorisk_manager.model
 
 import androidx.room.ColumnInfo
 
+/**
+ * Representa la información detallada de una hoja de seguridad.
+ * Se utiliza para mostrar los datos obtenidos al combinar la hoja
+ * de seguridad con la información del material asociado.
+ */
 data class HojaSeguridadDetalle(
+
     @ColumnInfo(name = "id_hoja")
     val idHoja: Int,
 

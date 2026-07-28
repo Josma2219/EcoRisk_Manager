@@ -21,16 +21,23 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+/**
+ * Pantalla utilizada para registrar y editar hojas de seguridad.
+ */
 class HojaFormularioActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHojaFormularioBinding
     private lateinit var hojaViewModel: HojaSeguridadViewModel
 
+    // Lista utilizada para cargar los materiales disponibles en el Spinner.
     private val listaMateriales = mutableListOf<MaterialPeligrosoEntity>()
 
     private var idHojaActual: Int = 0
     private var idMaterialFiltrado: Int = 0
 
+    /**
+     * Inicializa la pantalla y configura los datos necesarios.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -53,6 +60,9 @@ class HojaFormularioActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Inicializa el ViewModel que gestionará la información de la pantalla.
+     */
     private fun prepararViewModel() {
         val baseDatos = AppDatabase.obtenerBaseDatos(applicationContext)
         val repository = HojaSeguridadRepository(baseDatos.hojaSeguridadDao())
@@ -61,6 +71,10 @@ class HojaFormularioActivity : AppCompatActivity() {
         hojaViewModel = ViewModelProvider(this, factory)[HojaSeguridadViewModel::class.java]
     }
 
+    /**
+     * Configura el título y el botón según si se registrará
+     * una nueva hoja o se editará una existente.
+     */
     private fun configurarPantalla() {
         if (idHojaActual == 0) {
             binding.textoTituloFormulario.text = "Registrar hoja"
@@ -71,6 +85,10 @@ class HojaFormularioActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Observa los cambios del ViewModel para actualizar la interfaz
+     * y mostrar el resultado de las operaciones.
+     */
     private fun observarDatos() {
         hojaViewModel.hojaSeleccionada.observe(this) { hoja ->
             if (hoja != null) {
@@ -91,6 +109,9 @@ class HojaFormularioActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Obtiene la lista de materiales registrados para llenar el Spinner.
+     */
     private fun cargarMateriales() {
         val baseDatos = AppDatabase.obtenerBaseDatos(applicationContext)
 
@@ -104,6 +125,9 @@ class HojaFormularioActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Configura el Spinner con los materiales disponibles.
+     */
     private fun configurarSpinnerMateriales() {
         val nombresMateriales = mutableListOf("Seleccione material")
 
@@ -122,12 +146,17 @@ class HojaFormularioActivity : AppCompatActivity() {
         adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerMaterial.adapter = adaptador
 
+        // Si la pantalla fue abierta desde un material específico,
+        // se selecciona automáticamente y se bloquea el cambio.
         if (idMaterialFiltrado != 0) {
             seleccionarMaterialPorId(idMaterialFiltrado)
             binding.spinnerMaterial.isEnabled = false
         }
     }
 
+    /**
+     * Configura los eventos de los botones de la pantalla.
+     */
     private fun configurarEventos() {
         binding.botonGuardarHoja.setOnClickListener {
             guardarHoja()
@@ -138,6 +167,10 @@ class HojaFormularioActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Obtiene la información ingresada por el usuario
+     * y la envía al ViewModel para guardarla.
+     */
     private fun guardarHoja() {
         val idMaterial = obtenerIdMaterialSeleccionado()
         val version = binding.campoVersion.text.toString()
@@ -155,6 +188,9 @@ class HojaFormularioActivity : AppCompatActivity() {
         )
     }
 
+    /**
+     * Completa el formulario con la información de una hoja existente.
+     */
     private fun llenarFormulario(hoja: HojaSeguridadEntity) {
         binding.campoVersion.setText(hoja.version)
         binding.campoFechaEmision.setText(hoja.fechaEmision)
@@ -164,6 +200,9 @@ class HojaFormularioActivity : AppCompatActivity() {
         seleccionarMaterialPorId(hoja.idMaterial)
     }
 
+    /**
+     * Obtiene el identificador del material seleccionado en el Spinner.
+     */
     private fun obtenerIdMaterialSeleccionado(): Int {
         val posicion = binding.spinnerMaterial.selectedItemPosition
 
@@ -174,6 +213,9 @@ class HojaFormularioActivity : AppCompatActivity() {
         return listaMateriales[posicion - 1].idMaterial
     }
 
+    /**
+     * Selecciona un material en el Spinner utilizando su identificador.
+     */
     private fun seleccionarMaterialPorId(idMaterial: Int) {
         val posicion = listaMateriales.indexOfFirst { material ->
             material.idMaterial == idMaterial

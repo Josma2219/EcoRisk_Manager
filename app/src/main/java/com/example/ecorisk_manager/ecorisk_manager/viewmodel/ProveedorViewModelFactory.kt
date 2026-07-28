@@ -4,6 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.ecorisk_manager.data.repository.ProveedorRepository
 
+/**
+ * Factory encargada de crear la instancia de ProveedorViewModel
+ * proporcionando el repositorio necesario para su funcionamiento.
+ */
 class ProveedorViewModelFactory(
     private val proveedorRepository: ProveedorRepository
 ) : ViewModelProvider.Factory {

@@ -4,6 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.ecorisk_manager.data.repository.HomeRepository
 
+/**
+ * Factory encargada de crear la instancia de HomeViewModel
+ * proporcionando el repositorio necesario para su funcionamiento.
+ */
 class HomeViewModelFactory(
     private val homeRepository: HomeRepository
 ) : ViewModelProvider.Factory {

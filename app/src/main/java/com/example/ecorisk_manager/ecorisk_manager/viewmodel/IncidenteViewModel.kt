@@ -12,6 +12,10 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel encargado de gestionar el registro, consulta,
+ * actualización y eliminación de incidentes.
+ */
 class IncidenteViewModel(
     private val incidenteRepository: IncidenteRepository
 ) : ViewModel() {
@@ -28,8 +32,13 @@ class IncidenteViewModel(
     private val _resultadoOperacion = MutableLiveData<ResultadoOperacion?>()
     val resultadoOperacion: LiveData<ResultadoOperacion?> = _resultadoOperacion
 
+    // Permite cancelar la consulta anterior cuando se aplica
+    // un nuevo filtro sobre la lista de incidentes.
     private var trabajoLista: Job? = null
 
+    /**
+     * Obtiene el listado completo de incidentes.
+     */
     fun cargarIncidentes() {
         trabajoLista?.cancel()
 
@@ -40,6 +49,10 @@ class IncidenteViewModel(
         }
     }
 
+    /**
+     * Obtiene únicamente los incidentes asociados
+     * al material seleccionado.
+     */
     fun cargarIncidentesPorMaterial(idMaterial: Int) {
         trabajoLista?.cancel()
 
@@ -50,6 +63,9 @@ class IncidenteViewModel(
         }
     }
 
+    /**
+     * Filtra los incidentes según su estado.
+     */
     fun cargarIncidentesPorEstado(estado: String) {
         trabajoLista?.cancel()
 
@@ -60,6 +76,9 @@ class IncidenteViewModel(
         }
     }
 
+    /**
+     * Filtra los incidentes según su nivel de severidad.
+     */
     fun cargarIncidentesPorSeveridad(nivelSeveridad: String) {
         trabajoLista?.cancel()
 
@@ -70,6 +89,9 @@ class IncidenteViewModel(
         }
     }
 
+    /**
+     * Recupera la información de un incidente para editarlo.
+     */
     fun cargarIncidentePorId(idIncidente: Int) {
         viewModelScope.launch {
             val incidente = incidenteRepository.obtenerIncidentePorId(idIncidente)
@@ -77,6 +99,10 @@ class IncidenteViewModel(
         }
     }
 
+    /**
+     * Recupera el detalle completo de un incidente
+     * para mostrarlo en pantalla.
+     */
     fun cargarIncidenteDetallePorId(idIncidente: Int) {
         viewModelScope.launch {
             val incidente = incidenteRepository.obtenerIncidenteDetallePorId(idIncidente)
@@ -84,6 +110,10 @@ class IncidenteViewModel(
         }
     }
 
+    /**
+     * Valida la información ingresada y registra o actualiza
+     * el incidente según corresponda.
+     */
     fun guardarIncidente(
         idIncidente: Int,
         fechaIncidente: String,
@@ -143,6 +173,9 @@ class IncidenteViewModel(
         }
     }
 
+    /**
+     * Elimina un incidente registrado.
+     */
     fun eliminarIncidente(idIncidente: Int) {
         viewModelScope.launch {
             try {
@@ -161,10 +194,18 @@ class IncidenteViewModel(
         }
     }
 
+    /**
+     * Restablece el resultado de la última operación para evitar
+     * que vuelva a procesarse después de un cambio de configuración.
+     */
     fun limpiarResultadoOperacion() {
         _resultadoOperacion.value = null
     }
 
+    /**
+     * Comprueba que todos los datos obligatorios del incidente
+     * hayan sido ingresados antes de guardarlo.
+     */
     private fun validarDatosIncidente(
         fechaIncidente: String,
         tipoIncidente: String,

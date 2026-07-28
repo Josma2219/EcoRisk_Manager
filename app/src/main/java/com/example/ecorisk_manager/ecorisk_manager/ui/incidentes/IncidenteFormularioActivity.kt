@@ -22,16 +22,23 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+/**
+ * Pantalla utilizada para registrar y editar incidentes.
+ */
 class IncidenteFormularioActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityIncidenteFormularioBinding
     private lateinit var incidenteViewModel: IncidenteViewModel
 
+    // Lista utilizada para cargar los materiales disponibles en el Spinner.
     private val listaMateriales = mutableListOf<MaterialPeligrosoEntity>()
 
     private var idIncidenteActual: Int = 0
     private var idMaterialFiltrado: Int = 0
 
+    /**
+     * Inicializa la pantalla y configura los datos necesarios.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -55,6 +62,9 @@ class IncidenteFormularioActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Inicializa el ViewModel que gestionará la información de la pantalla.
+     */
     private fun prepararViewModel() {
         val baseDatos = AppDatabase.obtenerBaseDatos(applicationContext)
         val repository = IncidenteRepository(baseDatos.incidenteDao())
@@ -63,6 +73,10 @@ class IncidenteFormularioActivity : AppCompatActivity() {
         incidenteViewModel = ViewModelProvider(this, factory)[IncidenteViewModel::class.java]
     }
 
+    /**
+     * Configura el título y el botón según si se registrará
+     * un nuevo incidente o se editará uno existente.
+     */
     private fun configurarPantalla() {
         if (idIncidenteActual == 0) {
             binding.textoTituloFormulario.text = "Registrar incidente"
@@ -73,12 +87,18 @@ class IncidenteFormularioActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Configura los Spinner que utilizan listas de valores fijas.
+     */
     private fun configurarSpinnersFijos() {
         configurarSpinnerConArray(binding.spinnerTipoIncidente, R.array.tipos_incidente)
         configurarSpinnerConArray(binding.spinnerSeveridad, R.array.niveles_severidad)
         configurarSpinnerConArray(binding.spinnerEstado, R.array.estados_incidente)
     }
 
+    /**
+     * Asocia un arreglo de recursos a un Spinner.
+     */
     private fun configurarSpinnerConArray(spinner: Spinner, arrayId: Int) {
         val adaptador = ArrayAdapter.createFromResource(
             this,
@@ -90,6 +110,10 @@ class IncidenteFormularioActivity : AppCompatActivity() {
         spinner.adapter = adaptador
     }
 
+    /**
+     * Observa los cambios del ViewModel para actualizar la interfaz
+     * y mostrar el resultado de las operaciones.
+     */
     private fun observarDatos() {
         incidenteViewModel.incidenteSeleccionado.observe(this) { incidente ->
             if (incidente != null) {
@@ -110,6 +134,9 @@ class IncidenteFormularioActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Obtiene la lista de materiales registrados para llenar el Spinner.
+     */
     private fun cargarMateriales() {
         val baseDatos = AppDatabase.obtenerBaseDatos(applicationContext)
 
@@ -123,6 +150,9 @@ class IncidenteFormularioActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Configura el Spinner con los materiales disponibles.
+     */
     private fun configurarSpinnerMateriales() {
         val nombresMateriales = mutableListOf("Seleccione material")
 
@@ -141,12 +171,17 @@ class IncidenteFormularioActivity : AppCompatActivity() {
         adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerMaterial.adapter = adaptador
 
+        // Si la pantalla fue abierta desde un material específico,
+        // se selecciona automáticamente y se bloquea el cambio.
         if (idMaterialFiltrado != 0) {
             seleccionarMaterialPorId(idMaterialFiltrado)
             binding.spinnerMaterial.isEnabled = false
         }
     }
 
+    /**
+     * Configura los eventos de los botones de la pantalla.
+     */
     private fun configurarEventos() {
         binding.botonGuardarIncidente.setOnClickListener {
             guardarIncidente()
@@ -157,6 +192,10 @@ class IncidenteFormularioActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Obtiene la información ingresada por el usuario
+     * y la envía al ViewModel para guardarla.
+     */
     private fun guardarIncidente() {
         val idMaterial = obtenerIdMaterialSeleccionado()
         val fechaIncidente = binding.campoFechaIncidente.text.toString()
@@ -178,6 +217,9 @@ class IncidenteFormularioActivity : AppCompatActivity() {
         )
     }
 
+    /**
+     * Completa el formulario con la información de un incidente existente.
+     */
     private fun llenarFormulario(incidente: IncidenteEntity) {
         binding.campoFechaIncidente.setText(incidente.fechaIncidente)
         binding.campoDescripcion.setText(incidente.descripcion)
@@ -189,6 +231,9 @@ class IncidenteFormularioActivity : AppCompatActivity() {
         seleccionarValorSpinner(binding.spinnerEstado, incidente.estado)
     }
 
+    /**
+     * Obtiene el identificador del material seleccionado en el Spinner.
+     */
     private fun obtenerIdMaterialSeleccionado(): Int {
         val posicion = binding.spinnerMaterial.selectedItemPosition
 
@@ -199,6 +244,9 @@ class IncidenteFormularioActivity : AppCompatActivity() {
         return listaMateriales[posicion - 1].idMaterial
     }
 
+    /**
+     * Selecciona un material en el Spinner utilizando su identificador.
+     */
     private fun seleccionarMaterialPorId(idMaterial: Int) {
         val posicion = listaMateriales.indexOfFirst { material ->
             material.idMaterial == idMaterial
@@ -209,6 +257,9 @@ class IncidenteFormularioActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Selecciona un valor específico dentro de un Spinner.
+     */
     private fun seleccionarValorSpinner(spinner: Spinner, valor: String) {
         for (posicion in 0 until spinner.adapter.count) {
             val item = spinner.adapter.getItem(posicion).toString()
@@ -220,6 +271,9 @@ class IncidenteFormularioActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Coloca la fecha actual como valor inicial del formulario.
+     */
     private fun colocarFechaActual() {
         val formatoFecha = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val fechaActual = formatoFecha.format(Date())

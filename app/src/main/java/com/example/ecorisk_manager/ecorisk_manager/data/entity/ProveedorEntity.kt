@@ -4,8 +4,13 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * Representa la información de un proveedor registrado en el sistema.
+ * Cada proveedor puede estar asociado a uno o varios materiales peligrosos.
+ */
 @Entity(tableName = "proveedores")
 data class ProveedorEntity(
+
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_proveedor")
     val idProveedor: Int = 0,

@@ -5,10 +5,18 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ecorisk_manager.databinding.ActivityReporteMenuBinding
 
+/**
+ * Pantalla principal del módulo de reportes.
+ * Desde aquí el usuario puede acceder a los diferentes
+ * reportes disponibles en la aplicación.
+ */
 class ReporteMenuActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityReporteMenuBinding
 
+    /**
+     * Inicializa la pantalla y configura sus eventos.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -18,6 +26,9 @@ class ReporteMenuActivity : AppCompatActivity() {
         configurarEventos()
     }
 
+    /**
+     * Configura los eventos de los botones del menú.
+     */
     private fun configurarEventos() {
         binding.botonReporteRiesgo.setOnClickListener {
             val intent = Intent(this, ReporteMaterialesRiesgoActivity::class.java)

@@ -5,13 +5,20 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
+/**
+ * Representa un material peligroso registrado en el sistema.
+ * Almacena la información básica utilizada en los diferentes módulos
+ * de la aplicación.
+ */
 @Entity(
     tableName = "materiales_peligrosos",
     indices = [
+        // Evita que existan materiales con el mismo código de identificación.
         Index(value = ["codigo_material"], unique = true)
     ]
 )
 data class MaterialPeligrosoEntity(
+
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_material")
     val idMaterial: Int = 0,

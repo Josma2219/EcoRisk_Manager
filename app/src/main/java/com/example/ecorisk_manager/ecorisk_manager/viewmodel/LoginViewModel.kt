@@ -8,6 +8,10 @@ import com.example.ecorisk_manager.data.repository.UsuarioRepository
 import com.example.ecorisk_manager.model.EstadoLogin
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel encargado de gestionar el proceso de autenticación
+ * del usuario y comunicar el estado del inicio de sesión a la interfaz.
+ */
 class LoginViewModel(
     private val usuarioRepository: UsuarioRepository
 ) : ViewModel() {
@@ -15,6 +19,10 @@ class LoginViewModel(
     private val _estadoLogin = MutableLiveData<EstadoLogin>(EstadoLogin.Inicial)
     val estadoLogin: LiveData<EstadoLogin> = _estadoLogin
 
+    /**
+     * Crea el usuario administrador por defecto únicamente cuando
+     * la base de datos aún no contiene usuarios registrados.
+     */
     fun prepararUsuarioAdministrador() {
         viewModelScope.launch {
             try {
@@ -27,7 +35,13 @@ class LoginViewModel(
         }
     }
 
+    /**
+     * Valida las credenciales ingresadas y actualiza el estado
+     * del proceso de autenticación según el resultado obtenido.
+     */
     fun iniciarSesion(usuario: String, contrasena: String) {
+
+        // Validación básica antes de consultar la base de datos.
         if (usuario.isBlank() || contrasena.isBlank()) {
             _estadoLogin.value = EstadoLogin.Error("Digite usuario y contraseña")
             return

@@ -12,6 +12,10 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel encargado de gestionar las relaciones
+ * entre materiales peligrosos y proveedores.
+ */
 class MaterialProveedorViewModel(
     private val materialProveedorRepository: MaterialProveedorRepository
 ) : ViewModel() {
@@ -22,8 +26,14 @@ class MaterialProveedorViewModel(
     private val _resultadoOperacion = MutableLiveData<ResultadoOperacion?>()
     val resultadoOperacion: LiveData<ResultadoOperacion?> = _resultadoOperacion
 
+    // Permite cancelar la consulta anterior cuando se aplica
+    // un nuevo filtro sobre las relaciones.
     private var trabajoLista: Job? = null
 
+    /**
+     * Obtiene todas las relaciones registradas
+     * entre materiales y proveedores.
+     */
     fun cargarRelaciones() {
         trabajoLista?.cancel()
 
@@ -34,6 +44,10 @@ class MaterialProveedorViewModel(
         }
     }
 
+    /**
+     * Obtiene únicamente las relaciones
+     * correspondientes a un material.
+     */
     fun cargarRelacionesPorMaterial(idMaterial: Int) {
         trabajoLista?.cancel()
 
@@ -44,6 +58,10 @@ class MaterialProveedorViewModel(
         }
     }
 
+    /**
+     * Obtiene únicamente las relaciones
+     * correspondientes a un proveedor.
+     */
     fun cargarRelacionesPorProveedor(idProveedor: Int) {
         trabajoLista?.cancel()
 
@@ -54,6 +72,10 @@ class MaterialProveedorViewModel(
         }
     }
 
+    /**
+     * Valida la información ingresada y registra
+     * una nueva relación entre material y proveedor.
+     */
     fun guardarRelacion(
         idMaterial: Int,
         idProveedor: Int,
@@ -72,6 +94,8 @@ class MaterialProveedorViewModel(
 
         viewModelScope.launch {
             try {
+
+                // Evita registrar la misma relación más de una vez.
                 val relacionExiste = materialProveedorRepository.existeRelacion(
                     idMaterial = idMaterial,
                     idProveedor = idProveedor
@@ -106,6 +130,10 @@ class MaterialProveedorViewModel(
         }
     }
 
+    /**
+     * Elimina una relación registrada entre
+     * un material y un proveedor.
+     */
     fun eliminarRelacion(idRelacion: Int) {
         viewModelScope.launch {
             try {
@@ -124,10 +152,18 @@ class MaterialProveedorViewModel(
         }
     }
 
+    /**
+     * Restablece el resultado de la última operación
+     * para evitar que vuelva a procesarse.
+     */
     fun limpiarResultadoOperacion() {
         _resultadoOperacion.value = null
     }
 
+    /**
+     * Comprueba que la información necesaria para crear
+     * una relación sea válida antes de guardarla.
+     */
     private fun validarDatosRelacion(
         idMaterial: Int,
         idProveedor: Int,

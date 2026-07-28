@@ -2,7 +2,13 @@ package com.example.ecorisk_manager.model
 
 import androidx.room.ColumnInfo
 
+/**
+ * Representa la información detallada de un incidente.
+ * Se utiliza para mostrar los datos obtenidos al combinar el
+ * incidente con la información del material asociado.
+ */
 data class IncidenteDetalle(
+
     @ColumnInfo(name = "id_incidente")
     val idIncidente: Int,
 

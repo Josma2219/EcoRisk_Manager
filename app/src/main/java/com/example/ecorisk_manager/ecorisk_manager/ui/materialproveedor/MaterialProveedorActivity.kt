@@ -22,18 +22,26 @@ import com.example.ecorisk_manager.viewmodel.MaterialProveedorViewModelFactory
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+/**
+ * Pantalla encargada de administrar las relaciones
+ * entre materiales peligrosos y proveedores.
+ */
 class MaterialProveedorActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMaterialProveedorBinding
     private lateinit var materialProveedorViewModel: MaterialProveedorViewModel
     private lateinit var materialProveedorAdapter: MaterialProveedorAdapter
 
+    // Listas utilizadas para cargar la información de los Spinner.
     private val listaMateriales = mutableListOf<MaterialPeligrosoEntity>()
     private val listaProveedores = mutableListOf<ProveedorEntity>()
 
     private var idMaterialFiltrado: Int = 0
     private var idProveedorFiltrado: Int = 0
 
+    /**
+     * Inicializa la pantalla y configura sus componentes.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -52,14 +60,20 @@ class MaterialProveedorActivity : AppCompatActivity() {
         cargarRelacionesSegunOrigen()
     }
 
+    /**
+     * Actualiza la información al regresar desde otra pantalla.
+     */
     override fun onResume() {
         super.onResume()
 
-        // Si volvemos de crear material/proveedor en otra etapa, refrescamos.
+        // Refresca los datos mostrados en los Spinner y la lista.
         cargarSpinners()
         cargarRelacionesSegunOrigen()
     }
 
+    /**
+     * Inicializa el ViewModel que gestionará la información de la pantalla.
+     */
     private fun prepararViewModel() {
         val baseDatos = AppDatabase.obtenerBaseDatos(applicationContext)
         val repository = MaterialProveedorRepository(baseDatos.materialProveedorDao())
@@ -68,6 +82,9 @@ class MaterialProveedorActivity : AppCompatActivity() {
         materialProveedorViewModel = ViewModelProvider(this, factory)[MaterialProveedorViewModel::class.java]
     }
 
+    /**
+     * Configura el RecyclerView y su adaptador.
+     */
     private fun configurarRecycler() {
         materialProveedorAdapter = MaterialProveedorAdapter(
             alEliminarRelacion = { relacion ->
@@ -79,6 +96,9 @@ class MaterialProveedorActivity : AppCompatActivity() {
         binding.recyclerRelaciones.adapter = materialProveedorAdapter
     }
 
+    /**
+     * Observa los cambios en la lista de relaciones para actualizar la interfaz.
+     */
     private fun observarRelaciones() {
         materialProveedorViewModel.relaciones.observe(this) { relaciones ->
             materialProveedorAdapter.actualizarLista(relaciones)
@@ -89,6 +109,9 @@ class MaterialProveedorActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Observa el resultado de las operaciones realizadas sobre las relaciones.
+     */
     private fun observarResultado() {
         materialProveedorViewModel.resultadoOperacion.observe(this) { resultado ->
             if (resultado == null) return@observe
@@ -104,6 +127,10 @@ class MaterialProveedorActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Obtiene la información de materiales y proveedores
+     * para llenar los Spinner.
+     */
     private fun cargarSpinners() {
         val baseDatos = AppDatabase.obtenerBaseDatos(applicationContext)
 
@@ -126,6 +153,9 @@ class MaterialProveedorActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Configura el Spinner con los materiales disponibles.
+     */
     private fun configurarSpinnerMateriales() {
         val nombresMateriales = mutableListOf("Seleccione material")
         nombresMateriales.addAll(
@@ -148,6 +178,9 @@ class MaterialProveedorActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Configura el Spinner con los proveedores disponibles.
+     */
     private fun configurarSpinnerProveedores() {
         val nombresProveedores = mutableListOf("Seleccione proveedor")
         nombresProveedores.addAll(
@@ -170,6 +203,10 @@ class MaterialProveedorActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Selecciona automáticamente el material recibido
+     * y evita que pueda modificarse.
+     */
     private fun seleccionarMaterialFiltrado() {
         val posicion = listaMateriales.indexOfFirst { it.idMaterial == idMaterialFiltrado }
 
@@ -180,6 +217,10 @@ class MaterialProveedorActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Selecciona automáticamente el proveedor recibido
+     * y evita que pueda modificarse.
+     */
     private fun seleccionarProveedorFiltrado() {
         val posicion = listaProveedores.indexOfFirst { it.idProveedor == idProveedorFiltrado }
 
@@ -190,6 +231,9 @@ class MaterialProveedorActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Configura los eventos de los botones de la pantalla.
+     */
     private fun configurarEventos() {
         binding.botonAsociar.setOnClickListener {
             guardarRelacion()
@@ -200,6 +244,10 @@ class MaterialProveedorActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Obtiene la información ingresada por el usuario
+     * y la envía al ViewModel para guardar la relación.
+     */
     private fun guardarRelacion() {
         val idMaterial = obtenerIdMaterialSeleccionado()
         val idProveedor = obtenerIdProveedorSeleccionado()
@@ -212,6 +260,9 @@ class MaterialProveedorActivity : AppCompatActivity() {
         )
     }
 
+    /**
+     * Obtiene el identificador del material seleccionado en el Spinner.
+     */
     private fun obtenerIdMaterialSeleccionado(): Int {
         val posicion = binding.spinnerMaterial.selectedItemPosition
 
@@ -222,6 +273,9 @@ class MaterialProveedorActivity : AppCompatActivity() {
         return listaMateriales[posicion - 1].idMaterial
     }
 
+    /**
+     * Obtiene el identificador del proveedor seleccionado en el Spinner.
+     */
     private fun obtenerIdProveedorSeleccionado(): Int {
         val posicion = binding.spinnerProveedor.selectedItemPosition
 
@@ -232,6 +286,9 @@ class MaterialProveedorActivity : AppCompatActivity() {
         return listaProveedores[posicion - 1].idProveedor
     }
 
+    /**
+     * Carga las relaciones según el contexto desde el que fue abierta la pantalla.
+     */
     private fun cargarRelacionesSegunOrigen() {
         when {
             idMaterialFiltrado != 0 -> {
@@ -248,6 +305,9 @@ class MaterialProveedorActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Muestra un cuadro de confirmación antes de eliminar una relación.
+     */
     private fun confirmarEliminacion(idRelacion: Int) {
         AlertDialog.Builder(this)
             .setTitle("Eliminar relación")
@@ -259,6 +319,9 @@ class MaterialProveedorActivity : AppCompatActivity() {
             .show()
     }
 
+    /**
+     * Restablece los controles del formulario después de guardar una relación.
+     */
     private fun limpiarFormulario() {
         binding.campoPrecioReferencia.setText("")
 

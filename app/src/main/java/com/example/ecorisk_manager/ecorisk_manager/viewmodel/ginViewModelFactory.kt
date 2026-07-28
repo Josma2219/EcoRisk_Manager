@@ -4,6 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.ecorisk_manager.data.repository.UsuarioRepository
 
+/**
+ * Factory encargada de crear la instancia de LoginViewModel
+ * proporcionando el repositorio necesario para su funcionamiento.
+ */
 class LoginViewModelFactory(
     private val usuarioRepository: UsuarioRepository
 ) : ViewModelProvider.Factory {

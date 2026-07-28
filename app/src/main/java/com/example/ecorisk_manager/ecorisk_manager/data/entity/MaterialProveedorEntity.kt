@@ -6,6 +6,11 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
+/**
+ * Representa la relación entre un material peligroso y un proveedor.
+ * Permite asociar un mismo material con distintos proveedores y almacenar
+ * información adicional, como el precio de referencia.
+ */
 @Entity(
     tableName = "materiales_proveedores",
     foreignKeys = [
@@ -23,12 +28,16 @@ import androidx.room.PrimaryKey
         )
     ],
     indices = [
+        // Facilitan las consultas por material y proveedor.
         Index(value = ["id_material"]),
         Index(value = ["id_proveedor"]),
+
+        // Evita registrar la misma relación entre un material y un proveedor más de una vez.
         Index(value = ["id_material", "id_proveedor"], unique = true)
     ]
 )
 data class MaterialProveedorEntity(
+
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_material_proveedor")
     val idMaterialProveedor: Int = 0,

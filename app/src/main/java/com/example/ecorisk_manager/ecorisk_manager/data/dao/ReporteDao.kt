@@ -6,15 +6,25 @@ import com.example.ecorisk_manager.data.entity.MaterialPeligrosoEntity
 import com.example.ecorisk_manager.model.IncidenteDetalle
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * DAO encargado de obtener la información utilizada
+ * para generar los reportes de la aplicación.
+ */
 @Dao
 interface ReporteDao {
 
+    /**
+     * Obtiene el reporte con todos los materiales registrados.
+     */
     @Query("""
         SELECT * FROM materiales_peligrosos
         ORDER BY clasificacion_riesgo ASC, nombre_comercial ASC
     """)
     fun reporteTodosLosMateriales(): Flow<List<MaterialPeligrosoEntity>>
 
+    /**
+     * Obtiene un reporte de materiales filtrados por clasificación de riesgo.
+     */
     @Query("""
         SELECT * FROM materiales_peligrosos
         WHERE clasificacion_riesgo = :clasificacionRiesgo
@@ -24,6 +34,9 @@ interface ReporteDao {
         clasificacionRiesgo: String
     ): Flow<List<MaterialPeligrosoEntity>>
 
+    /**
+     * Obtiene el historial completo de incidentes registrados.
+     */
     @Query("""
         SELECT 
             i.id_incidente AS id_incidente,
@@ -43,6 +56,9 @@ interface ReporteDao {
     """)
     fun reporteHistorialIncidentes(): Flow<List<IncidenteDetalle>>
 
+    /**
+     * Obtiene un reporte de incidentes filtrados por estado.
+     */
     @Query("""
         SELECT 
             i.id_incidente AS id_incidente,
@@ -65,6 +81,9 @@ interface ReporteDao {
         estado: String
     ): Flow<List<IncidenteDetalle>>
 
+    /**
+     * Obtiene un reporte de incidentes filtrados por nivel de severidad.
+     */
     @Query("""
         SELECT 
             i.id_incidente AS id_incidente,

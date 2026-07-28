@@ -12,6 +12,10 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel encargado de gestionar el registro, consulta,
+ * actualización y eliminación de hojas de seguridad.
+ */
 class HojaSeguridadViewModel(
     private val hojaSeguridadRepository: HojaSeguridadRepository
 ) : ViewModel() {
@@ -28,8 +32,13 @@ class HojaSeguridadViewModel(
     private val _resultadoOperacion = MutableLiveData<ResultadoOperacion?>()
     val resultadoOperacion: LiveData<ResultadoOperacion?> = _resultadoOperacion
 
+    // Permite cancelar la consulta anterior cuando se carga
+    // una nueva lista de hojas de seguridad.
     private var trabajoLista: Job? = null
 
+    /**
+     * Obtiene el listado completo de hojas de seguridad.
+     */
     fun cargarHojas() {
         trabajoLista?.cancel()
 
@@ -40,6 +49,9 @@ class HojaSeguridadViewModel(
         }
     }
 
+    /**
+     * Obtiene únicamente las hojas asociadas al material indicado.
+     */
     fun cargarHojasPorMaterial(idMaterial: Int) {
         trabajoLista?.cancel()
 
@@ -50,6 +62,9 @@ class HojaSeguridadViewModel(
         }
     }
 
+    /**
+     * Recupera la información de una hoja para editarla.
+     */
     fun cargarHojaPorId(idHoja: Int) {
         viewModelScope.launch {
             val hoja = hojaSeguridadRepository.obtenerHojaPorId(idHoja)
@@ -57,6 +72,10 @@ class HojaSeguridadViewModel(
         }
     }
 
+    /**
+     * Recupera el detalle completo de una hoja para mostrarlo
+     * en la pantalla de información.
+     */
     fun cargarHojaDetallePorId(idHoja: Int) {
         viewModelScope.launch {
             val hoja = hojaSeguridadRepository.obtenerHojaDetallePorId(idHoja)
@@ -64,6 +83,10 @@ class HojaSeguridadViewModel(
         }
     }
 
+    /**
+     * Valida la información ingresada y registra o actualiza
+     * la hoja de seguridad según corresponda.
+     */
     fun guardarHoja(
         idHoja: Int,
         idMaterial: Int,
@@ -88,6 +111,8 @@ class HojaSeguridadViewModel(
             try {
                 val versionLimpia = version.trim()
 
+                // Verificar que la versión de la hoja sea única
+                // para el material seleccionado.
                 val versionRepetida = if (idHoja == 0) {
                     hojaSeguridadRepository.existeVersionParaMaterial(
                         idMaterial = idMaterial,
@@ -140,6 +165,9 @@ class HojaSeguridadViewModel(
         }
     }
 
+    /**
+     * Elimina una hoja de seguridad registrada.
+     */
     fun eliminarHoja(idHoja: Int) {
         viewModelScope.launch {
             try {
@@ -157,10 +185,18 @@ class HojaSeguridadViewModel(
         }
     }
 
+    /**
+     * Restablece el resultado de la última operación para evitar
+     * que vuelva a procesarse después de un cambio de configuración.
+     */
     fun limpiarResultadoOperacion() {
         _resultadoOperacion.value = null
     }
 
+    /**
+     * Comprueba que todos los datos requeridos de la hoja
+     * hayan sido ingresados correctamente antes de guardarla.
+     */
     private fun validarDatosHoja(
         idMaterial: Int,
         version: String,

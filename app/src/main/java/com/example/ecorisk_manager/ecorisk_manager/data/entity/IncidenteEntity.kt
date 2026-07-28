@@ -6,6 +6,11 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
+/**
+ * Representa un incidente registrado para un material peligroso.
+ * Cada registro almacena la información necesaria para dar seguimiento
+ * al evento y su estado.
+ */
 @Entity(
     tableName = "incidentes",
     foreignKeys = [
@@ -17,10 +22,12 @@ import androidx.room.PrimaryKey
         )
     ],
     indices = [
+        // Facilita las consultas de incidentes asociadas a un material.
         Index(value = ["id_material"])
     ]
 )
 data class IncidenteEntity(
+
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_incidente")
     val idIncidente: Int = 0,
