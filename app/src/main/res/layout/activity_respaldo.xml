@@ -1,97 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_fondo"
+    android:background="@color/color_primario_claro"
+    android:orientation="vertical"
     tools:context=".ui.respaldo.RespaldoActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_encabezado_login"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:paddingStart="20dp"
+        android:paddingTop="18dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="24dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/botonVolver"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-12dp"
+            android:text="‹ Volver"
+            android:textColor="@color/color_primario_claro" />
 
         <TextView
             android:id="@+id/textoTituloRespaldo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
             android:text="Respaldo y recuperación"
-            android:textColor="@color/texto_primario"
-            android:textSize="28sp"
+            android:textColor="@color/blanco"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textoDescripcionRespaldo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:text="Genere un respaldo local de la información registrada en la aplicación."
-            android:textColor="@color/texto_secundario"
-            android:textSize="15sp" />
+            android:layout_marginTop="4dp"
+            android:text="Genere un respaldo local de la información registrada en la aplicación"
+            android:textColor="@color/color_primario_claro"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:background="@color/color_superficie"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="20dp">
 
-            <TextView
-                android:id="@+id/textoEstadoRespaldo"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Estado: sin acciones realizadas todavía."
-                android:textColor="@color/texto_primario"
-                android:textSize="15sp" />
+                app:cardBackgroundColor="@color/color_superficie"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="3dp">
 
-            <TextView
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:id="@+id/textoEstadoRespaldo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Estado: sin acciones realizadas todavía."
+                        android:textColor="@color/texto_primario"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="14dp"
+                        android:background="@color/color_borde_suave" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:text="El respaldo incluye usuarios, materiales, proveedores, hojas de seguridad, relaciones material-proveedor e incidentes."
+                        android:textColor="@color/texto_secundario"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/botonGenerarRespaldo"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="52dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/color_primario"
+                android:text="Generar respaldo"
+                android:textColor="@color/blanco"
+                app:cornerRadius="12dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/botonRestaurarRespaldo"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
                 android:layout_marginTop="10dp"
-                android:text="El respaldo incluye usuarios, materiales, proveedores, hojas de seguridad, relaciones material-proveedor e incidentes."
+                android:backgroundTint="@color/color_superficie"
+                android:text="Restaurar último respaldo"
+                android:textColor="@color/color_secundario"
+                app:cornerRadius="12dp"
+                app:strokeColor="@color/color_secundario" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:text="Importante: al restaurar se reemplazan los datos actuales por los datos del último respaldo generado."
                 android:textColor="@color/texto_secundario"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/botonGenerarRespaldo"
-            android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="@color/color_primario"
-            android:text="Generar respaldo"
-            android:textColor="@color/blanco" />
+    </ScrollView>
 
-        <Button
-            android:id="@+id/botonRestaurarRespaldo"
-            android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="@color/color_secundario"
-            android:text="Restaurar último respaldo"
-            android:textColor="@color/blanco" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:text="Importante: al restaurar se reemplazan los datos actuales por los datos del último respaldo generado."
-            android:textColor="@color/texto_secundario"
-            android:textSize="14sp" />
-
-        <Button
-            android:id="@+id/botonVolver"
-            android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:layout_marginTop="26dp"
-            android:backgroundTint="@color/riesgo_critico"
-            android:text="Volver"
-            android:textColor="@color/blanco" />
-
-    </LinearLayout>
-
-</ScrollView>
+</LinearLayout>

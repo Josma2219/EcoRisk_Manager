@@ -1,124 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_fondo"
+    android:background="@color/color_primario_claro"
     android:orientation="vertical"
-    android:padding="20dp"
     tools:context=".ui.materialproveedor.MaterialProveedorActivity">
 
-    <TextView
-        android:id="@+id/textoTituloModulo"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Material por proveedor"
-        android:textColor="@color/texto_primario"
-        android:textSize="28sp"
-        android:textStyle="bold" />
+        android:background="@drawable/bg_encabezado_login"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingTop="18dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="24dp">
 
-    <TextView
-        android:id="@+id/textoDescripcionModulo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:text="Asocie proveedores con materiales peligrosos."
-        android:textColor="@color/texto_secundario"
-        android:textSize="15sp" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/botonVolver"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-12dp"
+            android:text="‹ Volver"
+            android:textColor="@color/color_primario_claro" />
 
-    <!-- Formulario básico.
-         Después podemos esconder esta zona cuando se entra solo a consultar desde detalle. -->
-    <TextView
-        android:id="@+id/textoMaterial"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:text="Material"
-        android:textColor="@color/texto_primario"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/textoTituloModulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Material por proveedor"
+            android:textColor="@color/blanco"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-    <Spinner
-        android:id="@+id/spinnerMaterial"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_marginTop="6dp"
-        android:background="@color/color_superficie" />
+        <TextView
+            android:id="@+id/textoDescripcionModulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Asocie proveedores con materiales peligrosos"
+            android:textColor="@color/color_primario_claro"
+            android:textSize="13sp" />
 
-    <TextView
-        android:id="@+id/textoProveedor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Proveedor"
-        android:textColor="@color/texto_primario"
-        android:textStyle="bold" />
+    </LinearLayout>
 
-    <Spinner
-        android:id="@+id/spinnerProveedor"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_marginTop="6dp"
-        android:background="@color/color_superficie" />
-
-    <EditText
-        android:id="@+id/campoPrecioReferencia"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_marginTop="12dp"
-        android:background="@color/color_superficie"
-        android:hint="Precio de referencia"
-        android:inputType="numberDecimal"
-        android:paddingStart="14dp"
-        android:paddingEnd="14dp"
-        android:textColor="@color/texto_primario"
-        android:textColorHint="@color/texto_secundario" />
-
-    <Button
-        android:id="@+id/botonAsociar"
-        android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:layout_marginTop="14dp"
-        android:backgroundTint="@color/color_primario"
-        android:text="Asociar material y proveedor"
-        android:textColor="@color/blanco" />
-
-    <TextView
-        android:id="@+id/textoTituloLista"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
-        android:text="Relaciones registradas"
-        android:textColor="@color/texto_primario"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/textoListaVacia"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:gravity="center"
-        android:text="No hay relaciones registradas"
-        android:textColor="@color/texto_secundario"
-        android:textSize="15sp"
-        android:visibility="gone" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerRelaciones"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="12dp"
-        android:layout_weight="1"
-        tools:listitem="@layout/item_material_proveedor" />
+        android:layout_weight="1">
 
-    <Button
-        android:id="@+id/botonVolver"
-        android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:layout_marginTop="12dp"
-        android:backgroundTint="@color/color_secundario"
-        android:text="Volver"
-        android:textColor="@color/blanco" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/color_superficie"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:id="@+id/textoMaterial"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Material"
+                        android:textColor="@color/texto_primario"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/spinnerMaterial"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/bg_campo_generico"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="14dp" />
+
+                    <TextView
+                        android:id="@+id/textoProveedor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:text="Proveedor"
+                        android:textColor="@color/texto_primario"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/spinnerProveedor"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/bg_campo_generico"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="14dp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:hint="Precio de referencia"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:boxStrokeColor="@color/color_primario">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/campoPrecioReferencia"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/botonAsociar"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="@color/color_primario"
+                        android:text="Asociar material y proveedor"
+                        android:textColor="@color/blanco"
+                        app:cornerRadius="10dp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/textoTituloLista"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:text="Relaciones registradas"
+                android:textColor="@color/texto_primario"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textoListaVacia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:gravity="center"
+                android:text="No hay relaciones registradas"
+                android:textColor="@color/texto_secundario"
+                android:textSize="14sp"
+                android:visibility="gone" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerRelaciones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:nestedScrollingEnabled="false"
+                tools:listitem="@layout/item_material_proveedor" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>
