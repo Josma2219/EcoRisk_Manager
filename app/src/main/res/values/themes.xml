@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="Base.Theme.EcoRisk_Manager" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
         <item name="colorPrimary">@color/color_primario</item>
         <item name="colorPrimaryVariant">@color/color_primario_medio</item>
         <item name="colorOnPrimary">@color/texto_sobre_primario</item>
@@ -12,6 +13,14 @@
         <item name="colorSurface">@color/color_superficie</item>
         <item name="colorOnSurface">@color/texto_primario</item>
 
+
+        <!-- NUEVO: controla texto escrito en campos -->
+        <item name="android:textColorPrimary">@color/texto_primario</item>
+
+        <!-- NUEVO: controla hint de campos -->
+        <item name="android:textColorHint">@color/texto_secundario</item>
+
+
         <item name="colorError">@color/riesgo_critico</item>
         <item name="colorOnError">@color/blanco</item>
 
@@ -19,6 +28,7 @@
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:statusBarColor">@color/color_primario</item>
         <item name="android:navigationBarColor">@color/color_primario</item>
+
     </style>
 
     <style name="Theme.EcoRisk_Manager" parent="Base.Theme.EcoRisk_Manager" />
